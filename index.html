@@ -107,7 +107,8 @@ nav {
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
 }
-.hero-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; width: 100%; }
+.hero-content { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 5rem; align-items: center; width: 100%; }
+.hero-visual, .feature-illustration, .screenshot, .phone-frame { max-width: 100%; min-width: 0; }
 .hero-label {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.4rem 1rem; border: 1px solid rgba(26,111,224,0.5); border-radius: 100px;
@@ -865,12 +866,12 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
     </div>
     <div class="slider-wrapper fade-up">
       <div class="slider-tabs">
-        <button class="tab-btn active" onclick="showPanel('discovery')">Smart Discovery</button>
-        <button class="tab-btn" onclick="showPanel('storage')">Storage Intelligence</button>
-        <button class="tab-btn" onclick="showPanel('security')">Contextual Security</button>
-        <button class="tab-btn" onclick="showPanel('transfer')">Intelligent Transfer</button>
-        <button class="tab-btn" onclick="showPanel('wearable')">Wearable Trust</button>
-        <button class="tab-btn" onclick="showPanel('emergency')">Emergency Module</button>
+        <button class="tab-btn active" onclick="showPanel('discovery', event)">Smart Discovery</button>
+        <button class="tab-btn" onclick="showPanel('storage', event)">Storage Intelligence</button>
+        <button class="tab-btn" onclick="showPanel('security', event)">Contextual Security</button>
+        <button class="tab-btn" onclick="showPanel('transfer', event)">Intelligent Transfer</button>
+        <button class="tab-btn" onclick="showPanel('wearable', event)">Wearable Trust</button>
+        <button class="tab-btn" onclick="showPanel('emergency', event)">Emergency Module</button>
       </div>
       <div class="slider-panels">
 
@@ -1756,11 +1757,13 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
 </footer>
 
 <script>
-function showPanel(id) {
+function showPanel(id, event) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
-  event.target.classList.add('active');
+  if (event && event.currentTarget) {
+    event.currentTarget.classList.add('active');
+  }
 }
 
 const observer = new IntersectionObserver((entries) => {
