@@ -316,12 +316,12 @@ nav {
 .panel-visual { display: flex; justify-content: center; }
 .feature-illustration {
   width: 100%; max-width: 340px; aspect-ratio: 4/5; background: rgba(255,255,255,0.03);
-  border: 1px solid var(--card-border); border-radius: var(--radius-lg); overflow: hidden;
+  border: 1px solid var(--card-border); border-radius: var(--radius-lg); overflow: visible;
   position: relative; display: flex; align-items: center; justify-content: center;
   transition: transform 0.3s;
 }
 .feature-illustration:hover { transform: scale(1.02); }
-.fi-content { width: 100%; height: 100%; padding: 1.5rem; }
+.fi-content { width: 100%; height: 100%; padding: 1.5rem; box-sizing: border-box; overflow: hidden; border-radius: var(--radius-lg); }
 
 /* ── ARCHITECTURE ── */
 #architecture { background: var(--navy); }
@@ -395,14 +395,15 @@ nav {
 .demo-wrapper { margin-top: 3rem; text-align: center; }
 .video-container {
   background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); border-radius: var(--radius-lg);
-  overflow: hidden; position: relative; aspect-ratio: 16/9; max-width: 900px; margin: 0 auto;
+  overflow: visible; position: relative; aspect-ratio: 16/9; max-width: 900px; margin: 0 auto;
   display: flex; align-items: center; justify-content: center;
 }
 .video-placeholder-bg {
   position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(26,111,224,0.15) 0%, rgba(242,106,33,0.08) 100%);
+  border-radius: var(--radius-lg);
 }
-.video-placeholder-content { position: relative; z-index: 2; text-align: center; }
+.video-placeholder-content { position: relative; z-index: 2; text-align: center; padding: 0 1rem; }
 .play-btn {
   width: 80px; height: 80px; background: rgba(26,111,224,0.9); border-radius: 50%;
   display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;
@@ -415,11 +416,11 @@ nav {
 .screenshots-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 2rem; }
 .screenshot {
   aspect-ratio: 9/16; background: rgba(255,255,255,0.03); border: 1px solid var(--card-border);
-  border-radius: var(--radius-md); overflow: hidden; transition: all 0.3s; position: relative;
+  border-radius: var(--radius-md); overflow: visible; transition: all 0.3s; position: relative;
   cursor: zoom-in;
 }
 .screenshot:hover { transform: scale(1.04) translateY(-4px); border-color: rgba(26,111,224,0.4); }
-.screenshot-inner { height: 100%; padding: 1rem; display: flex; flex-direction: column; }
+.screenshot-inner { height: 100%; padding: 1rem; display: flex; flex-direction: column; box-sizing: border-box; overflow: hidden; border-radius: var(--radius-md); }
 .screenshot-header { font-size: 0.6rem; color: var(--text-muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
 .screenshot-title { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 600; color: var(--blue-bright); margin-bottom: 0.75rem; }
 .screenshot-items { flex: 1; display: flex; flex-direction: column; gap: 0.35rem; }
