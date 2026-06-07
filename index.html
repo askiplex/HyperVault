@@ -107,8 +107,7 @@ nav {
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
 }
-.hero-content { position: relative; z-index: 2; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 5rem; align-items: center; width: 100%; }
-.hero-visual, .feature-illustration, .screenshot, .phone-frame { max-width: 100%; min-width: 0; }
+.hero-content { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; width: 100%; }
 .hero-label {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.4rem 1rem; border: 1px solid rgba(26,111,224,0.5); border-radius: 100px;
@@ -403,15 +402,6 @@ nav {
   position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(26,111,224,0.15) 0%, rgba(242,106,33,0.08) 100%);
   border-radius: var(--radius-lg);
-  overflow: hidden;
-}
-.video-placeholder-img {
-  position: absolute; inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.18;
-  z-index: 1;
 }
 .video-placeholder-content { position: relative; z-index: 2; text-align: center; padding: 0 1rem; }
 .play-btn {
@@ -430,10 +420,7 @@ nav {
   cursor: zoom-in;
 }
 .screenshot:hover { transform: scale(1.04) translateY(-4px); border-color: rgba(26,111,224,0.4); }
-.screenshot-inner { position: relative; z-index: 2; height: 100%; padding: 1rem; display: flex; flex-direction: column; box-sizing: border-box; overflow: hidden; border-radius: var(--radius-md); }
-.screenshot-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-md); opacity: 0.18; z-index: 1; }
-.architecture-visual { margin-top: 2rem; display: flex; justify-content: center; }
-.architecture-visual img { width: 100%; max-width: 960px; border-radius: var(--radius-lg); border: 1px solid var(--card-border); box-shadow: 0 24px 60px rgba(0,0,0,0.25); }
+.screenshot-inner { height: 100%; padding: 1rem; display: flex; flex-direction: column; box-sizing: border-box; overflow: hidden; border-radius: var(--radius-md); }
 .screenshot-header { font-size: 0.6rem; color: var(--text-muted); margin-bottom: 0.5rem; display: flex; justify-content: space-between; }
 .screenshot-title { font-family: 'JetBrains Mono', monospace; font-size: 0.55rem; font-weight: 600; color: var(--blue-bright); margin-bottom: 0.75rem; }
 .screenshot-items { flex: 1; display: flex; flex-direction: column; gap: 0.35rem; }
@@ -878,12 +865,12 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
     </div>
     <div class="slider-wrapper fade-up">
       <div class="slider-tabs">
-        <button class="tab-btn active" onclick="showPanel('discovery', event)">Smart Discovery</button>
-        <button class="tab-btn" onclick="showPanel('storage', event)">Storage Intelligence</button>
-        <button class="tab-btn" onclick="showPanel('security', event)">Contextual Security</button>
-        <button class="tab-btn" onclick="showPanel('transfer', event)">Intelligent Transfer</button>
-        <button class="tab-btn" onclick="showPanel('wearable', event)">Wearable Trust</button>
-        <button class="tab-btn" onclick="showPanel('emergency', event)">Emergency Module</button>
+        <button class="tab-btn active" onclick="showPanel('discovery')">Smart Discovery</button>
+        <button class="tab-btn" onclick="showPanel('storage')">Storage Intelligence</button>
+        <button class="tab-btn" onclick="showPanel('security')">Contextual Security</button>
+        <button class="tab-btn" onclick="showPanel('transfer')">Intelligent Transfer</button>
+        <button class="tab-btn" onclick="showPanel('wearable')">Wearable Trust</button>
+        <button class="tab-btn" onclick="showPanel('emergency')">Emergency Module</button>
       </div>
       <div class="slider-panels">
 
@@ -1349,9 +1336,6 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
       </div>
 
     </div>
-    <div class="architecture-visual fade-up">
-      <img src="assets/images/hypervault-architecture.webp" alt="HyperVault architecture overview">
-    </div>
   </div>
 </section>
 
@@ -1367,9 +1351,7 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
     </div>
     <div class="demo-wrapper fade-up">
       <div class="video-container">
-        <div class="video-placeholder-bg">
-          <img src="assets/images/hypervault-app-portfolio.webp" alt="HyperVault product demo preview" class="video-placeholder-img">
-        </div>
+        <div class="video-placeholder-bg"></div>
         <div class="video-placeholder-content">
           <div class="play-btn" onclick="this.innerHTML='⏸'; this.style.animation='pulse-dot 1s infinite'">▶</div>
           <h3>HyperVault Platform Introduction</h3>
@@ -1384,7 +1366,6 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
         <div style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin-bottom:1.25rem; text-transform:uppercase; letter-spacing:0.06em; font-family:'JetBrains Mono',monospace;">Key Workflow Screens</div>
         <div class="screenshots-grid">
           <div class="screenshot">
-            <img src="assets/images/hypervault-app-portfolio.webp" alt="HyperVault smart file explorer preview" class="screenshot-img">
             <div class="screenshot-inner">
               <div class="screenshot-header"><span>HyperVault</span><span>9:41</span></div>
               <div class="screenshot-title">Smart File Explorer</div>
@@ -1398,7 +1379,6 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
             </div>
           </div>
           <div class="screenshot">
-            <img src="assets/images/futuristic-cybersecurity-shield-illustration.webp" alt="Contextual Security preview" class="screenshot-img">
             <div class="screenshot-inner">
               <div class="screenshot-header"><span>Security</span><span>🛡️</span></div>
               <div class="screenshot-title">Contextual Security</div>
@@ -1412,7 +1392,6 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
             </div>
           </div>
           <div class="screenshot">
-            <img src="assets/images/hypervault-product-line.webp" alt="Secure file transfer preview" class="screenshot-img">
             <div class="screenshot-inner">
               <div class="screenshot-header"><span>Transfer</span><span>↔️</span></div>
               <div class="screenshot-title">Secure File Transfer</div>
@@ -1426,7 +1405,6 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
             </div>
           </div>
           <div class="screenshot">
-            <img src="assets/images/hypervault-business-model.webp" alt="Wearable trust preview" class="screenshot-img">
             <div class="screenshot-inner">
               <div class="screenshot-header"><span>Wearables</span><span>⌚</span></div>
               <div class="screenshot-title">Wearable Trust</div>
@@ -1778,13 +1756,11 @@ footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
 </footer>
 
 <script>
-function showPanel(id, event) {
+function showPanel(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('panel-' + id).classList.add('active');
-  if (event && event.currentTarget) {
-    event.currentTarget.classList.add('active');
-  }
+  event.target.classList.add('active');
 }
 
 const observer = new IntersectionObserver((entries) => {
