@@ -1,13 +1,22 @@
 # HyperVault Stunning Investor Website
 
-GitHub Pages ready single-page website.
+GitHub Pages-ready static website.
 
-## Upload Steps
-1. Extract this ZIP.
-2. Upload all extracted files and folders to a public GitHub repository.
+## Upload
+1. Create a public GitHub repository.
+2. Upload all files from this folder to the repository root.
 3. Go to Settings > Pages.
-4. Select Deploy from branch, branch `main`, folder `/root`.
-5. Save and wait for the public URL.
+4. Select Deploy from branch > main > / root.
+5. Share the generated GitHub Pages URL.
 
 ## Contact Email
-Open `index.html` and update `CONTACT_EMAIL` if needed.
+Open `index.html` and update:
+
+```js
+const CONTACT_EMAIL='dsalinkdev@gmail.com';
+```
+
+## Demo Video
+The downloadable product visual demo is located at:
+
+`assets/video/hypervault-product-demo.mp4`
