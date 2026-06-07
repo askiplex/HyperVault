@@ -4,630 +4,223 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HyperVault | Intelligent Android Storage, Security & Mobility Ecosystem</title>
-  <meta name="description" content="HyperVault is an Android-native contextual intelligence layer unifying content-centric storage, duplicate virtualization, contextual security, wearable-aware authentication, emergency workflows and context-preserving transfer." />
+  <meta name="description" content="HyperVault by Askiplex Technologies: an intelligent Android storage, security, transfer and wearable trust ecosystem." />
   <meta property="og:title" content="HyperVault | Intelligent Android Storage, Security & Mobility Ecosystem" />
-  <meta property="og:description" content="Investor overview for HyperVault by Askiplex Technologies: architecture, IP portfolio, product line, current progress and development roadmap." />
-  <meta property="og:image" content="assets/img/og-hypervault.webp" />
-  <meta name="theme-color" content="#06142d" />
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <meta property="og:description" content="Organize, encrypt, optimize, authenticate and transfer mobile data through one context-aware Android ecosystem." />
+  <meta property="og:image" content="assets/images/architecture.png" />
+  <meta name="theme-color" content="#071a3d" />
+  <link rel="icon" href="assets/images/hero-shield.png" />
   <style>
     :root{
-      --bg:#050b19;
-      --bg2:#081833;
-      --panel:rgba(255,255,255,.075);
-      --panel2:rgba(255,255,255,.11);
-      --stroke:rgba(198,225,255,.18);
-      --stroke2:rgba(79,211,255,.38);
-      --text:#f5f9ff;
-      --muted:#aebdd4;
-      --soft:#d9e8ff;
-      --blue:#36c8ff;
-      --blue2:#226bff;
-      --cyan:#38f4ff;
-      --orange:#ff9a3d;
-      --green:#5dffbb;
-      --danger:#ff5e7e;
-      --shadow: 0 24px 80px rgba(0,0,0,.42);
-      --radius:28px;
-      --max:1180px;
-      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      --navy:#061936; --navy2:#0a2d63; --blue:#0c6cff; --cyan:#23d4ff; --orange:#ff6b00;
+      --ink:#0b1736; --muted:#61708b; --line:#d9e5f4; --card:#ffffff; --bg:#f5f8fc;
+      --shadow:0 20px 60px rgba(8,27,62,.16); --radius:26px; --max:1180px;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:var(--font);
-      color:var(--text);
-      background:
-        radial-gradient(circle at 14% 10%, rgba(36,109,255,.35), transparent 28%),
-        radial-gradient(circle at 88% 18%, rgba(56,244,255,.24), transparent 30%),
-        radial-gradient(circle at 58% 78%, rgba(255,154,61,.12), transparent 32%),
-        linear-gradient(180deg, #030712 0%, #07162f 42%, #050b19 100%);
-      overflow-x:hidden;
-    }
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
-      background-size:56px 56px;
-      mask-image:linear-gradient(to bottom, rgba(0,0,0,.85), transparent 80%);
-      pointer-events:none;
-      z-index:-2;
-    }
-    .noise{
-      position:fixed; inset:0;
-      opacity:.12;
-      pointer-events:none;
-      z-index:-1;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-    }
-    .orb{position:absolute; border-radius:999px; filter:blur(12px); opacity:.72; pointer-events:none; mix-blend-mode:screen; animation:float 9s ease-in-out infinite}
-    .orb.one{width:260px;height:260px;background:rgba(54,200,255,.18);left:-80px;top:220px}
-    .orb.two{width:330px;height:330px;background:rgba(34,107,255,.18);right:-120px;top:580px;animation-delay:-4s}
-    .orb.three{width:230px;height:230px;background:rgba(255,154,61,.12);left:48%;top:1180px;animation-delay:-2s}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-28px)}}
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
-    button,input,textarea{font:inherit}
-    .container{width:min(var(--max), calc(100% - 42px)); margin:auto}
-    .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:blur(22px);
-      background:linear-gradient(180deg, rgba(4,12,27,.82), rgba(4,12,27,.58));
-      border-bottom:1px solid var(--stroke);
-    }
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:15px 0}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.2px}
-    .brand-badge{
-      width:42px;height:42px;border-radius:14px;
-      background:linear-gradient(135deg, var(--blue), var(--blue2));
-      display:grid;place-items:center;
-      box-shadow:0 0 34px rgba(54,200,255,.35);
-    }
-    .brand small{display:block;color:var(--muted);font-size:11px;font-weight:700;margin-top:1px;letter-spacing:.16em;text-transform:uppercase}
-    .nav-links{display:flex;gap:18px;align-items:center;color:var(--muted);font-size:14px;font-weight:700}
-    .nav-links a{padding:10px 0;position:relative}
-    .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:4px;height:2px;background:linear-gradient(90deg,var(--blue),var(--orange));transform:scaleX(0);transform-origin:left;transition:.24s}
-    .nav-links a:hover{color:var(--text)}
-    .nav-links a:hover::after{transform:scaleX(1)}
-    .nav-cta{display:flex;gap:10px;align-items:center}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      border:1px solid var(--stroke2);
-      color:var(--text);
-      min-height:46px;
-      padding:12px 18px;
-      border-radius:999px;
-      font-weight:850;
-      background:rgba(255,255,255,.07);
-      box-shadow:0 14px 44px rgba(0,0,0,.22);
-      transition:transform .22s ease, border-color .22s ease, background .22s ease, box-shadow .22s ease;
-      cursor:pointer;
-    }
-    .btn:hover{transform:translateY(-2px);background:rgba(255,255,255,.105);border-color:rgba(75,220,255,.78);box-shadow:0 18px 54px rgba(36,200,255,.16)}
-    .btn.primary{background:linear-gradient(135deg, #32c9ff, #245dff 60%, #153bb7);border-color:rgba(117,230,255,.74)}
-    .btn.orange{background:linear-gradient(135deg, #ffae55, #ff7b3b);border-color:rgba(255,205,152,.62);color:#140a02}
-    .btn.ghost{background:rgba(255,255,255,.04);border-color:var(--stroke)}
-    .mobile-toggle{display:none;background:transparent;border:0;color:#fff}
-    .hero{position:relative;padding:84px 0 68px;overflow:hidden}
-    .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:44px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--stroke);border-radius:999px;color:#dceeff;background:rgba(255,255,255,.06);font-weight:850;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
-    .pulse-dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 8px rgba(93,255,187,.1),0 0 28px rgba(93,255,187,.75)}
-    h1{font-size:clamp(45px, 7vw, 90px);line-height:.94;margin:24px 0 22px;letter-spacing:-.065em}
-    .gradient-text{background:linear-gradient(100deg,#fff 0%,#c8efff 35%,#35d3ff 62%,#ffb35b 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .hero-sub{font-size:clamp(18px,2vw,22px);line-height:1.55;color:var(--soft);max-width:720px;margin:0 0 28px}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0}
-    .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
-    .pill{border:1px solid var(--stroke);background:rgba(255,255,255,.06);border-radius:999px;padding:9px 12px;color:var(--muted);font-weight:800;font-size:13px}
-    .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;max-width:760px}
-    .metric{padding:16px;border-radius:20px;background:rgba(255,255,255,.064);border:1px solid var(--stroke)}
-    .metric strong{display:block;font-size:28px;line-height:1;color:#fff;letter-spacing:-.03em}
-    .metric span{display:block;color:var(--muted);font-size:13px;margin-top:8px;font-weight:750}
-    .hero-visual{position:relative;min-height:620px;display:grid;place-items:center;perspective:1200px}
-    .phone-stage{position:relative;width:min(470px,92vw);height:590px;transform-style:preserve-3d;animation:phoneFloat 7s ease-in-out infinite}
-    @keyframes phoneFloat{0%,100%{transform:translateY(0) rotateX(3deg) rotateY(-5deg)}50%{transform:translateY(-18px) rotateX(1deg) rotateY(5deg)}}
-    .phone{
-      position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
-      width:300px;height:590px;border-radius:44px;padding:13px;
-      background:linear-gradient(140deg,#0a1631,#1d3c72 50%,#050914);
-      border:1px solid rgba(160,223,255,.34);
-      box-shadow:0 46px 120px rgba(0,0,0,.52),0 0 80px rgba(54,200,255,.24);
-    }
-    .phone::before{content:"";position:absolute;left:50%;top:13px;transform:translateX(-50%);width:96px;height:26px;border-radius:0 0 18px 18px;background:#050914;z-index:3}
-    .screen{position:relative;height:100%;border-radius:34px;overflow:hidden;background:radial-gradient(circle at top,#143e7c,#07142d 44%,#061022);border:1px solid rgba(255,255,255,.12);padding:54px 20px 20px}
-    .screen-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-    .hv-logo{font-weight:950;letter-spacing:.08em;font-size:12px;color:#e9f8ff}
-    .screen-lock{width:36px;height:36px;border-radius:14px;background:rgba(255,255,255,.08);display:grid;place-items:center;border:1px solid rgba(255,255,255,.14)}
-    .searchbar{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.065);border-radius:18px;padding:13px;color:#dbefff;font-size:12px;margin-bottom:18px;display:flex;gap:10px;align-items:center}
-    .category-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .cat{padding:13px;border-radius:17px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);min-height:82px}
-    .cat b{display:block;font-size:13px;margin-bottom:8px}.cat small{color:#9fb5d3;font-size:11px}.cat i{font-style:normal;font-size:22px;display:block;margin-bottom:8px}
-    .storage-card{margin-top:14px;padding:16px;border-radius:22px;background:linear-gradient(135deg,rgba(54,200,255,.18),rgba(34,107,255,.08));border:1px solid rgba(54,200,255,.22)}
-    .progress{height:9px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:10px}.progress span{display:block;height:100%;width:62%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:999px}
-    .float-card{position:absolute;border:1px solid var(--stroke);background:rgba(8,23,48,.78);backdrop-filter:blur(20px);border-radius:24px;padding:15px 16px;box-shadow:var(--shadow);min-width:170px;animation:float 8s ease-in-out infinite}
-    .float-card b{display:block;font-size:14px}.float-card span{color:var(--muted);font-size:12px;display:block;margin-top:4px}.float-card .ico{width:36px;height:36px;border-radius:14px;background:rgba(54,200,255,.13);display:grid;place-items:center;margin-bottom:9px}
-    .fc1{left:0;top:66px}.fc2{right:0;top:138px;animation-delay:-2s}.fc3{left:8px;bottom:120px;animation-delay:-3.8s}.fc4{right:2px;bottom:52px;animation-delay:-1.2s}
-    .connection{position:absolute;width:150px;height:1px;background:linear-gradient(90deg,transparent,var(--blue),transparent);opacity:.55;transform-origin:left;filter:drop-shadow(0 0 8px var(--blue))}.ln1{left:142px;top:190px;rotate:18deg}.ln2{left:296px;top:250px;rotate:-22deg}.ln3{left:144px;bottom:234px;rotate:-18deg}.ln4{left:286px;bottom:180px;rotate:19deg}
-    section{padding:84px 0;position:relative}.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:26px;margin-bottom:34px}.section-kicker{color:var(--orange);font-weight:950;letter-spacing:.12em;text-transform:uppercase;font-size:13px}.section-title{font-size:clamp(32px,4.3vw,56px);line-height:1;margin:8px 0 0;letter-spacing:-.045em}.section-copy{color:var(--muted);font-size:17px;line-height:1.65;max-width:640px;margin:0}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px}.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    .card{position:relative;border:1px solid var(--stroke);background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.045));box-shadow:var(--shadow);border-radius:var(--radius);padding:26px;overflow:hidden}.card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(54,200,255,.12),transparent 32%);opacity:0;transition:.35s;pointer-events:none}.card:hover::before{opacity:1}.card:hover{border-color:rgba(88,219,255,.34)}
-    .icon{width:48px;height:48px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(54,200,255,.18),rgba(34,107,255,.1));border:1px solid rgba(54,200,255,.24);color:#8deaff;flex:0 0 auto}.icon.orange{color:#ffbd78;background:rgba(255,154,61,.12);border-color:rgba(255,154,61,.22)}.icon.green{color:#89ffd0;background:rgba(93,255,187,.11);border-color:rgba(93,255,187,.18)}.icon svg{width:23px;height:23px}
-    .card h3{margin:16px 0 10px;font-size:22px;letter-spacing:-.02em}.card p{color:var(--muted);line-height:1.6;margin:0}.card ul{padding-left:18px;color:var(--muted);line-height:1.72;margin:14px 0 0}.card li::marker{color:var(--blue)}
-    .problem-stack{display:grid;grid-template-columns:1fr;gap:14px}.problem-card{display:grid;grid-template-columns:60px 1fr;gap:18px;align-items:start}.problem-card h3{margin:0 0 6px}.divider-label{display:flex;align-items:center;gap:14px;color:#d9ecff;font-weight:950;margin:20px 0}.divider-label::before,.divider-label::after{content:"";height:1px;background:linear-gradient(90deg,transparent,var(--stroke2),transparent);flex:1}.versus{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch}.vs-badge{align-self:center;width:56px;height:56px;border-radius:999px;display:grid;place-items:center;background:linear-gradient(135deg,#ff7b3b,#245dff);font-weight:950;box-shadow:0 18px 55px rgba(0,0,0,.35)}
-    .visual-card{padding:14px;border-radius:30px;background:rgba(255,255,255,.07);border:1px solid var(--stroke);box-shadow:var(--shadow);overflow:hidden}.visual-card img,.visual-card video{border-radius:22px;width:100%;background:#09162f}.caption{display:flex;justify-content:space-between;gap:12px;padding:14px 8px 4px;color:var(--muted);font-size:13px;font-weight:760}.caption b{color:var(--soft)}
-    .demo-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:start}.workflow-list{display:grid;gap:14px}.workflow{display:flex;gap:13px;padding:16px;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid var(--stroke)}.workflow h4{margin:0 0 4px;font-size:16px}.workflow p{margin:0;color:var(--muted);line-height:1.5;font-size:14px}
-    .architecture-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center}.architecture-points{display:grid;gap:14px}.point{display:flex;gap:14px;padding:16px;border-radius:22px;background:rgba(255,255,255,.055);border:1px solid var(--stroke)}.point b{display:block;margin-bottom:4px}.point span{color:var(--muted);line-height:1.45}
-    .capability-card{min-height:300px}.capability-card h3{font-size:21px}.capability-card .tag{display:inline-flex;margin-top:18px;border:1px solid rgba(54,200,255,.24);border-radius:999px;padding:7px 10px;color:#aeeeff;background:rgba(54,200,255,.08);font-size:12px;font-weight:850}
-    .product-card{padding:0;overflow:hidden}.product-top{padding:26px}.price{margin-top:18px;font-size:38px;letter-spacing:-.04em;font-weight:950}.price span{font-size:14px;color:var(--muted);font-weight:800}.feature-line{display:flex;align-items:center;gap:10px;margin-top:11px;color:var(--muted);font-weight:700}.product-band{padding:18px 26px;border-top:1px solid var(--stroke);background:rgba(255,255,255,.045);color:#e7f6ff;font-weight:900}.featured{border-color:rgba(54,200,255,.42);box-shadow:0 26px 100px rgba(34,107,255,.24)}
-    .table-wrap{overflow:auto;border-radius:26px;border:1px solid var(--stroke);background:rgba(255,255,255,.055);box-shadow:var(--shadow)}table{width:100%;border-collapse:collapse;min-width:850px}th,td{text-align:left;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.09);vertical-align:top}th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8feaff;background:rgba(54,200,255,.08)}td{color:var(--muted);line-height:1.45}td strong{color:#fff}.patent-domain{color:#fff;font-weight:900}.status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.status{padding:18px;border-radius:22px;background:rgba(255,255,255,.06);border:1px solid var(--stroke);position:relative;overflow:hidden}.status::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue),var(--green))}.status b{display:block;font-size:15px}.status span{display:inline-flex;margin-top:10px;font-size:12px;font-weight:950;text-transform:uppercase;letter-spacing:.09em;color:#83ffd1}.status.inprogress span{color:#ffce8b}.status.inprogress::after{background:linear-gradient(90deg,var(--orange),var(--blue))}
-    .team-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px}.profile{display:grid;grid-template-columns:82px 1fr;gap:18px;align-items:start}.avatar{width:82px;height:82px;border-radius:24px;background:linear-gradient(135deg,rgba(54,200,255,.2),rgba(255,154,61,.14));border:1px solid var(--stroke2);display:grid;place-items:center;font-weight:950;font-size:26px}.profile h3{margin:0 0 5px}.role{color:#8deaff;font-weight:900;font-size:13px;letter-spacing:.08em;text-transform:uppercase}.profile p{margin-top:10px}.profile .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chip{font-size:12px;font-weight:850;color:#d9e9ff;background:rgba(255,255,255,.07);border:1px solid var(--stroke);padding:7px 9px;border-radius:999px}
-    .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.gallery-item{border:1px solid var(--stroke);background:rgba(255,255,255,.06);padding:8px;border-radius:20px;cursor:pointer;transition:.2s;position:relative;overflow:hidden}.gallery-item:hover{transform:translateY(-3px);border-color:var(--stroke2)}.gallery-item img{border-radius:14px}.gallery-item span{display:block;padding:9px 4px 3px;color:var(--muted);font-size:12px;font-weight:780}.modal{position:fixed;inset:0;background:rgba(0,0,0,.74);backdrop-filter:blur(14px);z-index:100;display:none;align-items:center;justify-content:center;padding:24px}.modal.open{display:flex}.modal-content{position:relative;max-width:min(1120px,95vw);max-height:88vh}.modal-content img{max-height:82vh;border-radius:22px;border:1px solid rgba(255,255,255,.18);box-shadow:0 30px 120px rgba(0,0,0,.65)}.modal-close{position:absolute;right:-12px;top:-12px;width:44px;height:44px;border-radius:50%;border:1px solid var(--stroke);background:#07162f;color:white;font-size:24px;cursor:pointer}
-    .contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:24px}.contact-list{display:grid;gap:13px}.contact-row{display:flex;gap:13px;align-items:flex-start;padding:16px;border-radius:20px;border:1px solid var(--stroke);background:rgba(255,255,255,.055)}.contact-row b{display:block}.contact-row span{color:var(--muted);font-size:14px;line-height:1.5}.form{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form .full{grid-column:1/-1}.field label{display:block;color:#d3e7ff;font-size:13px;font-weight:900;margin:0 0 8px}.field input,.field textarea,.field select{width:100%;border-radius:16px;border:1px solid var(--stroke);background:rgba(255,255,255,.07);color:#fff;padding:14px 14px;outline:none;transition:.2s}.field textarea{min-height:130px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:rgba(54,200,255,.62);box-shadow:0 0 0 4px rgba(54,200,255,.09)}.form-note{color:var(--muted);font-size:13px;line-height:1.5;margin:12px 0 0}.newsletter{display:flex;gap:10px;margin-top:18px}.newsletter input{flex:1;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.07);color:#fff;padding:13px 16px;outline:none}.newsletter button{white-space:nowrap}.success{display:none;color:#8dffd0;font-weight:850;font-size:13px;margin-top:10px}.success.show{display:block}
-    footer{padding:32px 0;border-top:1px solid var(--stroke);color:var(--muted);background:rgba(0,0,0,.12)}.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}.footer-links{display:flex;gap:16px;font-weight:800;font-size:13px}
-    .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease, transform .75s ease}.reveal.visible{opacity:1;transform:none}.tilt{transform-style:preserve-3d;transition:transform .22s ease}
-    @media (max-width:1020px){.hero-grid,.demo-layout,.architecture-wrap,.grid-2,.contact-grid,.team-layout{grid-template-columns:1fr}.hero-visual{min-height:560px}.grid-3{grid-template-columns:1fr 1fr}.grid-4,.status-grid,.gallery{grid-template-columns:1fr 1fr}.section-head{display:block}.section-copy{margin-top:16px}.nav-links{display:none}.mobile-toggle{display:inline-grid}.nav-links.open{display:flex;position:absolute;top:73px;left:20px;right:20px;flex-direction:column;align-items:flex-start;background:rgba(5,14,31,.96);border:1px solid var(--stroke);border-radius:22px;padding:18px;box-shadow:var(--shadow)}}
-    @media (max-width:680px){.container{width:min(100% - 26px, var(--max))}.hero{padding-top:50px}.hero-actions,.newsletter{flex-direction:column}.btn{width:100%}.metrics,.grid-3,.grid-4,.status-grid,.gallery,.form{grid-template-columns:1fr}.versus{grid-template-columns:1fr}.vs-badge{margin:auto}.phone-stage{height:520px;scale:.86}.float-card{display:none}.connection{display:none}.profile{grid-template-columns:1fr}.footer-inner{flex-direction:column;align-items:flex-start}.nav-cta .btn.ghost{display:none}}
-    @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+    *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);overflow-x:hidden}
+    a{color:inherit;text-decoration:none} img{max-width:100%;display:block}
+    .bg-orbs{position:fixed;inset:0;z-index:-2;background:radial-gradient(circle at 15% 10%,rgba(35,212,255,.18),transparent 28%),radial-gradient(circle at 86% 8%,rgba(255,107,0,.16),transparent 26%),linear-gradient(180deg,#f9fbff 0%,#eef5ff 54%,#ffffff 100%)}
+    .grid-noise{position:fixed;inset:0;z-index:-1;opacity:.24;background-image:linear-gradient(rgba(12,108,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(12,108,255,.09) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(to bottom,#000 0%,transparent 80%)}
+    .container{width:min(var(--max),calc(100% - 42px));margin:auto}.section{padding:92px 0}.eyebrow{display:inline-flex;gap:9px;align-items:center;padding:8px 13px;border:1px solid rgba(12,108,255,.16);border-radius:999px;background:rgba(255,255,255,.7);box-shadow:0 8px 28px rgba(12,108,255,.08);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+    h1,h2,h3,p{margin-top:0}.display{font-size:clamp(42px,7vw,82px);line-height:.94;letter-spacing:-.065em;margin:22px 0 20px;color:#fff}.title{font-size:clamp(30px,4.2vw,54px);line-height:1.02;letter-spacing:-.045em;margin:14px 0 16px}.lead{font-size:clamp(17px,2vw,22px);line-height:1.65;color:#d9e8ff}.body{font-size:16px;line-height:1.72;color:var(--muted)}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#ecf6ff;font-weight:700;font-size:13px;backdrop-filter:blur(10px)}
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(13,50,98,.09)}.nav-inner{display:flex;align-items:center;justify-content:space-between;height:76px}.brand{display:flex;align-items:center;gap:11px;font-weight:900;color:var(--navy);letter-spacing:-.02em}.brand-mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,var(--navy2),var(--blue));display:grid;place-items:center;box-shadow:0 12px 30px rgba(12,108,255,.28)}.brand-mark svg{width:24px;height:24px;fill:white}.nav-links{display:flex;gap:22px;align-items:center;font-size:13px;font-weight:800;color:#30415f}.nav-links a:hover{color:var(--blue)}.nav-cta{padding:12px 16px;border-radius:999px;background:var(--navy);color:white!important;box-shadow:0 12px 26px rgba(6,25,54,.18)}.menu{display:none;border:0;background:#fff;border-radius:12px;padding:10px;box-shadow:0 10px 25px rgba(0,0,0,.08)}
+    .hero{position:relative;min-height:760px;padding:90px 0 70px;background:linear-gradient(135deg,#05142e 0%,#082960 46%,#0b65ff 125%);overflow:hidden;color:#fff}.hero:before{content:"";position:absolute;inset:-35%;background:radial-gradient(circle at 15% 22%,rgba(35,212,255,.25),transparent 24%),radial-gradient(circle at 80% 10%,rgba(255,107,0,.24),transparent 18%),radial-gradient(circle at 65% 80%,rgba(35,212,255,.17),transparent 24%);animation:float 10s ease-in-out infinite alternate}.hero:after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at 55% 35%,#000,transparent 70%)}@keyframes float{to{transform:translate3d(2.5%,1.5%,0) scale(1.04)}}.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:30px 0}.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:15px 21px;font-weight:900;cursor:pointer;transition:.25s ease;font-size:14px}.btn-primary{background:linear-gradient(135deg,var(--orange),#ff9f39);color:#fff;box-shadow:0 18px 40px rgba(255,107,0,.32)}.btn-dark{background:#fff;color:var(--navy);box-shadow:0 18px 40px rgba(0,0,0,.14)}.btn-ghost{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);color:#fff}.btn:hover{transform:translateY(-3px);filter:saturate(1.1)}.hero-pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.hero-card{position:relative;border-radius:34px;background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.08));border:1px solid rgba(255,255,255,.26);box-shadow:0 36px 90px rgba(0,0,0,.28);padding:24px;backdrop-filter:blur(18px)}.hero-card img{border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.22);transition:.45s ease}.hero-card:hover img{transform:scale(1.035)}.stat-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.stat{padding:16px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18)}.stat b{display:block;font-size:24px;color:#fff}.stat span{font-size:12px;color:#c9dbfb}
+    .section-head{display:flex;justify-content:space-between;gap:28px;align-items:end;margin-bottom:34px}.section-head .body{max-width:560px}.card{border:1px solid rgba(13,50,98,.1);background:rgba(255,255,255,.86);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}.glass{background:linear-gradient(180deg,rgba(255,255,255,.86),rgba(255,255,255,.67));backdrop-filter:blur(14px)}.hover-zoom{transition:.35s ease}.hover-zoom:hover{transform:translateY(-7px) scale(1.015);box-shadow:0 26px 70px rgba(12,52,111,.18)}.orange-line{width:68px;height:4px;background:var(--orange);border-radius:999px;margin:0 0 18px}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px}.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.four-col{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.image-card{padding:10px}.image-card img{border-radius:20px;width:100%;height:100%;object-fit:cover}.content-card{padding:28px}.icon{width:46px;height:46px;border-radius:16px;background:linear-gradient(145deg,#fff,#eef6ff);border:1px solid var(--line);display:grid;place-items:center;box-shadow:0 12px 25px rgba(12,108,255,.12);color:var(--orange);font-size:24px}.feature-card{padding:24px;position:relative;overflow:hidden}.feature-card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:linear-gradient(90deg,var(--orange),var(--cyan))}.feature-card h3{margin:16px 0 8px;font-size:20px}.feature-card ul{padding-left:18px;margin:12px 0 0;color:#55637d;line-height:1.72}
+    .timeline{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:14px}.timeline:before{content:"";position:absolute;left:3%;right:3%;top:35px;height:3px;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--orange));z-index:0}.step{position:relative;z-index:1;background:#fff;border-radius:22px;padding:22px 16px;border:1px solid rgba(13,50,98,.1);box-shadow:0 14px 36px rgba(8,27,62,.09)}.dot{width:28px;height:28px;background:linear-gradient(145deg,var(--blue),var(--cyan));border:5px solid #fff;border-radius:99px;margin-bottom:15px;box-shadow:0 0 0 4px rgba(12,108,255,.12)}.step h4{margin:0 0 6px;font-size:15px}.step p{font-size:13px;color:var(--muted);margin:0;line-height:1.45}
+    .demo{background:linear-gradient(135deg,#061936 0%,#0a326e 70%,#082b5f 100%);color:white;position:relative;overflow:hidden}.demo:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 20%,rgba(35,212,255,.24),transparent 24%),radial-gradient(circle at 80% 70%,rgba(255,107,0,.2),transparent 25%)}.demo .container{position:relative;z-index:1}.video-frame{position:relative;border-radius:34px;overflow:hidden;border:1px solid rgba(255,255,255,.18);box-shadow:0 40px 100px rgba(0,0,0,.28);background:#000}.video-frame img{width:100%;height:470px;object-fit:cover;opacity:.88}.play{position:absolute;inset:0;display:grid;place-items:center}.play button{width:92px;height:92px;border-radius:999px;border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.18);backdrop-filter:blur(12px);color:#fff;font-size:32px;cursor:pointer;box-shadow:0 20px 50px rgba(0,0,0,.25);transition:.25s}.play button:hover{transform:scale(1.08);background:var(--orange)}.workflow-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}.workflow{padding:17px;border-radius:18px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18)}.workflow b{display:block;color:#fff}.workflow span{font-size:13px;color:#cbdcf6}
+    .slider-shell{position:relative}.slider{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:5px 4px 24px;scrollbar-width:thin}.slide{min-width:min(88vw,420px);scroll-snap-align:start}.slide img{height:235px;width:100%;object-fit:cover;border-radius:22px}.slide h3{font-size:18px;margin:16px 18px 8px}.slide p{font-size:14px;color:var(--muted);line-height:1.55;margin:0 18px 18px}.slider-controls{display:flex;gap:10px;justify-content:flex-end;margin-bottom:16px}.circle-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--navy);font-weight:900;cursor:pointer;box-shadow:0 10px 25px rgba(8,27,62,.08)}
+    .problem-matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.matrix-card{padding:22px;border-radius:22px;background:#fff;border:1px solid rgba(13,50,98,.1);position:relative;overflow:hidden}.matrix-card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--orange)}.matrix-card h3{font-size:18px;margin:10px 0}.matrix-card p{font-size:14px;color:var(--muted);line-height:1.55}.arch-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center}.arch-points{display:grid;gap:14px}.arch-point{display:flex;gap:14px;padding:17px;border-radius:18px;background:#fff;border:1px solid rgba(13,50,98,.1)}.arch-point b{display:block;margin-bottom:3px}.arch-point span{font-size:13px;color:var(--muted);line-height:1.45}
+    .product-card{padding:28px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between}.product-card:nth-child(2){background:linear-gradient(145deg,#061936,#0d4da7);color:white}.price{font-size:34px;font-weight:950;letter-spacing:-.04em}.product-card li{margin:9px 0;color:inherit}.patent-table{width:100%;border-collapse:separate;border-spacing:0 12px}.patent-table th{text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:0 16px}.patent-table td{background:#fff;padding:18px 16px;border-top:1px solid rgba(13,50,98,.1);border-bottom:1px solid rgba(13,50,98,.1);font-size:14px}.patent-table td:first-child{border-left:1px solid rgba(13,50,98,.1);border-radius:16px 0 0 16px;font-weight:900;color:var(--blue)}.patent-table td:last-child{border-right:1px solid rgba(13,50,98,.1);border-radius:0 16px 16px 0;color:var(--muted)}
+    .progress-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.progress-item{padding:20px;border-radius:20px;background:#fff;border:1px solid rgba(13,50,98,.1);display:flex;align-items:center;gap:14px}.check{width:34px;height:34px;border-radius:50%;background:linear-gradient(145deg,#11c489,#2be6ae);color:#fff;display:grid;place-items:center;font-weight:900;flex:0 0 auto}.progress-item small{display:block;color:var(--muted);margin-top:4px}.team-card{padding:28px;display:grid;grid-template-columns:96px 1fr;gap:22px;align-items:center}.avatar{width:96px;height:96px;border-radius:30px;background:linear-gradient(145deg,var(--navy),var(--blue));display:grid;place-items:center;color:white;font-size:40px;font-weight:900;box-shadow:0 18px 40px rgba(12,108,255,.22)}.team-card h3{margin:0 0 4px}.role{color:var(--orange);font-weight:900;font-size:13px;text-transform:uppercase;letter-spacing:.08em}.contact-section{background:linear-gradient(135deg,#071a3d,#0a2d63 70%,#0c6cff);color:#fff}.contact-box{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px}.form{padding:28px;border-radius:28px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px)}.field{display:grid;gap:8px;margin-bottom:14px}.field label{font-size:13px;font-weight:800;color:#dcecff}.field input,.field textarea,.field select{width:100%;border:1px solid rgba(255,255,255,.22);border-radius:15px;background:rgba(255,255,255,.96);padding:14px 14px;font:inherit;color:var(--ink)}.field textarea{min-height:120px;resize:vertical}.newsletter{display:flex;gap:10px;margin-top:20px}.newsletter input{flex:1;border:0;border-radius:999px;padding:15px 18px}.footer{padding:28px 0;background:#041024;color:#abc0dd;font-size:13px}.footer .container{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    .modal{position:fixed;inset:0;background:rgba(3,13,30,.78);display:none;place-items:center;z-index:100;padding:22px}.modal.open{display:grid}.modal-card{width:min(960px,96vw);border-radius:30px;background:#061936;color:#fff;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.16)}.modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.12)}.modal-body{padding:30px}.demo-animation{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:center}.demo-node{padding:18px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);text-align:center;animation:pulse 1.8s infinite alternate}.demo-node:nth-child(2){animation-delay:.2s}.demo-node:nth-child(3){animation-delay:.4s}.demo-node:nth-child(4){animation-delay:.6s}.demo-node:nth-child(5){animation-delay:.8s}@keyframes pulse{to{transform:translateY(-8px);background:rgba(255,107,0,.22)}}.close{background:transparent;border:0;color:#fff;font-size:28px;cursor:pointer}.reveal{opacity:0;transform:translateY(34px);transition:opacity .75s ease,transform .75s ease}.reveal.in{opacity:1;transform:none}
+    @media(max-width:980px){.nav-links{display:none}.menu{display:block}.hero-grid,.two-col,.arch-grid,.contact-box{grid-template-columns:1fr}.three-col,.four-col,.problem-matrix,.progress-grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:1fr 1fr}.timeline:before{display:none}.section-head{display:block}.hero{padding-top:60px}.video-frame img{height:340px}.workflow-bar{grid-template-columns:1fr 1fr}}
+    @media(max-width:640px){.container{width:min(100% - 26px,var(--max))}.section{padding:64px 0}.hero{min-height:auto}.display{font-size:42px}.three-col,.four-col,.problem-matrix,.progress-grid,.timeline{grid-template-columns:1fr}.stat-strip,.workflow-bar{grid-template-columns:1fr}.hero-actions,.newsletter{flex-direction:column}.btn{justify-content:center}.contact-box{gap:18px}.team-card{grid-template-columns:1fr;text-align:center}.avatar{margin:auto}.footer .container{display:block;text-align:center}.demo-animation{grid-template-columns:1fr}.patent-table{display:block;overflow-x:auto;white-space:nowrap}.nav-inner{height:68px}.video-frame img{height:260px}}
   </style>
 </head>
 <body>
-  <div class="noise"></div>
-  <div class="orb one"></div><div class="orb two"></div><div class="orb three"></div>
-
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="#top" class="brand" aria-label="HyperVault home">
-        <span class="brand-badge" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="23" height="23" fill="none"><path d="M12 2l8 3v6c0 5.2-3.2 9.5-8 11-4.8-1.5-8-5.8-8-11V5l8-3z" stroke="white" stroke-width="1.8"/><path d="M8.5 12.2l2.4 2.4 4.8-5.3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        <span>HyperVault<small>Askiplex Technologies</small></span>
-      </a>
-      <div class="nav-links" id="navLinks">
-        <a href="#problem">Problem</a>
-        <a href="#architecture">Architecture</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#ip">IP</a>
-        <a href="#progress">Progress</a>
-        <a href="#team">Team</a>
-      </div>
-      <div class="nav-cta">
-        <a class="btn ghost" href="assets/docs/HyperVault_Investor_Deck.pdf" download>Download Deck</a>
-        <a class="btn primary" href="#contact">Contact</a>
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu">
-          <svg viewBox="0 0 24 24" width="28" height="28" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        </button>
-      </div>
+<div class="bg-orbs"></div><div class="grid-noise"></div>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top"><span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M12 2 4.6 5v5.2c0 4.9 3.1 9.4 7.4 10.8 4.3-1.4 7.4-5.9 7.4-10.8V5L12 2Zm0 3.1 4.6 1.9v3.2c0 3.3-1.8 6.4-4.6 7.7-2.8-1.3-4.6-4.4-4.6-7.7V7L12 5.1Z"/></svg></span><span>HyperVault</span></a>
+    <div class="nav-links"><a href="#summary">Summary</a><a href="#demo">Demo</a><a href="#architecture">Architecture</a><a href="#capabilities">Capabilities</a><a href="#ip">IP</a><a href="#team">Team</a><a class="nav-cta" href="#contact">Contact</a></div>
+    <button class="menu" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">☰</button>
+  </div>
+</nav>
+<header id="top" class="hero">
+  <div class="container hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">Investor Overview · Askiplex Technologies</span>
+      <h1 class="display">Intelligent Android Storage, Security & Mobility Ecosystem.</h1>
+      <p class="lead">HyperVault organizes, encrypts, optimizes, authenticates and transfers mobile data through a unified context-aware Android platform.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="#contact">Request Discussion →</a><a class="btn btn-dark" href="assets/docs/APX_HyperVault_ExecutiveSummary_v5.pdf" target="_blank">Open Executive Summary</a><a class="btn btn-ghost" href="#demo">Watch Demo</a></div>
+      <div class="hero-pills"><span class="pill">Secure by Design</span><span class="pill">Intelligent by Context</span><span class="pill">Trusted Everywhere</span><span class="pill">Built for Scale</span></div>
     </div>
-  </nav>
-
-  <main id="top">
-    <header class="hero">
-      <div class="container hero-grid">
-        <div class="reveal">
-          <span class="eyebrow"><span class="pulse-dot"></span> Investor-ready product platform</span>
-          <h1><span class="gradient-text">HyperVault</span><br/>Intelligent Android Storage, Security & Mobility Ecosystem</h1>
-          <p class="hero-sub">A contextual intelligence layer for Android that brings together content-centric storage, duplicate virtualization, contextual security, wearable-aware authentication, emergency workflows and context-preserving transfer into one unified experience.</p>
-          <div class="hero-actions">
-            <a class="btn primary" href="#contact">Reach out to Askiplex</a>
-            <a class="btn orange" href="#demo">Watch product overview</a>
-            <a class="btn ghost" href="assets/docs/HyperVault_Investor_Deck.pptx" download>Download PPTX</a>
-          </div>
-          <div class="pill-row" aria-label="Core technology pillars">
-            <span class="pill">Content-centric Storage</span>
-            <span class="pill">Duplicate Virtualization</span>
-            <span class="pill">Contextual Security</span>
-            <span class="pill">Wearable Trust</span>
-            <span class="pill">Context-aware Mobility</span>
-          </div>
-          <div class="metrics">
-            <div class="metric"><strong data-count="5">0</strong><span>Patent applications filed</span></div>
-            <div class="metric"><strong>24–30m</strong><span>Development runway target</span></div>
-            <div class="metric"><strong>₹2.5–3Cr</strong><span>Seed funding requirement</span></div>
-          </div>
-        </div>
-        <div class="hero-visual reveal" aria-label="HyperVault product interface mockup">
-          <div class="phone-stage tilt">
-            <div class="connection ln1"></div><div class="connection ln2"></div><div class="connection ln3"></div><div class="connection ln4"></div>
-            <div class="float-card fc1"><div class="ico">▦</div><b>Content Intelligence</b><span>Find by category, app and time</span></div>
-            <div class="float-card fc2"><div class="ico">⧉</div><b>Duplicate Virtualization</b><span>Optimize without deleting files</span></div>
-            <div class="float-card fc3"><div class="ico">⌚</div><b>Wearable Trust</b><span>Presence-aware secure access</span></div>
-            <div class="float-card fc4"><div class="ico">⇄</div><b>Secure Transfer</b><span>Move context, not just files</span></div>
-            <div class="phone">
-              <div class="screen">
-                <div class="screen-header"><span class="hv-logo">HYPERVAULT</span><span class="screen-lock">🛡</span></div>
-                <div class="searchbar">🔎 Search by file, app, category or trust state</div>
-                <div class="category-grid">
-                  <div class="cat"><i>📄</i><b>Documents</b><small>1,248 files</small></div>
-                  <div class="cat"><i>🖼</i><b>Media</b><small>8.4 GB</small></div>
-                  <div class="cat"><i>🔐</i><b>Secure Vault</b><small>Protected</small></div>
-                  <div class="cat"><i>⌚</i><b>Wearable</b><small>Trusted</small></div>
-                </div>
-                <div class="storage-card">
-                  <b>Duplicate Optimization</b>
-                  <div class="progress"><span></span></div>
-                  <small style="color:#b8c9df;display:block;margin-top:9px">86 GB projected storage saved with logical references</small>
-                </div>
-                <div class="storage-card" style="background:linear-gradient(135deg,rgba(255,154,61,.18),rgba(54,200,255,.07))">
-                  <b>Emergency Ready</b>
-                  <small style="color:#b8c9df;display:block;margin-top:9px">One-tap SOS, live location and evidence collection</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section id="demo">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Product Demo</div>
-            <h2 class="section-title">A concise product story for investors.</h2>
-          </div>
-          <p class="section-copy">The embedded overview uses selected deck visuals to communicate the product vision, architecture, capabilities, IP portfolio and development status in a simple investor-friendly flow.</p>
-        </div>
-        <div class="demo-layout">
-          <div class="visual-card reveal">
-            <video controls preload="metadata" poster="assets/img/og-hypervault.webp">
-              <source src="assets/video/hypervault-overview.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <div class="caption"><b>HyperVault overview video</b><span>Replace this file with your recorded product demo when ready.</span></div>
-          </div>
-          <div class="workflow-list reveal">
-            <div class="workflow"><span class="icon">▦</span><div><h4>Content-centric discovery</h4><p>Explore files by category, source application, time and logical grouping rather than folder paths.</p></div></div>
-            <div class="workflow"><span class="icon orange">⧉</span><div><h4>Duplicate-safe optimization</h4><p>Virtualize duplicate content with logical references instead of asking users to delete files permanently.</p></div></div>
-            <div class="workflow"><span class="icon green">⌚</span><div><h4>Wearable trust & emergency</h4><p>Use trusted wearable presence for access decisions and enable emergency activation workflows.</p></div></div>
-            <div class="workflow"><span class="icon">⇄</span><div><h4>Context-preserving transfer</h4><p>Transfer content relationships, vault awareness and duplicate intelligence across devices.</p></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="problem">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Problem Statement</div>
-            <h2 class="section-title">Storage, security, transfer and authentication remain isolated.</h2>
-          </div>
-          <p class="section-copy">Existing apps solve isolated user tasks, but they do not share a common intelligence layer. HyperVault is positioned around the missing architecture between those systems.</p>
-        </div>
-        <div class="versus reveal">
-          <div class="card">
-            <h3>Current mobile data experience</h3>
-            <ul>
-              <li>File managers remain folder-centric.</li>
-              <li>Duplicate cleanup often depends on destructive deletion.</li>
-              <li>Vault apps break gallery and MediaStore continuity.</li>
-              <li>Transfer apps move files without preserving relationships.</li>
-              <li>Authentication remains one-time, repetitive and device-centric.</li>
-            </ul>
-          </div>
-          <div class="vs-badge">VS</div>
-          <div class="card">
-            <h3>HyperVault approach</h3>
-            <ul>
-              <li>Content-centric and app-aware abstraction layer.</li>
-              <li>Non-destructive duplicate virtualization.</li>
-              <li>Contextual security without breaking workflows.</li>
-              <li>Security-aware, duplicate-aware and category-aware transfers.</li>
-              <li>Continuous trust through wearable-aware presence.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="grid-4" style="margin-top:18px">
-          <div class="card problem-card reveal"><span class="icon">📁</span><div><h3>Data Management</h3><p>No content-centric abstraction layer; discovery degrades as data grows.</p></div></div>
-          <div class="card problem-card reveal"><span class="icon orange">🔐</span><div><h3>Security</h3><p>Protection is achieved through hiding, relocation or isolation.</p></div></div>
-          <div class="card problem-card reveal"><span class="icon">⇄</span><div><h3>Transfer</h3><p>Transfers move files only, not relationships, vault context or policies.</p></div></div>
-          <div class="card problem-card reveal"><span class="icon green">⌚</span><div><h3>Authentication</h3><p>Trust is not continuous, contextual or presence-aware.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="architecture">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">HyperVault Architecture</div>
-            <h2 class="section-title">The missing contextual intelligence layer.</h2>
-          </div>
-          <p class="section-copy">HyperVault introduces an architecture that unifies data management, security, transfer and authentication into one intelligent ecosystem.</p>
-        </div>
-        <div class="architecture-wrap">
-          <div class="visual-card reveal">
-            <img src="assets/img/architecture.webp" alt="HyperVault architecture diagram from the pitch deck" loading="lazy" />
-            <div class="caption"><b>Architecture diagram</b><span>Source: investor pitch deck</span></div>
-          </div>
-          <div class="architecture-points reveal">
-            <div class="point"><span class="icon">1</span><div><b>Contextual Intelligence Layer</b><span>Shared intelligence across storage, security, transfer and authentication.</span></div></div>
-            <div class="point"><span class="icon orange">2</span><div><b>Logical File Continuity</b><span>Files remain discoverable even when encrypted, optimized, virtualized or transferred.</span></div></div>
-            <div class="point"><span class="icon green">3</span><div><b>Wearable-Aware Trust</b><span>Access decisions can use trusted presence and emergency context.</span></div></div>
-            <div class="point"><span class="icon">4</span><div><b>Context-Preserving Mobility</b><span>Transfers preserve category, app, security and duplicate-aware relationships.</span></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="capabilities">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Core Capabilities</div>
-            <h2 class="section-title">Six intelligence domains built on one platform.</h2>
-          </div>
-          <p class="section-copy">The initial website keeps the content credible and architecture-focused, while still showing enough product substance for investor review.</p>
-        </div>
-        <div class="grid-3">
-          <div class="card capability-card reveal"><span class="icon">▦</span><h3>Content Intelligence</h3><p>Category-aware exploration, app-aware organization, time-aware discovery and logical group-aware navigation.</p><span class="tag">Find by context, not folders</span></div>
-          <div class="card capability-card reveal"><span class="icon orange">⧉</span><h3>Storage Intelligence</h3><p>Duplicate virtualization, non-destructive storage optimization and shared content intelligence.</p><span class="tag">Optimize without deletion</span></div>
-          <div class="card capability-card reveal"><span class="icon">🛡</span><h3>Security Intelligence</h3><p>Contextual security, MediaStore-aware protection and logical file continuity preservation.</p><span class="tag">Security without disruption</span></div>
-          <div class="card capability-card reveal"><span class="icon green">⇄</span><h3>Transfer Intelligence</h3><p>Security-aware migration, duplicate-aware synchronization and context-preserving transfer workflows.</p><span class="tag">Move relationships, not just files</span></div>
-          <div class="card capability-card reveal"><span class="icon">⌚</span><h3>Trust Intelligence</h3><p>Presence-aware authentication, wearable-aware trust and context-aware access decisions.</p><span class="tag">Continuous trusted presence</span></div>
-          <div class="card capability-card reveal"><span class="icon orange">🆘</span><h3>Emergency Intelligence</h3><p>One-tap emergency activation, wearable-triggered response and intelligent emergency notifications.</p><span class="tag">Safety integrated into trust</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="product-line">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Product Line</div>
-            <h2 class="section-title">Free app, premium app and smart wearables.</h2>
-          </div>
-          <p class="section-copy">Three product lines are built on the same HyperVault platform, allowing a phased commercialization path from Android software to wearable trust hardware.</p>
-        </div>
-        <div class="grid-3">
-          <div class="card product-card reveal"><div class="product-top"><span class="icon">🎁</span><h3>Free App</h3><p>Entry-level Android application for user acquisition, product validation and community feedback.</p><div class="feature-line">✓ Basic content discovery</div><div class="feature-line">✓ Core file organization</div><div class="feature-line">✓ Play Store distribution</div></div><div class="product-band">Stage 1: Free / Freemium</div></div>
-          <div class="card product-card featured reveal"><div class="product-top"><span class="icon orange">💎</span><h3>Premium App</h3><p>Advanced intelligence for storage optimization, contextual security, emergency and transfer workflows.</p><div class="price">₹99<span>/month</span></div><div class="feature-line">✓ Duplicate virtualization</div><div class="feature-line">✓ Contextual security</div><div class="feature-line">✓ Advanced transfer intelligence</div></div><div class="product-band">Stage 2: Premium subscription</div></div>
-          <div class="card product-card reveal"><div class="product-top"><span class="icon green">⌚</span><h3>Smart Wearables</h3><p>Smart ring and wearable ecosystem for authentication, emergency triggers and monitoring use cases.</p><div class="feature-line">✓ Wearable authentication</div><div class="feature-line">✓ Emergency trigger services</div><div class="feature-line">✓ Health monitoring platform</div></div><div class="product-band">Stage 3: Hardware sales</div></div>
-        </div>
-        <div class="visual-card reveal" style="margin-top:24px">
-          <img src="assets/img/product-line.webp" alt="HyperVault product line slide showing three product lines built on one platform" loading="lazy" />
-        </div>
-      </div>
-    </section>
-
-    <section id="ip">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Intellectual Property</div>
-            <h2 class="section-title">Five provisional patent applications protect the core differentiators.</h2>
-          </div>
-          <p class="section-copy">The IP portfolio covers the product’s key architectural domains across platform intelligence, storage, security, trust, emergency and transfer.</p>
-        </div>
-        <div class="table-wrap reveal">
-          <table>
-            <thead><tr><th>Patent Domain</th><th>Patent Type</th><th>Title</th><th>Application No.</th></tr></thead>
-            <tbody>
-              <tr><td class="patent-domain">Platform Intelligence</td><td>Provisional</td><td><strong>System and Method for Intelligent Secure Data Management, Duplicate Virtualization, Wearable Authentication, and Smart Transfer</strong></td><td>2026-2106-4901 (India)</td></tr>
-              <tr><td class="patent-domain">Storage Intelligence</td><td>Provisional</td><td><strong>System and Method for Intelligent Non-Destructive Shared-Storage Duplicate Virtualization Using Logical Stub References</strong></td><td>2026-2106-6923 (India)</td></tr>
-              <tr><td class="patent-domain">Security Intelligence</td><td>Provisional</td><td><strong>System and Method for Non-Disruptive Contextual Secure File and MediaStore Management</strong></td><td>2026-2106-6926 (India)</td></tr>
-              <tr><td class="patent-domain">Trust & Emergency Intelligence</td><td>Provisional</td><td><strong>System and Method for Wearable-Aware Continuous Trust, Contextual Secure File and MediaStore Access, and Emergency Communication</strong></td><td>2026-2106-6927 (India)</td></tr>
-              <tr><td class="patent-domain">Transfer Intelligence</td><td>Provisional</td><td><strong>System and Method for Contextual State-Preserving File and MediaStore Transfer</strong></td><td>2026-2106-6932 (India)</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="visual-card reveal" style="margin-top:24px"><img src="assets/img/ip-portfolio.webp" alt="HyperVault IP portfolio slide from pitch deck" loading="lazy" /></div>
-      </div>
-    </section>
-
-    <section id="progress">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Current Progress</div>
-            <h2 class="section-title">Credibility milestones already underway.</h2>
-          </div>
-          <p class="section-copy">The initial investor website presents clear execution progress without overloading the page with financial projections or excessive marketing claims.</p>
-        </div>
-        <div class="status-grid">
-          <div class="status reveal"><b>Company Registration</b><span>Completed</span></div>
-          <div class="status reveal"><b>Startup India Recognition</b><span>Completed</span></div>
-          <div class="status reveal"><b>Google Play Developer Account</b><span>Completed</span></div>
-          <div class="status inprogress reveal"><b>Core Product Development</b><span>In Progress</span></div>
-          <div class="status inprogress reveal"><b>Core Platform Architecture</b><span>In Progress</span></div>
-          <div class="status reveal"><b>Patent Applications</b><span>5 Filed</span></div>
-          <div class="status inprogress reveal"><b>Play Store Release</b><span>Preparation</span></div>
-          <div class="status inprogress reveal"><b>GitHub Pages</b><span>Website Ready</span></div>
-        </div>
-        <div class="grid-2" style="margin-top:24px">
-          <div class="visual-card reveal"><img src="assets/img/progress.webp" alt="HyperVault current progress slide" loading="lazy" /></div>
-          <div class="visual-card reveal"><img src="assets/img/roadmap.webp" alt="HyperVault roadmap and fund utilization slide" loading="lazy" /></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="team">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Team</div>
-            <h2 class="section-title">Founder-led technical depth with operating execution.</h2>
-          </div>
-          <p class="section-copy">The team section is intentionally direct: investors can quickly understand technical ownership, operational ownership and relevant background.</p>
-        </div>
-        <div class="team-layout">
-          <div class="card profile reveal">
-            <div class="avatar">AV</div>
-            <div>
-              <div class="role">Founder, CEO & CTO</div>
-              <h3>Anurag Verma</h3>
-              <p>25+ years in enterprise storage, replication and security technologies. Former Senior Principal Engineer across Broadcom, Symantec, Veritas and QLogic. Holds granted US patents and leads product vision, Android architecture, encryption strategy and AI security roadmap.</p>
-              <div class="chips"><span class="chip">Enterprise Storage</span><span class="chip">Security</span><span class="chip">Android Architecture</span><span class="chip">IIT Roorkee</span></div>
-            </div>
-          </div>
-          <div class="card profile reveal">
-            <div class="avatar">SM</div>
-            <div>
-              <div class="role">Co-Founder & COO</div>
-              <h3>Shashank Mishra</h3>
-              <p>19+ years of multi-domain experience spanning healthcare, finance and enterprise software. Leads operations, execution, partnerships, GTM planning and scalable business processes.</p>
-              <div class="chips"><span class="chip">Operations</span><span class="chip">Partnerships</span><span class="chip">GTM Planning</span><span class="chip">AI & Data Science</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="grid-2" style="margin-top:24px">
-          <div class="visual-card reveal"><img src="assets/img/founder.webp" alt="Founder and company overview slide" loading="lazy" /></div>
-          <div class="visual-card reveal"><img src="assets/img/cofounder.webp" alt="Co-Founder and COO slide" loading="lazy" /></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="deck">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Deck Visuals</div>
-            <h2 class="section-title">Selected source visuals from the investor deck.</h2>
-          </div>
-          <p class="section-copy">Click any image to enlarge. These visuals are included so investors can see the original architecture, capability, product line, IP and progress material without leaving the page.</p>
-        </div>
-        <div class="gallery reveal">
-          <button class="gallery-item" data-full="assets/slides/slide-06.webp"><img src="assets/slides/slide-06.webp" alt="Missing intelligence layer slide" loading="lazy"><span>Missing Intelligence Layer</span></button>
-          <button class="gallery-item" data-full="assets/slides/slide-07.webp"><img src="assets/slides/slide-07.webp" alt="Architecture slide" loading="lazy"><span>Architecture</span></button>
-          <button class="gallery-item" data-full="assets/slides/slide-08.webp"><img src="assets/slides/slide-08.webp" alt="Platform intelligence capabilities slide" loading="lazy"><span>Capabilities</span></button>
-          <button class="gallery-item" data-full="assets/slides/slide-10.webp"><img src="assets/slides/slide-10.webp" alt="Competitive advantages slide" loading="lazy"><span>Competitive Advantages</span></button>
-          <button class="gallery-item" data-full="assets/slides/slide-12.webp"><img src="assets/slides/slide-12.webp" alt="Product line slide" loading="lazy"><span>Product Line</span></button>
-          <button class="gallery-item" data-full="assets/slides/slide-13.webp"><img src="assets/slides/slide-13.webp" alt="Intellectual property slide" loading="lazy"><span>IP Portfolio</span></button>
-          <button class="gallery-item" data-full="assets/slides/slide-17.webp"><img src="assets/slides/slide-17.webp" alt="Current progress slide" loading="lazy"><span>Current Progress</span></button>
-          <button class="gallery-item" data-full="assets/slides/slide-19.webp"><img src="assets/slides/slide-19.webp" alt="Roadmap and fund utilization slide" loading="lazy"><span>Roadmap</span></button>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <div class="section-kicker">Contact Information</div>
-            <h2 class="section-title">Connect with Askiplex Technologies.</h2>
-          </div>
-          <p class="section-copy">Use the inquiry form for investor discussions, partnerships, product review, pilot opportunities or newsletter updates.</p>
-        </div>
-        <div class="contact-grid">
-          <div class="card reveal">
-            <h3>Investor and partnership contact</h3>
-            <p>HyperVault is currently in active product development with patents filed, Play Store preparation underway and a staged product roadmap across Android software, premium intelligence and smart wearable trust.</p>
-            <div class="contact-list" style="margin-top:22px">
-              <div class="contact-row"><span class="icon">✉</span><div><b>Email</b><span><a id="contactEmailLink" href="mailto:investors@askiplex.com">investors@askiplex.com</a></span></div></div>
-              <div class="contact-row"><span class="icon">🌐</span><div><b>GitHub Pages</b><span><a href="https://askiplexdev.github.io/HyperVault/index.html" target="_blank" rel="noopener">askiplexdev.github.io/HyperVault</a></span></div></div>
-              <div class="contact-row"><span class="icon orange">🏢</span><div><b>Company</b><span>Askiplex Technologies</span></div></div>
-            </div>
-            <form class="newsletter" id="newsletterForm">
-              <input id="newsletterEmail" type="email" placeholder="Enter email for HyperVault updates" required aria-label="Newsletter email" />
-              <button class="btn primary" type="submit">Subscribe</button>
-            </form>
-            <div class="success" id="newsletterSuccess">Thanks. Your email client will open to confirm subscription.</div>
-          </div>
-          <div class="card reveal">
-            <form class="form" id="contactForm">
-              <div class="field"><label for="name">Name</label><input id="name" name="name" placeholder="Your name" required /></div>
-              <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" required /></div>
-              <div class="field"><label for="topic">Inquiry Type</label><select id="topic" name="topic"><option>Investor discussion</option><option>Strategic partnership</option><option>Product demo</option><option>Press / media</option><option>Other</option></select></div>
-              <div class="field"><label for="company">Company</label><input id="company" name="company" placeholder="Company / fund name" /></div>
-              <div class="field full"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us what you would like to discuss..." required></textarea></div>
-              <div class="full">
-                <button class="btn primary" type="submit">Send inquiry</button>
-                <a class="btn ghost" href="assets/docs/HyperVault_Investor_Deck.pdf" download>Download PDF deck</a>
-                <p class="form-note">This static GitHub Pages form opens a pre-filled email. To collect submissions directly on the website, connect Formspree, Netlify Forms or EmailJS later.</p>
-                <div class="success" id="contactSuccess">Your email client should open with the inquiry details.</div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container footer-inner">
-      <div>© <span id="year"></span> Askiplex Technologies. HyperVault investor website.</div>
-      <div class="footer-links"><a href="#top">Top</a><a href="assets/docs/HyperVault_Investor_Deck.pdf" download>Deck PDF</a><a href="#contact">Contact</a></div>
-    </div>
-  </footer>
-
-  <div class="modal" id="modal" aria-hidden="true">
-    <div class="modal-content">
-      <button class="modal-close" id="modalClose" aria-label="Close image preview">×</button>
-      <img id="modalImage" src="" alt="Expanded deck visual" />
+    <div class="hero-card reveal">
+      <img src="assets/images/architecture.png" alt="HyperVault architecture diagram" />
+      <div class="stat-strip"><div class="stat"><b>5</b><span>Core pillars</span></div><div class="stat"><b>6</b><span>Intelligence domains</span></div><div class="stat"><b>1</b><span>Unified platform</span></div></div>
     </div>
   </div>
-
-  <script>
-    // Update these before publishing if you want to use a different investor email or newsletter destination.
-    const CONTACT_EMAIL = "investors@askiplex.com";
-    const NEWSLETTER_EMAIL = "investors@askiplex.com";
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('contactEmailLink').href = `mailto:${CONTACT_EMAIL}`;
-    document.getElementById('contactEmailLink').textContent = CONTACT_EMAIL;
-
-    const navLinks = document.getElementById('navLinks');
-    document.getElementById('mobileToggle').addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){ entry.target.classList.add('visible'); observer.unobserve(entry.target); }
-      });
-    }, {threshold:.14});
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(!entry.isIntersecting) return;
-        const el = entry.target; const end = parseInt(el.dataset.count, 10); let current = 0;
-        const step = Math.max(1, Math.round(end / 28));
-        const tick = () => { current += step; if(current >= end){ el.textContent = end; } else { el.textContent = current; requestAnimationFrame(tick); } };
-        tick(); counterObserver.unobserve(el);
-      });
-    }, {threshold:.7});
-    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
-
-    document.querySelectorAll('.tilt').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - .5;
-        const y = (e.clientY - r.top) / r.height - .5;
-        card.style.transform = `rotateY(${x*6}deg) rotateX(${-y*4}deg)`;
-      });
-      card.addEventListener('mouseleave', () => card.style.transform = '');
-    });
-
-    const modal = document.getElementById('modal');
-    const modalImage = document.getElementById('modalImage');
-    document.querySelectorAll('.gallery-item').forEach(btn => {
-      btn.addEventListener('click', () => { modalImage.src = btn.dataset.full; modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); });
-    });
-    const closeModal = () => { modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); modalImage.src = ''; };
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-    modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
-    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
-
-    document.getElementById('contactForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(e.target).entries());
-      const subject = encodeURIComponent(`HyperVault Inquiry: ${data.topic || 'Investor discussion'}`);
-      const body = encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || ''}\nInquiry Type: ${data.topic || ''}\n\nMessage:\n${data.message}\n\nSent from the HyperVault investor website.`);
-      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-      document.getElementById('contactSuccess').classList.add('show');
-    });
-
-    document.getElementById('newsletterForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const email = document.getElementById('newsletterEmail').value;
-      const subject = encodeURIComponent('Subscribe me to HyperVault updates');
-      const body = encodeURIComponent(`Please add this email to HyperVault updates/newsletter: ${email}`);
-      window.location.href = `mailto:${NEWSLETTER_EMAIL}?subject=${subject}&body=${body}`;
-      document.getElementById('newsletterSuccess').classList.add('show');
-      e.target.reset();
-    });
-  </script>
+</header>
+<main>
+<section id="summary" class="section">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Executive Summary</span><h2 class="title">A missing intelligence layer for fragmented mobile data.</h2><div class="orange-line"></div></div><p class="body">Today, storage, security, transfer and authentication operate as isolated systems. HyperVault introduces contextual intelligence across content, duplicate relationships, security policies, trusted presence and device mobility.</p></div>
+    <div class="two-col">
+      <div class="card content-card hover-zoom reveal"><h3>Platform thesis</h3><p class="body">Users do not experience files as folders. They experience data by app, category, sensitivity, time, trust state and intended action. HyperVault is designed around that real behavior.</p><div class="hero-pills" style="margin-top:18px"><span class="pill" style="background:#eef6ff;color:#0a2d63;border-color:#d9e5f4">Content-centric</span><span class="pill" style="background:#eef6ff;color:#0a2d63;border-color:#d9e5f4">Duplicate-aware</span><span class="pill" style="background:#eef6ff;color:#0a2d63;border-color:#d9e5f4">Wearable-aware</span></div></div>
+      <div class="card image-card hover-zoom reveal"><img src="assets/images/executive-summary.png" alt="HyperVault executive summary visual" /></div>
+    </div>
+  </div>
+</section>
+<section id="about" class="section" style="padding-top:10px">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">About Us</span><h2 class="title">Company journey and current progress.</h2></div><p class="body">Askiplex Technologies is building HyperVault as a credible, architecture-led mobile data infrastructure platform with clear progress across company setup, product development, IP protection and Play Store readiness.</p></div>
+    <div class="timeline reveal">
+      <div class="step"><div class="dot"></div><h4>Company Registration</h4><p>Completed</p></div>
+      <div class="step"><div class="dot"></div><h4>Startup India Recognition</h4><p>Completed</p></div>
+      <div class="step"><div class="dot"></div><h4>Google Play Account</h4><p>Completed</p></div>
+      <div class="step"><div class="dot"></div><h4>Core Product</h4><p>Development in progress</p></div>
+      <div class="step"><div class="dot"></div><h4>Patent Portfolio</h4><p>5 applications filed</p></div>
+      <div class="step"><div class="dot"></div><h4>Play Store Release</h4><p>Preparation underway</p></div>
+    </div>
+  </div>
+</section>
+<section id="demo" class="section demo">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow" style="color:#fff;border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.1)">Product Demo</span><h2 class="title">A visual walkthrough of the HyperVault workflow.</h2></div><p class="lead" style="font-size:17px">Show investors how files move from scattered apps into one secure, searchable, optimized and transferable mobile workspace.</p></div>
+    <div class="video-frame reveal"><img src="assets/images/app-ui.png" alt="HyperVault app interface preview"/><div class="play"><button onclick="openDemo()" aria-label="Play product demo">▶</button></div></div>
+    <div class="workflow-bar reveal"><div class="workflow"><b>Discover</b><span>Find files by app, type, time and category.</span></div><div class="workflow"><b>Protect</b><span>Apply contextual security without breaking workflows.</span></div><div class="workflow"><b>Optimize</b><span>Reduce duplicate waste without destructive deletion.</span></div><div class="workflow"><b>Transfer</b><span>Move secure, context-rich content across devices.</span></div></div>
+  </div>
+</section>
+<section id="screens" class="section">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Screenshots & Workflows</span><h2 class="title">Product visuals with investor-ready storytelling.</h2></div><p class="body">Every visual is presented as a high-impact card with hover zoom and slider navigation for easy review on desktop, tablet or phone.</p></div>
+    <div class="slider-controls"><button class="circle-btn" onclick="slideBy('productSlider',-1)">‹</button><button class="circle-btn" onclick="slideBy('productSlider',1)">›</button></div>
+    <div class="slider" id="productSlider">
+      <article class="card slide hover-zoom"><img src="assets/images/solution-tech.png" alt="Solution technology visual"><h3>Solution / Technology</h3><p>Context-aware intelligence turns generic files into intelligent mobile context.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/file-explorer.png" alt="Smart file discovery"><h3>Intelligent File Explorer</h3><p>One-tap content discovery by category, app source and workflow.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/duplicate.png" alt="Duplicate optimization"><h3>Duplicate Optimization</h3><p>Storage savings through virtualization and continuity preservation.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/security-vault.png" alt="Security vault"><h3>Security & Vault</h3><p>Contextual encryption without disrupting galleries or app workflows.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/file-transfer.png" alt="File transfer"><h3>Intelligent File Transfer</h3><p>Secure, app-aware, category-aware transfer workflows.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/wearable-emergency.png" alt="Wearable trust"><h3>Wearable Trust</h3><p>Trusted presence, proximity unlock, emergency workflows and live location.</p></article>
+    </div>
+  </div>
+</section>
+<section id="problem" class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Problem Statement</span><h2 class="title">Storage, security, transfer and authentication remain isolated.</h2></div><p class="body">Existing mobile tools solve individual pain points but do not share a contextual intelligence layer. This creates data fragmentation, broken continuity, duplicate clutter and repetitive authentication.</p></div>
+    <div class="problem-matrix reveal">
+      <div class="matrix-card hover-zoom"><div class="icon">▦</div><h3>Storage</h3><p>Folder-centric discovery breaks down as app-generated media and documents expand.</p></div>
+      <div class="matrix-card hover-zoom"><div class="icon">🛡</div><h3>Security</h3><p>Vault apps often relocate or hide files, breaking MediaStore and gallery continuity.</p></div>
+      <div class="matrix-card hover-zoom"><div class="icon">⇄</div><h3>Transfer</h3><p>Transfer apps move files without preserving context, relationships or policies.</p></div>
+      <div class="matrix-card hover-zoom"><div class="icon">⌚</div><h3>Authentication</h3><p>Identity checks remain one-time, device-centric and disconnected from trusted presence.</p></div>
+    </div>
+    <div class="card image-card hover-zoom reveal" style="margin-top:24px"><img src="assets/images/problem.png" alt="Problem with today's apps" /></div>
+  </div>
+</section>
+<section id="architecture" class="section">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Architecture</span><h2 class="title">Contextual Intelligence Core.</h2></div><p class="body">The platform connects context-aware storage, security and transfer with app-aware, category-aware, duplicate-aware, MediaStore-aware and wearable-aware intelligence.</p></div>
+    <div class="arch-grid">
+      <div class="card image-card hover-zoom reveal"><img src="assets/images/architecture.png" alt="HyperVault architecture diagram" /></div>
+      <div class="arch-points reveal">
+        <div class="arch-point"><div class="icon">🧠</div><div><b>Contextual Intelligence Core</b><span>Shared intelligence layer across data management, security, transfer and authentication.</span></div></div>
+        <div class="arch-point"><div class="icon">▦</div><div><b>Context-Aware Storage</b><span>Category-aware exploration, app-aware organization and time-aware grouping.</span></div></div>
+        <div class="arch-point"><div class="icon">🛡</div><div><b>Context-Aware Security</b><span>File-aware, MediaStore-aware, app-aware and duplicate-aware protection.</span></div></div>
+        <div class="arch-point"><div class="icon">⇄</div><div><b>Context-Aware Transfer</b><span>Duplicate-aware, security-aware and application-aware mobility.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="capabilities" class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Core Capabilities</span><h2 class="title">Six intelligence domains. One unified experience.</h2></div><p class="body">Each capability is designed as a distinct user value while reinforcing the broader HyperVault architecture.</p></div>
+    <div class="three-col">
+      <div class="card feature-card hover-zoom reveal"><div class="icon">🔎</div><h3>Content Intelligence</h3><p class="body">Category-aware exploration, app-aware organization, time-aware discovery and logical group navigation.</p></div>
+      <div class="card feature-card hover-zoom reveal"><div class="icon">⧉</div><h3>Storage Intelligence</h3><p class="body">Duplicate virtualization, non-destructive optimization and shared content intelligence.</p></div>
+      <div class="card feature-card hover-zoom reveal"><div class="icon">🛡</div><h3>Security Intelligence</h3><p class="body">Contextual security, MediaStore-aware protection and logical file continuity preservation.</p></div>
+      <div class="card feature-card hover-zoom reveal"><div class="icon">⇄</div><h3>Transfer Intelligence</h3><p class="body">Security-aware migration, duplicate-aware synchronization and context-preserving transfers.</p></div>
+      <div class="card feature-card hover-zoom reveal"><div class="icon">⌚</div><h3>Trust Intelligence</h3><p class="body">Presence-aware authentication, wearable-aware trust and context-aware access decisions.</p></div>
+      <div class="card feature-card hover-zoom reveal"><div class="icon">🆘</div><h3>Emergency Intelligence</h3><p class="body">One-tap emergency activation, wearable-triggered response and intelligent notifications.</p></div>
+    </div>
+  </div>
+</section>
+<section id="product-line" class="section">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Product Line</span><h2 class="title">Free app, premium app and smart wearables.</h2></div><p class="body">HyperVault starts with an Android platform and expands into a continuous wearable trust ecosystem.</p></div>
+    <div class="three-col">
+      <div class="card product-card hover-zoom reveal"><div><div class="icon">🎁</div><h3>Free App</h3><p class="body">Basic file explorer, category explorer, basic security and basic transfers.</p></div><div class="price">Free</div></div>
+      <div class="card product-card hover-zoom reveal"><div><div class="icon">💎</div><h3>Premium App</h3><p>Duplicate virtualization, advanced security, AI-assisted categorization, wearable trust, emergency features and advanced transfers.</p></div><div class="price">Subscription</div></div>
+      <div class="card product-card hover-zoom reveal"><div><div class="icon">⌚</div><h3>Smart Wearables</h3><p class="body">Smart rings, bands, watches, cards and keychains for trusted access and emergency triggers.</p></div><div class="price">Hardware</div></div>
+    </div>
+    <div class="card image-card hover-zoom reveal" style="margin-top:24px"><img src="assets/images/product-line.png" alt="HyperVault product line" /></div>
+  </div>
+</section>
+<section id="ip" class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Intellectual Property</span><h2 class="title">Patent portfolio protecting key differentiators.</h2></div><p class="body">Five provisional patent applications cover the platform intelligence layer across storage, duplicate virtualization, security, trust, emergency and transfer intelligence.</p></div>
+    <div class="reveal"><table class="patent-table"><thead><tr><th>Domain</th><th>Patent Title</th><th>Application No.</th></tr></thead><tbody>
+      <tr><td>Platform Intelligence</td><td>System and Method for Intelligent Secure Data Management, Duplicate Virtualization, Wearable Authentication, and Smart Transfer</td><td>2026-2106-4901 (India)</td></tr>
+      <tr><td>Storage Intelligence</td><td>System and Method for Intelligent Non-Destructive Shared-Storage Duplicate Virtualization Using Logical Stub References</td><td>2026-2106-6923 (India)</td></tr>
+      <tr><td>Security Intelligence</td><td>System and Method for Non-Disruptive Contextual Secure File and MediaStore Management</td><td>2026-2106-6926 (India)</td></tr>
+      <tr><td>Trust & Emergency</td><td>System and Method for Wearable-Aware Continuous Trust, Contextual Secure File and MediaStore Access, and Emergency Communication</td><td>2026-2106-6927 (India)</td></tr>
+      <tr><td>Transfer Intelligence</td><td>System and Method for Contextual State-Preserving File and MediaStore Transfer</td><td>2026-2106-6932 (India)</td></tr>
+    </tbody></table></div>
+  </div>
+</section>
+<section id="progress" class="section">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Current Progress</span><h2 class="title">Credibility through execution milestones.</h2></div><p class="body">The current status demonstrates company readiness, platform progress, IP filing activity and release preparation.</p></div>
+    <div class="progress-grid reveal">
+      <div class="progress-item"><div class="check">✓</div><div><b>Company registration</b><small>Completed</small></div></div>
+      <div class="progress-item"><div class="check">✓</div><div><b>Startup India recognition</b><small>Completed</small></div></div>
+      <div class="progress-item"><div class="check">✓</div><div><b>Google Play developer account</b><small>Completed</small></div></div>
+      <div class="progress-item"><div class="check">↗</div><div><b>Product development</b><small>In progress</small></div></div>
+      <div class="progress-item"><div class="check">✓</div><div><b>Patent filings</b><small>5 filed</small></div></div>
+      <div class="progress-item"><div class="check">↗</div><div><b>Play Store preparation</b><small>Underway</small></div></div>
+    </div>
+  </div>
+</section>
+<section id="team" class="section" style="background:#fff">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Team</span><h2 class="title">Technical vision plus operating execution.</h2></div><p class="body">The leadership profile is positioned around deep enterprise storage/security architecture and business execution capacity.</p></div>
+    <div class="two-col">
+      <div class="card team-card hover-zoom reveal"><div class="avatar">AV</div><div><div class="role">Founder, CEO & CTO</div><h3>Anurag Verma</h3><p class="body">25+ years in enterprise storage, replication and security technologies. Senior Principal Engineer across Broadcom, Symantec, Veritas and QLogic. 3 granted US patents and inventor on HyperVault filings.</p></div></div>
+      <div class="card team-card hover-zoom reveal"><div class="avatar">SM</div><div><div class="role">Co-Founder & COO</div><h3>Shashank Mishra</h3><p class="body">19+ years of multi-domain experience across healthcare, finance and enterprise software. Leads operations, execution, partnerships, GTM planning and scalable business processes.</p></div></div>
+    </div>
+  </div>
+</section>
+<section id="deck" class="section">
+  <div class="container">
+    <div class="section-head reveal"><div><span class="eyebrow">Investor Visuals</span><h2 class="title">Supporting deck visuals and product proof points.</h2></div><p class="body">Use this gallery to quickly show investors architecture, product portfolio, business model, market position and platform differentiation.</p></div>
+    <div class="slider-controls"><button class="circle-btn" onclick="slideBy('deckSlider',-1)">‹</button><button class="circle-btn" onclick="slideBy('deckSlider',1)">›</button></div>
+    <div class="slider" id="deckSlider">
+      <article class="card slide hover-zoom"><img src="assets/images/business-model.png" alt="Business model"><h3>Business Model</h3><p>App subscription and wearable device expansion.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/app-portfolio.png" alt="App portfolio"><h3>App Portfolio</h3><p>Android platform and wearable trust ecosystem.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/market.png" alt="Market opportunity"><h3>Market Opportunity</h3><p>Android, privacy, storage and wearable trust expansion.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/competition.png" alt="Competition"><h3>Competition</h3><p>Integrated platform versus fragmented point solutions.</p></article>
+      <article class="card slide hover-zoom"><img src="assets/images/missing-layer-slide.png" alt="Missing intelligence layer"><h3>Missing Intelligence Layer</h3><p>Unified layer across data, security, transfer and authentication.</p></article>
+    </div>
+  </div>
+</section>
+<section id="contact" class="section contact-section">
+  <div class="container">
+    <div class="contact-box">
+      <div class="reveal"><span class="eyebrow" style="color:#fff;border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.1)">Contact Information</span><h2 class="title">Ready to discuss HyperVault?</h2><p class="lead" style="font-size:17px">For investor discussions, partnership conversations, product demos or B2B pilots, reach out directly from this page.</p><div class="hero-actions"><a class="btn btn-primary" href="assets/docs/APX_HyperVault_Investors_v6.pptx" target="_blank">Download Investor Deck</a><a class="btn btn-ghost" href="assets/docs/APX_HyperVault_ExecutiveSummary_v5.pdf" target="_blank">Download Summary</a></div><p style="color:#b9d1f0"><b>Configured email:</b> <span id="emailText">dsalinkdev@gmail.com</span></p><div class="newsletter"><input id="newsletterEmail" type="email" placeholder="Your email for updates"><button class="btn btn-primary" onclick="subscribeNews()">Subscribe</button></div></div>
+      <form class="form reveal" onsubmit="sendInquiry(event)"><div class="field"><label>Name</label><input id="name" required placeholder="Your name"></div><div class="field"><label>Email</label><input id="email" type="email" required placeholder="you@example.com"></div><div class="field"><label>Interest</label><select id="interest"><option>Investor discussion</option><option>Strategic partnership</option><option>B2B pilot</option><option>Product demo</option><option>Media / Analyst inquiry</option></select></div><div class="field"><label>Message</label><textarea id="message">I reviewed the HyperVault website and would like to discuss the product, roadmap, IP portfolio and investment opportunity.</textarea></div><button class="btn btn-primary" type="submit">Send Inquiry →</button><p style="font-size:12px;color:#cfe1fb;margin:14px 0 0">GitHub Pages-ready: no backend required. The form opens a pre-filled email.</p></form>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer"><div class="container"><div><b>HyperVault by Askiplex Technologies</b><br>Organize. Encrypt. Optimize. Authenticate. Transfer.</div><div>Secure by Design · Intelligent by Context · Trusted Everywhere</div></div></footer>
+<div class="modal" id="demoModal"><div class="modal-card"><div class="modal-head"><b>HyperVault Product Demo Flow</b><button class="close" onclick="closeDemo()">×</button></div><div class="modal-body"><div class="demo-animation"><div class="demo-node">📱<br><b>Apps</b><br><small>WhatsApp, Camera, Office</small></div><div class="demo-node">🧠<br><b>Context</b><br><small>App, type, time, trust</small></div><div class="demo-node">🛡<br><b>Secure</b><br><small>Contextual protection</small></div><div class="demo-node">⧉<br><b>Optimize</b><br><small>Duplicate virtualization</small></div><div class="demo-node">⇄<br><b>Transfer</b><br><small>Context-preserving mobility</small></div></div></div></div></div>
+<script>
+const CONTACT_EMAIL='dsalinkdev@gmail.com';
+function slideBy(id,dir){const el=document.getElementById(id);el.scrollBy({left:dir*(el.clientWidth*.78),behavior:'smooth'});}
+function openDemo(){document.getElementById('demoModal').classList.add('open')}
+function closeDemo(){document.getElementById('demoModal').classList.remove('open')}
+function sendInquiry(e){e.preventDefault();const name=document.getElementById('name').value;const email=document.getElementById('email').value;const interest=document.getElementById('interest').value;const msg=document.getElementById('message').value;const subject=encodeURIComponent('HyperVault Inquiry - '+interest);const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\nInterest: ${interest}\n\nMessage:\n${msg}`);window.location.href=`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;}
+function subscribeNews(){const em=document.getElementById('newsletterEmail').value||'';const subject=encodeURIComponent('HyperVault Newsletter Subscription');const body=encodeURIComponent(`Please add me to HyperVault updates.\n\nEmail: ${em}`);window.location.href=`mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;}
+const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in')})},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
 </body>
 </html>
