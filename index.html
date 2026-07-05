@@ -28,17 +28,9 @@
       </a>
       <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
       <div class="nav-links">
-        <a href="#executive-summary">Executive Summary</a>
-        <a href="#problem">Problem</a>
-        <a href="#solution">Solution</a>
-        <a href="#core-capabilities">Core Capabilities</a>
-        <a href="#platform">Architecture</a>
-        <a href="#products">Products</a>
-        <a href="#business">Business</a>
-        <a href="#video">Video</a>
         <details class="nav-dropdown">
           <summary>
-            <span>About Us</span>
+            <span>About</span>
             <span class="nav-chevron" aria-hidden="true"></span>
           </summary>
           <div class="nav-submenu">
@@ -72,6 +64,32 @@
             </a>
           </div>
         </details>
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="core-capabilities.html">Core Capabilities</a>
+        <a href="#products">Products</a>
+        <details class="nav-dropdown">
+          <summary>
+            <span>Business</span>
+            <span class="nav-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="nav-submenu">
+            <a href="business.html#business-model">
+              <span class="submenu-dot green-dot"></span>
+              <span>
+                <strong>Business Model</strong>
+                <small>Monetization path</small>
+              </span>
+            </a>
+            <a href="business.html#investor">
+              <span class="submenu-dot orange-dot"></span>
+              <span>
+                <strong>Investor Snapshot</strong>
+                <small>Funding and progress</small>
+              </span>
+            </a>
+          </div>
+        </details>
         <a href="#faqs">FAQs</a>
         <a href="#contact" class="nav-cta">Contact</a>
       </div>
@@ -91,15 +109,8 @@
         <p class="hero-subheadline">A next-generation Android platform built to organize, protect, authenticate, and move mobile data through contextual intelligence.</p>
         <p>HyperVault transforms fragmented Android storage into a secure, intelligent, and connected data ecosystem with content-centric discovery, duplicate optimization, contextual vault protection, wearable-aware authentication, emergency workflows, and smart file mobility.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#executive-summary">Explore HyperVault</a>
+          <a class="btn primary" href="core-capabilities.html">Explore HyperVault</a>
           <a class="btn secondary" href="#products">View Product Ecosystem</a>
-        </div>
-        <div class="hero-feature-list" aria-label="HyperVault intelligence layers">
-          <span>App-aware organization</span>
-          <span>Category-aware security</span>
-          <span>Duplicate-aware optimization</span>
-          <span>Wearable-aware access</span>
-          <span>Context-aware transfer</span>
         </div>
       </div>
 
@@ -123,6 +134,20 @@
           <button type="button" data-video-zoom-reset>Fit</button>
           <button type="button" data-video-fullscreen>Fullscreen</button>
         </div>
+        <div class="hero-capability-marquee" aria-label="HyperVault intelligence layers">
+          <div class="capability-track">
+            <span class="capability-card app-aware"><strong>App-aware</strong> organization</span>
+            <span class="capability-card security-aware"><strong>Category-aware</strong> security</span>
+            <span class="capability-card duplicate-aware"><strong>Duplicate-aware</strong> optimization</span>
+            <span class="capability-card wearable-aware"><strong>Wearable-aware</strong> access</span>
+            <span class="capability-card transfer-aware"><strong>Context-aware</strong> transfer</span>
+            <span class="capability-card app-aware" aria-hidden="true"><strong>App-aware</strong> organization</span>
+            <span class="capability-card security-aware" aria-hidden="true"><strong>Category-aware</strong> security</span>
+            <span class="capability-card duplicate-aware" aria-hidden="true"><strong>Duplicate-aware</strong> optimization</span>
+            <span class="capability-card wearable-aware" aria-hidden="true"><strong>Wearable-aware</strong> access</span>
+            <span class="capability-card transfer-aware" aria-hidden="true"><strong>Context-aware</strong> transfer</span>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -133,41 +158,6 @@
       <span>Wearable Trust</span>
       <span>Emergency Intelligence</span>
     </section>
-
-    <section class="section executive-summary" id="executive-summary">
-      <div class="section-heading centered reveal">
-        <span class="eyebrow orange">Executive Summary</span>
-        <h2>HyperVault unifies Android storage, security, mobility and wearable trust</h2>
-        <p>
-          HyperVault is an intelligent Android platform from ASKIPLEX Technologies that brings content-centric storage,
-          duplicate virtualization, contextual security, wearable-aware authentication, context-aware mobility and emergency
-          response into one continuous trust ecosystem.
-        </p>
-      </div>
-
-      <div class="executive-layout">
-        <div class="executive-copy reveal">
-          <div class="summary-kicker">Why it matters</div>
-          <h3>A missing intelligence layer for modern mobile users</h3>
-          <p>
-            Android users manage growing volumes of photos, videos, documents, app data and sensitive media across disconnected
-            tools. HyperVault creates a unified intelligence layer so users can discover, protect, transfer and trust their content
-            without breaking normal workflows.
-          </p>
-          <div class="summary-points">
-            <span>Content-centric discovery</span>
-            <span>Non-destructive duplicate optimization</span>
-            <span>Contextual vault and access control</span>
-            <span>Wearable-aware continuous trust</span>
-            <span>One-tap emergency communication</span>
-          </div>
-        </div>
-        <div class="executive-visual reveal magic-image">
-          <img src="assets/hd/apx-hypervault-executivesummary.jpg" alt="HyperVault executive summary investor one-page overview" />
-        </div>
-      </div>
-    </section>
-
 
     <section class="section split" id="problem">
       <div class="section-heading reveal">
@@ -251,75 +241,6 @@
         </article>
       </div>
 
-      <div class="solution-ecosystem magic-frame reveal">
-        <div class="ecosystem-copy">
-          <span class="eyebrow green">HyperVault Ecosystem</span>
-          <h3>Six connected intelligence layers around one secure mobile core</h3>
-          <p>Click the ecosystem visual to zoom into the full high-definition version and inspect every capability in detail.</p>
-        </div>
-        <img src="assets/hd/hypervault-ecosystem-solution.png" alt="HyperVault ecosystem diagram showing intelligent file explorer, duplicate optimization, contextual encryption, wearable trust, secure transfer, and cloud enterprise readiness" />
-      </div>
-    </section>
-
-    <section class="section platform" id="platform">
-      <div class="section-heading reveal">
-        <span class="eyebrow blue">Platform Architecture</span>
-        <h2>One intelligence core connecting apps, files, devices and wearables</h2>
-      </div>
-      <div class="architecture-card magic-frame reveal">
-        <img src="assets/hd/hypervault-architecture.png" alt="HyperVault contextual intelligence architecture diagram" />
-      </div>
-
-      <div class="feature-carousel magic-frame reveal" id="core-capabilities" data-carousel="features">
-        <div class="feature-header">
-          <div>
-            <span class="eyebrow">Core Capabilities</span>
-            <h2>See how HyperVault feels in use</h2>
-          </div>
-          <div class="carousel-controls compact">
-            <button aria-label="Previous feature slide" data-prev>‹</button>
-            <div class="dots" data-dots></div>
-            <button aria-label="Next feature slide" data-next>›</button>
-          </div>
-        </div>
-        <div class="carousel-track visual-track">
-          <article class="slide active">
-            <img src="assets/hd/hypervault-intelligent-file-explorer.png" alt="HyperVault intelligent file explorer" />
-            <div class="slide-copy">
-              <h3>Intelligent file explorer</h3>
-              <p>All files become easier to discover, organize, secure and transfer from a single app view.</p>
-            </div>
-          </article>
-          <article class="slide">
-            <img src="assets/hd/contextual-encryption-security-and-vault.png" alt="Contextual encryption security and vault interface" />
-            <div class="slide-copy">
-              <h3>Contextual encryption & vault</h3>
-              <p>PDFs, Office files, photos, audio and WhatsApp media can be protected automatically by context.</p>
-            </div>
-          </article>
-          <article class="slide">
-            <img src="assets/hd/hypervault-mobile-context-aware.png" alt="HyperVault context-aware mobile security" />
-            <div class="slide-copy">
-              <h3>Context-aware protection</h3>
-              <p>Security is applied with awareness of content type, app source, trust state and device relationship.</p>
-            </div>
-          </article>
-          <article class="slide">
-            <img src="assets/hd/hypervault-difference.png" alt="HyperVault app-aware, category-aware, duplicate-aware and wearable-aware features" />
-            <div class="slide-copy">
-              <h3>Different by design</h3>
-              <p>App-aware, category-aware, duplicate-aware and wearable-aware logic makes the platform more than a file manager.</p>
-            </div>
-          </article>
-          <article class="slide">
-            <img src="assets/hd/wearabletrust-and-emergency-ecosystem.png" alt="Wearable trust and emergency ecosystem" />
-            <div class="slide-copy">
-              <h3>Wearable trust + emergency</h3>
-              <p>Smart rings and wearables extend security beyond the phone with one-tap emergency workflows.</p>
-            </div>
-          </article>
-        </div>
-      </div>
     </section>
 
     <section class="section products" id="products">
@@ -380,43 +301,6 @@
         </div>
       </div>
 
-      <div class="wide-image magic-frame reveal">
-        <img src="assets/hd/hypervault-productline.png" alt="HyperVault product line showing freemium app, premium app and smart wearable" />
-      </div>
-    </section>
-
-    <section class="section business" id="business">
-      <div class="section-heading reveal">
-        <span class="eyebrow green">Business Model</span>
-        <h2>Freemium acquisition, premium subscription, wearable revenue</h2>
-      </div>
-      <div class="business-layout">
-        <div class="revenue-card reveal">
-          <h3>Subscription Revenue</h3>
-          <ul>
-            <li>Duplicate virtualization</li>
-            <li>Contextual security</li>
-            <li>Advanced transfer intelligence</li>
-            <li>Wearable-aware authentication</li>
-            <li>Emergency services</li>
-          </ul>
-          <strong>₹99/month · ₹999/year</strong>
-        </div>
-        <div class="revenue-card orange-card reveal">
-          <h3>Hardware Revenue</h3>
-          <ul>
-            <li>Smart rings</li>
-            <li>Smart bands</li>
-            <li>Smart watches</li>
-            <li>Smart cards</li>
-            <li>Smart keychains</li>
-          </ul>
-          <strong>One-time device sales</strong>
-        </div>
-        <div class="business-image magic-frame reveal">
-          <img src="assets/hd/hypervault-business-model.png" alt="HyperVault business model visual" />
-        </div>
-      </div>
     </section>
 
     <section class="section target" id="users">
@@ -436,57 +320,6 @@
       </div>
       <div class="wide-image magic-frame reveal">
         <img src="assets/hd/industry-or-domain-expansion.png" alt="HyperVault industry and domain expansion segments" />
-      </div>
-    </section>
-
-
-    <section class="section video-section" id="video">
-      <div class="section-heading centered reveal">
-        <span class="eyebrow orange">Autoplay Feature Video</span>
-        <h2>HyperVault in motion</h2>
-        <p>An embedded autoplay overview that walks through the platform, product features, wearable trust, roadmap and business model.</p>
-      </div>
-      <div class="video-shell magic-frame reveal">
-        <video autoplay muted loop playsinline controls preload="metadata" poster="assets/hd/hypervault-ecosystem-solution.png">
-          <source src="assets/hypervault-feature-reel.mp4" type="video/mp4" />
-          Your browser does not support embedded video playback.
-        </video>
-        <div class="video-caption">
-          <strong>Feature Reel</strong>
-          <span>Android intelligence · Duplicate virtualization · Contextual vault · Wearable trust · Emergency ecosystem</span>
-        </div>
-      </div>
-
-      <div class="video-ecosystem magic-frame reveal">
-        <img src="assets/hd/hypervault-ecosystem-solution.png" alt="HyperVault ecosystem visual showing six connected intelligence layers around the mobile app" />
-      </div>
-    </section>
-
-
-    <section class="section investor" id="investor">
-      <div class="section-heading reveal">
-        <span class="eyebrow orange">Investor Snapshot</span>
-        <h2>Seed funding to complete product engineering, embedded systems and smart-ring prototyping</h2>
-      </div>
-      <div class="investor-grid">
-        <article class="fund-card reveal">
-          <span>Seeking</span>
-          <strong>₹2.5–3 Crore</strong>
-          <p>Seed investment for a 24–30 month development runway.</p>
-        </article>
-        <article class="fund-card reveal">
-          <span>Current Progress</span>
-          <strong>Core build in progress</strong>
-          <p>Company registration, Startup India recognition and Google Play developer account completed.</p>
-        </article>
-        <article class="fund-card reveal">
-          <span>IP Portfolio</span>
-          <strong>5 patent applications filed</strong>
-          <p>Protecting storage, security, trust, emergency, transfer and contextual intelligence systems.</p>
-        </article>
-      </div>
-      <div class="wide-image magic-frame reveal">
-        <img src="assets/hd/apx-hypervault-executivesummary.jpg" alt="HyperVault executive summary and investor overview" />
       </div>
     </section>
 
