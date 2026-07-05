@@ -173,18 +173,14 @@ document.querySelectorAll('[data-hero-video-player]').forEach((player) => {
   updateVideoState();
 });
 
-// ===== Requested Enhancements: progress bar, newsletter popup, top button, static forms =====
+// ===== Requested Enhancements: progress bar, top button, static forms =====
 const scrollProgress = document.getElementById('scrollProgress');
 const topButton = document.getElementById('topButton');
-const newsletterModal = document.getElementById('newsletterModal');
-const newsletterClose = document.getElementById('newsletterClose');
 const newsletterNote = document.getElementById('newsletterNote');
 const imageLightbox = document.getElementById('imageLightbox');
 const imageLightboxImg = document.getElementById('imageLightboxImg');
 const imageLightboxTitle = document.getElementById('imageLightboxTitle');
 const imageLightboxClose = document.getElementById('imageLightboxClose');
-
-let newsletterShown = sessionStorage.getItem('hypervaultNewsletterShown') === 'yes';
 
 function getThanksPageUrl() {
   const currentPath = window.location.pathname;
@@ -198,16 +194,6 @@ document.querySelectorAll('.form-next-url').forEach((field) => {
   field.value = getThanksPageUrl();
 });
 
-function openNewsletter() {
-  if (!newsletterModal || newsletterShown) return;
-
-  newsletterModal.classList.add('open');
-  newsletterModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-  newsletterShown = true;
-  sessionStorage.setItem('hypervaultNewsletterShown', 'yes');
-}
-
 function updateScrollEnhancements() {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -216,8 +202,6 @@ function updateScrollEnhancements() {
   if (scrollProgress) scrollProgress.style.width = `${Math.min(100, Math.max(0, progress))}%`;
 
   if (topButton) topButton.classList.toggle('visible', scrollTop > 520);
-
-  if (!newsletterShown && scrollTop > 520 && progress > 18) openNewsletter();
 }
 
 window.addEventListener('scroll', updateScrollEnhancements, { passive: true });
@@ -227,20 +211,9 @@ topButton?.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-function closeNewsletter() {
-  newsletterModal?.classList.remove('open');
-  newsletterModal?.setAttribute('aria-hidden', 'true');
-  if (!imageLightbox?.classList.contains('open')) document.body.style.overflow = '';
-}
-
-newsletterClose?.addEventListener('click', closeNewsletter);
-newsletterModal?.addEventListener('click', (event) => {
-  if (event.target === newsletterModal) closeNewsletter();
-});
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     closeNavMenu();
-    closeNewsletter();
     closeImageLightbox();
   }
 });
@@ -289,7 +262,7 @@ function closeImageLightbox() {
 
   imageLightbox.classList.remove('open');
   imageLightbox.setAttribute('aria-hidden', 'true');
-  if (!newsletterModal?.classList.contains('open')) document.body.style.overflow = '';
+  document.body.style.overflow = '';
   setTimeout(() => {
     if (!imageLightbox.classList.contains('open')) imageLightboxImg.removeAttribute('src');
   }, 220);
