@@ -45,9 +45,12 @@ document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
+const navDropdowns = document.querySelectorAll('.nav-dropdown');
+const desktopNavQuery = window.matchMedia('(min-width: 1181px) and (hover: hover) and (pointer: fine)');
 
 function closeNavMenu() {
   navLinks?.classList.remove('open');
+  navDropdowns.forEach((dropdown) => dropdown.removeAttribute('open'));
   document.body.classList.remove('nav-open');
   menuToggle?.setAttribute('aria-expanded', 'false');
   menuToggle?.setAttribute('aria-label', 'Open navigation');
@@ -66,6 +69,41 @@ document.querySelectorAll('.nav-links a').forEach((link) => {
   });
 });
 
+navDropdowns.forEach((dropdown) => {
+  let closeTimer;
+
+  function openDropdown() {
+    clearTimeout(closeTimer);
+    dropdown.setAttribute('open', '');
+  }
+
+  function closeDropdown(delay = 180) {
+    clearTimeout(closeTimer);
+    closeTimer = setTimeout(() => {
+      dropdown.removeAttribute('open');
+    }, delay);
+  }
+
+  dropdown.addEventListener('mouseenter', () => {
+    if (desktopNavQuery.matches) openDropdown();
+  });
+
+  dropdown.addEventListener('mouseleave', () => {
+    if (desktopNavQuery.matches) closeDropdown();
+  });
+
+  dropdown.addEventListener('focusout', (event) => {
+    if (desktopNavQuery.matches && !dropdown.contains(event.relatedTarget)) {
+      closeDropdown(80);
+    }
+  });
+});
+
+document.addEventListener('click', (event) => {
+  if (event.target.closest('.nav-dropdown')) return;
+  navDropdowns.forEach((dropdown) => dropdown.removeAttribute('open'));
+});
+
 document.addEventListener('click', (event) => {
   if (!navLinks?.classList.contains('open')) return;
   if (navLinks.contains(event.target) || menuToggle?.contains(event.target)) return;
@@ -74,6 +112,65 @@ document.addEventListener('click', (event) => {
 
 window.addEventListener('resize', () => {
   if (window.innerWidth > 1180) closeNavMenu();
+});
+
+document.querySelectorAll('[data-hero-video-player]').forEach((player) => {
+  const video = player.querySelector('[data-hero-video]');
+  const toggle = player.querySelector('[data-video-toggle]');
+  const restart = player.querySelector('[data-video-restart]');
+  const zoomOut = player.querySelector('[data-video-zoom-out]');
+  const zoomIn = player.querySelector('[data-video-zoom-in]');
+  const zoomReset = player.querySelector('[data-video-zoom-reset]');
+  const fullscreen = player.querySelector('[data-video-fullscreen]');
+  const zoomLabel = player.querySelector('[data-video-zoom-label]');
+  const status = player.querySelector('[data-video-status]');
+  let zoom = 1;
+
+  if (!video) return;
+
+  function updateVideoState() {
+    if (toggle) toggle.textContent = video.paused ? 'Play' : 'Pause';
+    if (status) status.textContent = video.paused ? 'Paused slideshow' : 'Playing slideshow';
+  }
+
+  function setZoom(nextZoom) {
+    zoom = Math.min(1.8, Math.max(1, Number(nextZoom.toFixed(2))));
+    video.style.setProperty('--hero-video-zoom', zoom);
+    if (zoomLabel) zoomLabel.textContent = `${Math.round(zoom * 100)}%`;
+  }
+
+  toggle?.addEventListener('click', () => {
+    if (video.paused) {
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
+    updateVideoState();
+  });
+
+  restart?.addEventListener('click', () => {
+    video.currentTime = 0;
+    video.play().catch(() => {});
+    updateVideoState();
+  });
+
+  zoomOut?.addEventListener('click', () => setZoom(zoom - 0.1));
+  zoomIn?.addEventListener('click', () => setZoom(zoom + 0.1));
+  zoomReset?.addEventListener('click', () => setZoom(1));
+
+  fullscreen?.addEventListener('click', () => {
+    const frame = player.querySelector('.hero-video-frame') || player;
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.();
+    } else {
+      frame.requestFullscreen?.();
+    }
+  });
+
+  video.addEventListener('play', updateVideoState);
+  video.addEventListener('pause', updateVideoState);
+  setZoom(1);
+  updateVideoState();
 });
 
 // ===== Requested Enhancements: progress bar, newsletter popup, top button, static forms =====

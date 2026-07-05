@@ -36,9 +36,42 @@
         <a href="#products">Products</a>
         <a href="#business">Business</a>
         <a href="#video">Video</a>
-        <a href="#about">About Us</a>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#ip">IP</a>
+        <details class="nav-dropdown">
+          <summary>
+            <span>About Us</span>
+            <span class="nav-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="nav-submenu">
+            <a href="about.html">
+              <span class="submenu-dot green-dot"></span>
+              <span>
+                <strong>About Us</strong>
+                <small>Company vision</small>
+              </span>
+            </a>
+            <a href="roadmap.html">
+              <span class="submenu-dot blue-dot"></span>
+              <span>
+                <strong>Roadmap & Timeline</strong>
+                <small>Milestones and plan</small>
+              </span>
+            </a>
+            <a href="leadership.html">
+              <span class="submenu-dot orange-dot"></span>
+              <span>
+                <strong>HyperVault - Leadership Team</strong>
+                <small>Founding leadership</small>
+              </span>
+            </a>
+            <a href="ip.html">
+              <span class="submenu-dot navy-dot"></span>
+              <span>
+                <strong>IP · Intellectual Property</strong>
+                <small>Patent portfolio</small>
+              </span>
+            </a>
+          </div>
+        </details>
         <a href="#faqs">FAQs</a>
         <a href="#contact" class="nav-cta">Contact</a>
       </div>
@@ -48,31 +81,47 @@
   <main>
     <section class="hero section" aria-labelledby="hero-title">
       <div class="hero-copy reveal">
-        <div class="eyebrow">
-          <span class="pulse-dot"></span>
-          ASKIPLEX Technologies · DPIT Recognized Startup
+        <div class="hero-tech-banner">
+          <div class="eyebrow">
+            <span class="pulse-dot"></span>
+            Introduction to HyperVault
+          </div>
+          <h1 id="hero-title"><span>HyperVault</span> Intelligent Android Storage, Security & Mobility Ecosystem</h1>
         </div>
-        <h1 id="hero-title">Intelligent Android Storage, Security, Wearable & Mobility Ecosystem</h1>
-        <p>
-          HyperVault brings storage, contextual security, smart transfers, wearable trust and emergency response into one seamless Android ecosystem — secure, efficient, private and future ready.
-        </p>
+        <p class="hero-subheadline">A next-generation Android platform built to organize, protect, authenticate, and move mobile data through contextual intelligence.</p>
+        <p>HyperVault transforms fragmented Android storage into a secure, intelligent, and connected data ecosystem with content-centric discovery, duplicate optimization, contextual vault protection, wearable-aware authentication, emergency workflows, and smart file mobility.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="#investor">Investor Overview</a>
-          <a class="btn secondary" href="#platform">Explore Platform</a>
+          <a class="btn primary" href="#executive-summary">Explore HyperVault</a>
+          <a class="btn secondary" href="#products">View Product Ecosystem</a>
         </div>
-        <div class="hero-metrics">
-          <div><strong>5</strong><span>Core tech pillars</span></div>
-          <div><strong>₹99</strong><span>Target premium / month</span></div>
-          <div><strong>24–30</strong><span>Month runway target</span></div>
+        <div class="hero-feature-list" aria-label="HyperVault intelligence layers">
+          <span>App-aware organization</span>
+          <span>Category-aware security</span>
+          <span>Duplicate-aware optimization</span>
+          <span>Wearable-aware access</span>
+          <span>Context-aware transfer</span>
         </div>
       </div>
 
-      <div class="hero-visual magic-frame reveal">
-        <div class="phone-stage tilt-card">
-          <img src="assets/hd/hypervault.png" alt="HyperVault app, smart ring and emergency ecosystem visual" />
-          <div class="float-card fc-one">One-tap SOS</div>
-          <div class="float-card fc-two">Trusted wearable unlock</div>
-          <div class="float-card fc-three">Secure transfer</div>
+      <div class="hero-visual hero-video-card magic-frame reveal" data-hero-video-player>
+        <div class="hero-video-header">
+          <span>HyperVault Intelligence</span>
+          <strong data-video-status></strong>
+        </div>
+        <div class="hero-video-frame">
+          <video class="hero-video" data-hero-video autoplay muted loop playsinline controls preload="auto" poster="assets/hero/hypervault-category-app-aware.png" aria-label="Embedded HyperVault category slideshow video showing app-aware organization, category-aware security, duplicate-aware optimization, wearable-aware access, and context-aware transfer">
+            <source src="assets/hero/hypervault-hero-intelligence.mp4" type="video/mp4" />
+            <img src="assets/hero/hypervault-category-app-aware.png" alt="HyperVault app-aware organization dashboard slide" />
+          </video>
+        </div>
+        <div class="hero-video-controls" aria-label="HyperVault slideshow controls">
+          <button type="button" data-video-toggle>Pause</button>
+          <button type="button" data-video-restart>Restart</button>
+          <button type="button" data-video-zoom-out>Zoom -</button>
+          <output data-video-zoom-label>100%</output>
+          <button type="button" data-video-zoom-in>Zoom +</button>
+          <button type="button" data-video-zoom-reset>Fit</button>
+          <button type="button" data-video-fullscreen>Fullscreen</button>
         </div>
       </div>
     </section>
@@ -441,289 +490,6 @@
       </div>
     </section>
 
-
-    <section class="section about-us" id="about">
-      <div class="about-hero reveal">
-        <div>
-          <span class="eyebrow green">About Us</span>
-          <h2>ASKIPLEX Technologies is building the HyperVault trust ecosystem</h2>
-          <p>
-            HyperVault started with emergency-response research and evolved into a broader Android, wearable and mobility
-            platform. The company is now focused on product engineering, embedded systems development, smart-ring research,
-            contextual security and ecosystem integration.
-          </p>
-        </div>
-        <div class="about-stats">
-          <div><strong>2024</strong><span>Company formation journey</span></div>
-          <div><strong>2025</strong><span>BLE and wearable research</span></div>
-          <div><strong>2026+</strong><span>Smart-ring ecosystem focus</span></div>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="section roadmap" id="roadmap">
-      <div class="section-heading centered reveal about-roadmap-bridge">
-        <span class="eyebrow green">Roadmap & Timeline</span>
-        <h2>Quarter-by-quarter progress from emergency prototypes to smart-ring infrastructure</h2>
-        <p>HyperVault's timeline shows how emergency-response research expanded into BLE experimentation, wearable communication, smart-ring research and dedicated hardware investments.</p>
-      </div>
-
-      <div class="timeline roadmap-timeline reveal">
-        <article class="timeline-item roadmap-year">
-          <time>2024</time>
-          <h3>Foundation and company setup</h3>
-          <div class="quarter-grid compact">
-            <div class="quarter-card">
-              <span>Q1 · January</span>
-              <h4>Emergency-response prototypes</h4>
-              <p>Started researching and building emergency-response prototypes.</p>
-            </div>
-            <div class="quarter-card">
-              <span>Q2 · May</span>
-              <h4>Company registration</h4>
-              <p>Registered Askiplex Technologies as an OPC.</p>
-            </div>
-            <div class="quarter-card">
-              <span>Q4 · December</span>
-              <h4>Startup India recognition</h4>
-              <p>Obtained Startup India recognition.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="timeline-item roadmap-year">
-          <time>2025</time>
-          <h3>Wearable communication and BLE research</h3>
-          <div class="quarter-grid">
-            <div class="quarter-card">
-              <span>Q1</span>
-              <h4>BLE experimentation</h4>
-              <ul>
-                <li>Bluetooth Low Energy experimentation</li>
-                <li>Initial wearable communication research</li>
-              </ul>
-            </div>
-            <div class="quarter-card">
-              <span>Q2</span>
-              <h4>Nordic development</h4>
-              <ul>
-                <li>Nordic nRF5340 development</li>
-                <li>Embedded development workflow setup</li>
-              </ul>
-            </div>
-            <div class="quarter-card">
-              <span>Q3</span>
-              <h4>GATT and Android bridge</h4>
-              <ul>
-                <li>GATT profile development</li>
-                <li>Android-to-wearable communication</li>
-              </ul>
-            </div>
-            <div class="quarter-card">
-              <span>Q4</span>
-              <h4>Smart-ring architecture</h4>
-              <ul>
-                <li>Smart-ring architecture research</li>
-                <li>Trust and emergency workflow mapping</li>
-              </ul>
-            </div>
-          </div>
-        </article>
-
-        <article class="timeline-item roadmap-year">
-          <time>2026 onward</time>
-          <h3>Smart-ring research and hardware investments</h3>
-          <div class="quarter-grid">
-            <div class="quarter-card">
-              <span>Q1 · January onward</span>
-              <h4>Commercial smart-ring research</h4>
-              <ul>
-                <li>Purchased commercial smart rings for study</li>
-                <li>Touch interactions and gesture interactions</li>
-                <li>Button alternatives and display possibilities</li>
-              </ul>
-            </div>
-            <div class="quarter-card">
-              <span>Q2</span>
-              <h4>User experience and constraints</h4>
-              <ul>
-                <li>User experience evaluation</li>
-                <li>Form-factor limitations</li>
-                <li>Battery tradeoffs</li>
-                <li>Emergency activation workflows</li>
-              </ul>
-            </div>
-            <div class="quarter-card">
-              <span>Q3</span>
-              <h4>Development and testing systems</h4>
-              <ul>
-                <li>Dell Laptop, RAM upgrades and SSD upgrades</li>
-                <li>Mac Mini</li>
-                <li>iPhone and multiple Android devices</li>
-                <li>Nordic nRF5340 Development Kit</li>
-              </ul>
-            </div>
-            <div class="quarter-card">
-              <span>Q4</span>
-              <h4>Sensor evaluation hardware</h4>
-              <ul>
-                <li>BMA400 Triple Axis Accelerometer</li>
-                <li>TMP117 Temperature Sensor</li>
-                <li>MAX30102 Pulse Oximeter</li>
-                <li>Heart rate sensors and SpO2 sensors</li>
-              </ul>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="roadmap-grid magic-frame reveal">
-        <img src="assets/hd/hypervault-product-development-roadmap-and-milestones-phase-summary.png" alt="HyperVault product development roadmap and milestones phase summary" />
-      </div>
-    </section>
-
-    <section class="section leadership" id="leadership">
-      <div class="leadership-title reveal">
-        <span class="eyebrow blue">HyperVault - Leadership Team</span>
-        <h2>Founding leadership built for product vision and operating scale</h2>
-      </div>
-
-      <div class="leadership-divider reveal">
-        <span>Founding Leadership</span>
-      </div>
-
-      <div class="leader-grid founding-grid">
-        <article class="leader-card founder-card reveal">
-          <div class="leader-photo-wrap">
-            <img class="leader-photo leader-photo-img" src="assets/hd/leadership/anurag-verma.png" alt="Anurag Verma">
-            <div class="leader-icon" aria-hidden="true">💡</div>
-          </div>
-          <h3>Anurag Verma</h3>
-          <strong>Founder, CEO & CTO</strong>
-          <p>Owns product vision, Android architecture, encryption strategy, and AI security roadmap.</p>
-          <span class="leader-badge">Product Vision + Technical Architecture</span>
-        </article>
-
-        <article class="leader-card founder-card reveal">
-          <div class="leader-photo-wrap">
-            <img class="leader-photo leader-photo-img" src="assets/hd/leadership/shashank-mishra.png" alt="Shashank Mishra">
-            <div class="leader-icon" aria-hidden="true">⚙</div>
-          </div>
-          <h3>Shashank Mishra</h3>
-          <strong>Co-Founder & COO</strong>
-          <p>Leads operations, execution, partnerships, GTM planning, and scalable business processes.</p>
-          <span class="leader-badge">Execution + Operating Scale</span>
-        </article>
-      </div>
-
-      <div class="leadership-strengths reveal">
-        <div class="leadership-divider strengths-divider">
-          <span>Key Leadership Strengths</span>
-        </div>
-        <div class="strength-grid">
-          <article class="strength-item">
-            <span class="strength-icon" aria-hidden="true">👁</span>
-            <div>
-              <h3>Vision</h3>
-              <p>Trusted long-term product direction</p>
-            </div>
-          </article>
-          <article class="strength-item">
-            <span class="strength-icon" aria-hidden="true">🛡</span>
-            <div>
-              <h3>Security</h3>
-              <p>Security expertise embedded across product</p>
-            </div>
-          </article>
-          <article class="strength-item">
-            <span class="strength-icon" aria-hidden="true">🎯</span>
-            <div>
-              <h3>Execution</h3>
-              <p>Clear delivery ownership and results focus</p>
-            </div>
-          </article>
-          <article class="strength-item">
-            <span class="strength-icon" aria-hidden="true">👥</span>
-            <div>
-              <h3>Scalable Operations</h3>
-              <p>Process discipline to scale sustainably</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section ip-section" id="ip">
-      <div class="section-heading centered reveal">
-        <span class="eyebrow orange">IP · Intellectual Property</span>
-        <h2>HyperVault Intellectual Property Portfolio</h2>
-        <p>The portfolio protects HyperVault's key differentiators across storage, security, authentication, transfer and contextual intelligence technologies.</p>
-      </div>
-
-      <div class="ip-visual-grid reveal">
-        <article class="ip-stat-card">
-          <span>5</span>
-          <strong>Patent Applications</strong>
-          <p>Filed across core platform, storage, security, trust, emergency and transfer intelligence domains.</p>
-        </article>
-        <article class="ip-stat-card">
-          <span>2026</span>
-          <strong>India Filing Series</strong>
-          <p>Provisional applications aligned to HyperVault's long-term Trust Intelligence roadmap.</p>
-        </article>
-        <article class="ip-stat-card">
-          <span>Core</span>
-          <strong>Defensive Portfolio</strong>
-          <p>Designed to protect the connected ecosystem rather than a single standalone feature.</p>
-        </article>
-      </div>
-
-      <div class="ip-table-wrap reveal">
-        <table class="ip-table">
-          <thead>
-            <tr>
-              <th>Patent Domain</th>
-              <th>Patent Type</th>
-              <th>Title</th>
-              <th>Application No.</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="Patent Domain"><strong>Platform Intelligence</strong></td>
-              <td data-label="Patent Type">Provisional</td>
-              <td data-label="Title">System and Method for Intelligent Secure Data Management, Duplicate Virtualization, Wearable Authentication, and Smart Transfer</td>
-              <td data-label="Application No.">2026-2106-4901 (India)</td>
-            </tr>
-            <tr>
-              <td data-label="Patent Domain"><strong>Storage Intelligence</strong></td>
-              <td data-label="Patent Type">Provisional</td>
-              <td data-label="Title">System and Method for Intelligent Non-Destructive Shared-Storage Duplicate Virtualization Using Logical Stub References</td>
-              <td data-label="Application No.">2026-2106-6923 (India)</td>
-            </tr>
-            <tr>
-              <td data-label="Patent Domain"><strong>Security Intelligence</strong></td>
-              <td data-label="Patent Type">Provisional</td>
-              <td data-label="Title">System and Method for Non-Disruptive Contextual Secure File and MediaStore Management</td>
-              <td data-label="Application No.">2026-2106-6926 (India)</td>
-            </tr>
-            <tr>
-              <td data-label="Patent Domain"><strong>Trust & Emergency Intelligence</strong></td>
-              <td data-label="Patent Type">Provisional</td>
-              <td data-label="Title">System and Method for Wearable-Aware Continuous Trust, Contextual Secure File and MediaStore Access, and Emergency Communication</td>
-              <td data-label="Application No.">2026-2106-6927 (India)</td>
-            </tr>
-            <tr>
-              <td data-label="Patent Domain"><strong>Transfer Intelligence</strong></td>
-              <td data-label="Patent Type">Provisional</td>
-              <td data-label="Title">System and Method for Contextual State-Preserving File and MediaStore Transfer</td>
-              <td data-label="Application No.">2026-2106-6932 (India)</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
 
     <section class="section faqs" id="faqs">
       <div class="section-heading centered reveal">
