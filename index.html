@@ -7,6 +7,7 @@
   <title>HyperVault | Trust. Protect. Connect.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" type="image/png" href="assets/hypervault-logo-mark.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,10 +21,10 @@
   <header class="site-header" id="top">
     <nav class="nav">
       <a href="#top" class="brand" aria-label="HyperVault home">
-        <span class="brand-mark">H</span>
+        <span class="brand-mark"><img src="assets/hypervault-logo-mark.png" alt="" /></span>
         <span>
-          <strong>HYPERVAULT</strong>
-          <small>Trust. Protect. Connect.</small>
+          <strong><span>Hyper</span><span class="brand-vault">Vault</span></strong>
+          <small>SECURE | ORGANIZE | PROTECT</small>
         </span>
       </a>
       <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
@@ -114,25 +115,48 @@
         </div>
       </div>
 
-      <div class="hero-visual hero-video-card magic-frame reveal" data-hero-video-player>
-        <div class="hero-video-header">
+      <div class="hero-visual hero-carousel magic-frame reveal" data-carousel="hero">
+        <div class="hero-carousel-header">
           <span>HyperVault Intelligence</span>
-          <strong data-video-status></strong>
         </div>
-        <div class="hero-video-frame">
-          <video class="hero-video" data-hero-video autoplay muted loop playsinline controls preload="auto" poster="assets/hero/hypervault-category-app-aware.png" aria-label="Embedded HyperVault category slideshow video showing app-aware organization, category-aware security, duplicate-aware optimization, wearable-aware access, and context-aware transfer">
-            <source src="assets/hero/hypervault-hero-intelligence.mp4" type="video/mp4" />
-            <img src="assets/hero/hypervault-category-app-aware.png" alt="HyperVault app-aware organization dashboard slide" />
-          </video>
-        </div>
-        <div class="hero-video-controls" aria-label="HyperVault slideshow controls">
-          <button type="button" data-video-toggle>Pause</button>
-          <button type="button" data-video-restart>Restart</button>
-          <button type="button" data-video-zoom-out>Zoom -</button>
-          <output data-video-zoom-label>100%</output>
-          <button type="button" data-video-zoom-in>Zoom +</button>
-          <button type="button" data-video-zoom-reset>Fit</button>
-          <button type="button" data-video-fullscreen>Fullscreen</button>
+        <div class="hero-carousel-track">
+          <article class="slide active">
+            <img src="assets/hero/hypervault-hero-dashboard.png" alt="HyperVault mobile dashboard showing organized categories, secure vault actions, authentication, optimization, and transfer controls" />
+            <div class="hero-slide-caption">
+              <strong>Unified Android Intelligence</strong>
+              <span>Organize, secure, optimize, authenticate, and transfer from one connected layer.</span>
+            </div>
+          </article>
+          <article class="slide">
+            <img src="assets/hero/hypervault-category-app-aware.png" alt="HyperVault app-aware organization interface showing files grouped by source app and content category" />
+            <div class="hero-slide-caption">
+              <strong>App-aware Organization</strong>
+              <span>Content is grouped by file type, source app, and daily mobile context.</span>
+            </div>
+          </article>
+          <article class="slide">
+            <img src="assets/hero/hypervault-category-security.png" alt="HyperVault category-aware security dashboard showing protected files and secure vault controls" />
+            <div class="hero-slide-caption">
+              <strong>Category-aware Security</strong>
+              <span>Protection adapts around sensitive content, vault behavior, and trust state.</span>
+            </div>
+          </article>
+          <article class="slide">
+            <img src="assets/hero/hypervault-category-duplicates.png" alt="HyperVault duplicate optimization interface showing duplicate groups and storage recovery insights" />
+            <div class="hero-slide-caption">
+              <strong>Duplicate-aware Optimization</strong>
+              <span>Reduce storage waste while preserving content continuity and user confidence.</span>
+            </div>
+          </article>
+          <article class="slide">
+            <img src="assets/hero/hypervault-category-transfer.png" alt="HyperVault context-aware transfer screen showing secure file movement across trusted devices" />
+            <div class="hero-slide-caption">
+              <strong>Context-aware Transfer</strong>
+              <span>Move files with structure, security context, and destination trust intact.</span>
+            </div>
+          </article>
+          <button class="hero-slider-arrow hero-slider-prev" type="button" aria-label="Previous HyperVault intelligence slide" data-prev>‹</button>
+          <button class="hero-slider-arrow hero-slider-next" type="button" aria-label="Next HyperVault intelligence slide" data-next>›</button>
         </div>
         <div class="hero-capability-marquee" aria-label="HyperVault intelligence layers">
           <div class="capability-track">
@@ -689,8 +713,8 @@
 
   <footer class="footer">
     <a href="#top" class="brand">
-      <span class="brand-mark">H</span>
-      <span><strong>HYPERVAULT</strong><small>Trust. Protect. Connect.</small></span>
+      <span class="brand-mark"><img src="assets/hypervault-logo-mark.png" alt="" /></span>
+      <span><strong><span>Hyper</span><span class="brand-vault">Vault</span></strong><small>SECURE | ORGANIZE | PROTECT</small></span>
     </a>
     <p>© 2026 ASKIPLEX Technologies. Built for investor-ready product storytelling.</p>
   </footer>

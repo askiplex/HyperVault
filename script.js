@@ -3,8 +3,8 @@ const carousels = document.querySelectorAll('[data-carousel]');
 carousels.forEach((carousel) => {
   const slides = [...carousel.querySelectorAll('.slide')];
   const dotsHolder = carousel.querySelector('[data-dots]');
-  const next = carousel.querySelector('[data-next]');
-  const prev = carousel.querySelector('[data-prev]');
+  const nextButtons = [...carousel.querySelectorAll('[data-next]')];
+  const prevButtons = [...carousel.querySelectorAll('[data-prev]')];
   let index = 0;
   let timer;
 
@@ -29,8 +29,8 @@ carousels.forEach((carousel) => {
     timer = setInterval(() => show(index + 1), carousel.dataset.carousel === 'features' ? 5200 : 4600);
   }
 
-  next?.addEventListener('click', () => show(index + 1, true));
-  prev?.addEventListener('click', () => show(index - 1, true));
+  nextButtons.forEach((next) => next.addEventListener('click', () => show(index + 1, true)));
+  prevButtons.forEach((prev) => prev.addEventListener('click', () => show(index - 1, true)));
   show(0);
   restart();
 });
@@ -279,6 +279,15 @@ document.querySelectorAll('main img').forEach((image) => {
       event.preventDefault();
       openImageLightbox(image);
     }
+  });
+});
+
+document.querySelectorAll('.hero-carousel .slide').forEach((slide) => {
+  slide.addEventListener('click', (event) => {
+    if (event.target.closest('button')) return;
+    if (event.target.closest('img')) return;
+    const image = slide.querySelector('img');
+    if (image) openImageLightbox(image);
   });
 });
 
