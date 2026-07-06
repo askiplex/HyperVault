@@ -1612,25 +1612,29 @@ p {
   gap: 12px;
 }
 
+.icon-sprite {
+  display: none;
+}
+
 .adoption-card {
   position: relative;
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
+  grid-template-columns: 48px minmax(0, 1fr);
   grid-template-areas:
     "number want"
     "divider deliver";
-  gap: 8px 12px;
+  gap: 8px 13px;
   align-items: start;
-  min-height: 132px;
-  padding: 15px 16px 16px;
+  min-height: 146px;
+  padding: 13px 14px 14px;
   border: 1px solid rgba(27,31,36,.1);
   border-radius: 18px;
   background:
-    linear-gradient(145deg, rgba(255,255,255,.95), rgba(244,246,247,.84)) padding-box,
+    linear-gradient(145deg, rgba(255,255,255,.96), rgba(244,246,247,.88)) padding-box,
     linear-gradient(135deg, rgba(255,122,0,.45), rgba(74,79,85,.2), rgba(110,58,31,.24)) border-box;
   box-shadow: 0 14px 34px rgba(27,31,36,.08);
   overflow: hidden;
-  transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
+  transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease, background .24s ease;
 }
 
 .adoption-card::before {
@@ -1648,7 +1652,8 @@ p {
   inset: 0;
   background:
     linear-gradient(115deg, transparent 0 34%, rgba(255,255,255,.7) 45%, transparent 57%),
-    radial-gradient(circle at 100% 0%, rgba(255,122,0,.12), transparent 42%);
+    radial-gradient(circle at 100% 0%, rgba(255,122,0,.15), transparent 42%),
+    radial-gradient(circle at 78% 94%, rgba(15,118,82,.16), transparent 34%);
   opacity: 0;
   transform: translateX(-35%);
   transition: transform .24s ease, opacity .24s ease;
@@ -1656,9 +1661,9 @@ p {
 }
 
 .adoption-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(255,122,0,.28);
-  box-shadow: 0 24px 58px rgba(27,31,36,.14);
+  transform: translateY(-6px) scale(1.012);
+  border-color: rgba(255,122,0,.36);
+  box-shadow: 0 26px 64px rgba(27,31,36,.16);
 }
 
 .adoption-card:hover::after {
@@ -1666,24 +1671,77 @@ p {
   transform: translateX(34%);
 }
 
-.adoption-number {
+.adoption-icon {
   position: relative;
   grid-area: number;
-  width: 36px;
-  height: 36px;
+  width: 48px;
+  height: 48px;
   display: grid;
   place-items: center;
-  border-radius: 12px;
-  color: white;
+  border: 1px solid rgba(255,122,0,.26);
+  border-radius: 16px;
+  color: var(--orange);
   background:
-    linear-gradient(145deg, rgba(27,31,36,.94), rgba(74,79,85,.9)),
-    radial-gradient(circle at 50% 0%, rgba(255,122,0,.35), transparent 70%);
-  box-shadow: 0 10px 22px rgba(27,31,36,.14);
+    radial-gradient(circle at 50% 0%, rgba(255,122,0,.34), transparent 58%),
+    linear-gradient(145deg, rgba(27,31,36,.96), rgba(74,79,85,.9));
+  box-shadow:
+    0 14px 26px rgba(27,31,36,.16),
+    inset 0 1px 0 rgba(255,255,255,.2),
+    inset 0 -10px 20px rgba(0,0,0,.24);
+  z-index: 1;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, color .22s ease;
+}
+
+.adoption-icon::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,122,0,.04));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+.adoption-icon svg {
+  position: relative;
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 5px 8px rgba(0,0,0,.28));
+}
+
+.adoption-number {
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  min-width: 25px;
+  height: 18px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.54);
+  border-radius: 999px;
+  color: #1b1f24;
+  background: linear-gradient(135deg, #fff7ee, #ff7a00);
+  box-shadow: 0 8px 16px rgba(27,31,36,.16);
   font-family: var(--display);
-  font-size: .88rem;
+  font-size: .62rem;
   font-weight: 900;
   line-height: 1;
   z-index: 1;
+}
+
+.adoption-card:hover .adoption-icon {
+  color: #ffb168;
+  border-color: rgba(255,122,0,.46);
+  box-shadow:
+    0 18px 34px rgba(27,31,36,.2),
+    0 0 0 5px rgba(255,122,0,.1),
+    inset 0 1px 0 rgba(255,255,255,.24),
+    inset 0 -10px 20px rgba(0,0,0,.22);
+  transform: translateY(-2px) rotate(-2deg);
 }
 
 .adoption-card > div:first-of-type {
@@ -1694,19 +1752,90 @@ p {
   grid-area: deliver;
 }
 
+.adoption-card > div:first-of-type,
+.adoption-card > div:last-of-type {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  border-radius: 14px;
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.adoption-card > div:first-of-type {
+  border: 1px solid rgba(255,122,0,.18);
+  background:
+    linear-gradient(135deg, rgba(255,247,238,.96), rgba(255,255,255,.76)),
+    radial-gradient(circle at 100% 0%, rgba(255,122,0,.16), transparent 52%);
+  box-shadow: inset 4px 0 0 rgba(255,122,0,.62);
+}
+
+.adoption-card > div:last-of-type {
+  border: 1px solid rgba(15,118,82,.18);
+  background:
+    linear-gradient(135deg, rgba(239,253,246,.98), rgba(255,255,255,.8)),
+    radial-gradient(circle at 100% 100%, rgba(15,118,82,.16), transparent 54%);
+  box-shadow: inset 4px 0 0 rgba(15,118,82,.68);
+}
+
+.adoption-card:hover > div:first-of-type {
+  border-color: rgba(255,122,0,.34);
+  background:
+    linear-gradient(135deg, rgba(255,241,225,.98), rgba(255,255,255,.84)),
+    radial-gradient(circle at 100% 0%, rgba(255,122,0,.22), transparent 54%);
+  transform: translateX(2px);
+}
+
+.adoption-card:hover > div:last-of-type {
+  border-color: rgba(15,118,82,.34);
+  background:
+    linear-gradient(135deg, rgba(226,250,238,.98), rgba(255,255,255,.86)),
+    radial-gradient(circle at 100% 100%, rgba(15,118,82,.24), transparent 56%);
+  box-shadow:
+    inset 4px 0 0 rgba(15,118,82,.82),
+    0 14px 30px rgba(15,118,82,.1);
+  transform: translateX(4px);
+}
+
 .adoption-card small {
   display: inline-flex;
+  align-items: center;
+  gap: 5px;
   width: max-content;
   max-width: 100%;
   margin-bottom: 5px;
   padding: 4px 8px;
   border-radius: 999px;
-  color: var(--copper);
-  background: rgba(255,122,0,.09);
   font-size: .62rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: .04em;
+}
+
+.adoption-card small::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.adoption-card > div:first-of-type small {
+  color: #a64a16;
+  background: rgba(255,122,0,.12);
+}
+
+.adoption-card > div:first-of-type small::before {
+  box-shadow: 0 0 0 4px rgba(255,122,0,.14);
+}
+
+.adoption-card > div:last-of-type small {
+  color: #0f7652;
+  background: rgba(15,118,82,.12);
+}
+
+.adoption-card > div:last-of-type small::before {
+  box-shadow: 0 0 0 4px rgba(15,118,82,.14);
 }
 
 .adoption-card h3 {
@@ -1721,17 +1850,25 @@ p {
 .adoption-card p {
   position: relative;
   margin: 0;
-  color: rgba(27, 31, 36, .72);
+  color: rgba(27, 31, 36, .76);
   font-size: .86rem;
   font-weight: 750;
   line-height: 1.42;
   z-index: 1;
 }
 
+.adoption-card > div:first-of-type h3 {
+  color: #7b3415;
+}
+
+.adoption-card > div:last-of-type p {
+  color: #143f31;
+}
+
 .adoption-divider {
   position: relative;
   grid-area: divider;
-  width: 36px;
+  width: 48px;
   height: 100%;
   min-height: 38px;
   z-index: 1;
@@ -1743,9 +1880,9 @@ p {
   top: 6px;
   bottom: 6px;
   left: 50%;
-  width: 2px;
+  width: 3px;
   border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255,122,0,.78), rgba(27,31,36,.14));
+  background: linear-gradient(180deg, rgba(255,122,0,.85), rgba(15,118,82,.82));
   transform: translateX(-50%);
 }
 
@@ -1757,8 +1894,8 @@ p {
   width: 9px;
   height: 9px;
   border-radius: 999px;
-  background: var(--orange);
-  box-shadow: 0 0 0 5px rgba(255,122,0,.12);
+  background: linear-gradient(135deg, var(--orange), #0f7652);
+  box-shadow: 0 0 0 5px rgba(255,122,0,.12), 0 0 0 10px rgba(15,118,82,.08);
   transform: translate(-50%, -50%);
 }
 
@@ -3498,7 +3635,7 @@ p {
   }
 
   .adoption-card {
-    grid-template-columns: 34px minmax(0, 1fr);
+    grid-template-columns: 42px minmax(0, 1fr);
     grid-template-areas:
       "number want"
       "divider deliver";
@@ -3507,14 +3644,30 @@ p {
     padding: 14px 15px 15px;
   }
 
+  .adoption-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+  }
+
+  .adoption-icon::before {
+    inset: 5px;
+    border-radius: 10px;
+  }
+
+  .adoption-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
   .adoption-number {
-    width: 34px;
-    height: 34px;
-    font-size: .82rem;
+    min-width: 23px;
+    height: 17px;
+    font-size: .58rem;
   }
 
   .adoption-divider {
-    width: 34px;
+    width: 42px;
     height: 100%;
     min-height: 34px;
     border-radius: 0;
