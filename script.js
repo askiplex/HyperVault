@@ -35,6 +35,84 @@ carousels.forEach((carousel) => {
   restart();
 });
 
+const pillarCarousel = document.querySelector('[data-pillar-carousel]');
+
+if (pillarCarousel) {
+  const titleEl = pillarCarousel.querySelector('[data-pillar-title]');
+  const descriptionEl = pillarCarousel.querySelector('[data-pillar-description]');
+  const dotsHolder = pillarCarousel.querySelector('[data-dots]');
+  const nextButtons = [...pillarCarousel.querySelectorAll('[data-next]')];
+  const prevButtons = [...pillarCarousel.querySelectorAll('[data-prev]')];
+  const eyebrowEl = pillarCarousel.querySelector('.eyebrow');
+  let index = 0;
+  let timer;
+
+  const pillars = [
+    {
+      number: '01',
+      title: 'Content-Centric Storage Virtualization',
+      description: 'Organizes photos, documents, videos, downloads, and app-originated files by meaning and source.'
+    },
+    {
+      number: '02',
+      title: 'Data Deduplication Virtualization',
+      description: 'Reduces duplicate clutter through logical references while protecting user continuity.'
+    },
+    {
+      number: '03',
+      title: 'Contextual Security Virtualization',
+      description: 'Applies contextual vault behavior around sensitive files, categories, and app workflows.'
+    },
+    {
+      number: '04',
+      title: 'Data Mobility Virtualization',
+      description: 'Moves content through trusted, context-aware transfer paths across devices and destinations.'
+    },
+    {
+      number: '05',
+      title: 'Wearable-Aware Authentication',
+      description: 'Uses wearable proximity and trust signals for secure access, continuity, and emergency actions.'
+    }
+  ];
+
+  const dots = [];
+
+  function show(nextIndex, userInitiated = false) {
+    index = (nextIndex + pillars.length) % pillars.length;
+    const pillar = pillars[index];
+
+    if (titleEl) titleEl.textContent = pillar.title;
+    if (descriptionEl) descriptionEl.textContent = pillar.description;
+    if (eyebrowEl) eyebrowEl.textContent = `Pillar ${pillar.number}`;
+
+    dots.forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex === index));
+
+    if (userInitiated) restart();
+  }
+
+  function restart() {
+    clearInterval(timer);
+    timer = setInterval(() => show(index + 1), 5200);
+  }
+
+  if (dotsHolder) {
+    pillars.forEach((_, dotIndex) => {
+      const button = document.createElement('button');
+      button.className = 'dot';
+      button.setAttribute('aria-label', `Go to pillar ${dotIndex + 1}`);
+      button.addEventListener('click', () => show(dotIndex, true));
+      dotsHolder.appendChild(button);
+      dots.push(button);
+    });
+  }
+
+  nextButtons.forEach((nextButton) => nextButton.addEventListener('click', () => show(index + 1, true)));
+  prevButtons.forEach((prevButton) => prevButton.addEventListener('click', () => show(index - 1, true)));
+
+  show(0);
+  restart();
+}
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) entry.target.classList.add('visible');

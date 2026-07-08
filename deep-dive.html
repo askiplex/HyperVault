@@ -29,6 +29,31 @@
       </a>
       <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">Menu</button>
       <div class="nav-links">
+        <a href="deep-dive.html" aria-current="page">Deep Dive</a>
+        <a href="index.html#products">Products</a>
+        <details class="nav-dropdown">
+          <summary>
+            <span>Business</span>
+            <span class="nav-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="nav-submenu">
+            <a href="business.html#business-model">
+              <span class="submenu-dot green-dot"></span>
+              <span>
+                <strong>Business Model</strong>
+                <small>Monetization path</small>
+              </span>
+            </a>
+            <a href="business.html#investor">
+              <span class="submenu-dot orange-dot"></span>
+              <span>
+                <strong>Investor Snapshot</strong>
+                <small>Funding and progress</small>
+              </span>
+            </a>
+          </div>
+        </details>
+        <a href="evolution.html">Evolution</a>
         <details class="nav-dropdown">
           <summary>
             <span>About</span>
@@ -61,32 +86,6 @@
               <span>
                 <strong>IP - Intellectual Property</strong>
                 <small>Patent portfolio</small>
-              </span>
-            </a>
-          </div>
-        </details>
-        <a href="index.html#problem">Problem</a>
-        <a href="index.html#solution">Solution</a>
-        <a href="deep-dive.html" aria-current="page">Deep Dive</a>
-        <a href="index.html#products">Products</a>
-        <details class="nav-dropdown">
-          <summary>
-            <span>Business</span>
-            <span class="nav-chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="nav-submenu">
-            <a href="business.html#business-model">
-              <span class="submenu-dot green-dot"></span>
-              <span>
-                <strong>Business Model</strong>
-                <small>Monetization path</small>
-              </span>
-            </a>
-            <a href="business.html#investor">
-              <span class="submenu-dot orange-dot"></span>
-              <span>
-                <strong>Investor Snapshot</strong>
-                <small>Funding and progress</small>
               </span>
             </a>
           </div>
@@ -140,34 +139,26 @@
 
       <div class="deep-pillar-layout">
         <figure class="deep-pillar-visual magic-frame reveal">
-          <img src="assets/pillars/hypervault-what-is-dashboard.png" alt="HyperVault technology pillars visual showing virtualized data categories, deduplication, security, mobility, and wearable trust" />
+          <img src="assets/pillars/Hypervault technology pillars.png" alt="HyperVault technology pillars visual showing virtualized data categories, deduplication, security, mobility, and wearable trust" />
         </figure>
-        <div class="deep-pillar-stack reveal" aria-label="HyperVault technology pillars">
-          <article class="deep-pillar category-card">
-            <span>01</span>
-            <h3>Data Category Virtualization</h3>
-            <p>Organizes photos, documents, videos, downloads, and app-originated files by meaning and source.</p>
-          </article>
-          <article class="deep-pillar dedupe-card">
-            <span>02</span>
-            <h3>Data Deduplication Virtualization</h3>
-            <p>Reduces duplicate clutter through logical references while protecting user continuity.</p>
-          </article>
-          <article class="deep-pillar security-card">
-            <span>03</span>
-            <h3>Data Security Virtualization</h3>
-            <p>Applies contextual vault behavior around sensitive files, categories, and app workflows.</p>
-          </article>
-          <article class="deep-pillar mobility-card">
-            <span>04</span>
-            <h3>Data Mobility Virtualization</h3>
-            <p>Moves content through trusted, context-aware transfer paths across devices and destinations.</p>
-          </article>
-          <article class="deep-pillar wearable-card">
-            <span>05</span>
-            <h3>Wearable-Aware Authentication</h3>
-            <p>Uses wearable proximity and trust signals for secure access, continuity, and emergency actions.</p>
-          </article>
+
+        <div class="deep-pillar-banner reveal" data-pillar-carousel>
+          <button class="pillar-banner-nav pillar-banner-nav-prev" type="button" data-prev aria-label="Previous pillar">
+            <span aria-hidden="true">&lsaquo;</span>
+          </button>
+
+          <div class="pillar-banner-card">
+            <div class="pillar-banner-copy">
+              <span class="eyebrow orange">Pillar 01</span>
+              <h3 data-pillar-title>Content-Centric Storage Virtualization</h3>
+              <p data-pillar-description>Organizes photos, documents, videos, downloads, and app-originated files by meaning and source.</p>
+            </div>
+            <div class="dots" data-dots></div>
+          </div>
+
+          <button class="pillar-banner-nav pillar-banner-nav-next" type="button" data-next aria-label="Next pillar">
+            <span aria-hidden="true">&rsaquo;</span>
+          </button>
         </div>
       </div>
     </section>

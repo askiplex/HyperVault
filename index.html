@@ -29,6 +29,31 @@
       </a>
       <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
       <div class="nav-links">
+        <a href="deep-dive.html">Deep Dive</a>
+        <a href="#products">Products</a>
+        <details class="nav-dropdown">
+          <summary>
+            <span>Business</span>
+            <span class="nav-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="nav-submenu">
+            <a href="business.html#business-model">
+              <span class="submenu-dot green-dot"></span>
+              <span>
+                <strong>Business Model</strong>
+                <small>Monetization path</small>
+              </span>
+            </a>
+            <a href="business.html#investor">
+              <span class="submenu-dot orange-dot"></span>
+              <span>
+                <strong>Investor Snapshot</strong>
+                <small>Funding and progress</small>
+              </span>
+            </a>
+          </div>
+        </details>
+        <a href="evolution.html">Evolution</a>
         <details class="nav-dropdown">
           <summary>
             <span>About</span>
@@ -61,32 +86,6 @@
               <span>
                 <strong>IP · Intellectual Property</strong>
                 <small>Patent portfolio</small>
-              </span>
-            </a>
-          </div>
-        </details>
-        <a href="#problem">Problem</a>
-        <a href="#solution">Solution</a>
-        <a href="deep-dive.html">Deep Dive</a>
-        <a href="#products">Products</a>
-        <details class="nav-dropdown">
-          <summary>
-            <span>Business</span>
-            <span class="nav-chevron" aria-hidden="true"></span>
-          </summary>
-          <div class="nav-submenu">
-            <a href="business.html#business-model">
-              <span class="submenu-dot green-dot"></span>
-              <span>
-                <strong>Business Model</strong>
-                <small>Monetization path</small>
-              </span>
-            </a>
-            <a href="business.html#investor">
-              <span class="submenu-dot orange-dot"></span>
-              <span>
-                <strong>Investor Snapshot</strong>
-                <small>Funding and progress</small>
               </span>
             </a>
           </div>
@@ -190,7 +189,7 @@
       <div class="pillar-banner-slider" aria-label="Rotating HyperVault pillar banners">
         <article class="pillar-slide category-slide">
           <span>01</span>
-          <h3>Data Category Virtualization</h3>
+          <h3>Content-Centric Storage Virtualization</h3>
           <p>Organizes photos, documents, videos, downloads and app-originated files into meaningful virtual categories.</p>
         </article>
         <article class="pillar-slide dedupe-slide">
@@ -200,7 +199,7 @@
         </article>
         <article class="pillar-slide security-slide">
           <span>03</span>
-          <h3>Data Security Virtualization</h3>
+          <h3>Contextual Security Virtualization</h3>
           <p>Applies contextual protection and vault behavior around sensitive content, categories and usage patterns.</p>
         </article>
         <article class="pillar-slide mobility-slide">
@@ -218,7 +217,7 @@
       <div class="pillar-card-grid" aria-label="HyperVault pillar cards">
         <article class="pillar-card category-card">
           <span>01</span>
-          <h3>Data Category Virtualization</h3>
+          <h3>Content-Centric Storage Virtualization</h3>
           <p>Virtual category intelligence for content discovery and source-aware organization.</p>
         </article>
         <article class="pillar-card dedupe-card">
@@ -228,7 +227,7 @@
         </article>
         <article class="pillar-card security-card">
           <span>03</span>
-          <h3>Data Security Virtualization</h3>
+          <h3>Contextual Security Virtualization</h3>
           <p>Contextual vault behavior for sensitive files, categories and app-driven workflows.</p>
         </article>
         <article class="pillar-card mobility-card">
@@ -247,7 +246,7 @@
     <section class="section adoption-section" aria-labelledby="adoption-title">
       <div class="section-heading centered reveal">
         <span class="eyebrow orange">User Adoption</span>
-        <h2 id="adoption-title">Why Users Adopt HyperVault</h2>
+        <h2 id="adoption-title">Why HyperVault</h2>
         <p>HyperVault turns everyday Android frustrations into faster discovery, safer access, cleaner storage, trusted mobility and emergency-ready workflows.</p>
       </div>
 
@@ -466,90 +465,6 @@
           </div>
         </article>
       </div>
-    </section>
-
-    <section class="section split" id="problem">
-      <div class="section-heading reveal">
-        <span class="eyebrow orange">The Problem</span>
-        <h2>Mobile content is everywhere. Trust is not.</h2>
-        <p>
-          Today’s Android users rely on separate apps for files, vaults, transfers and authentication. That creates duplicated content, broken workflows and weak contextual trust.
-        </p>
-      </div>
-      <div class="carousel-shell magic-frame reveal" data-carousel="problem">
-        <div class="carousel-track">
-          <article class="slide active">
-            <img src="assets/hd/current-app-problems.png" alt="Current Android app problems: scattered files, weak authentication and slow transfers" />
-            <div class="slide-copy">
-              <h3>Fragmented workflows</h3>
-              <p>Files are scattered across apps, vaults interrupt normal behavior, and transfers rarely preserve context.</p>
-            </div>
-          </article>
-          <article class="slide">
-            <img src="assets/hd/current-duplicate-problem.png" alt="Duplicate file problem consuming storage space" />
-            <div class="slide-copy">
-              <h3>Duplicate clutter</h3>
-              <p>Photos, PDFs, videos and documents multiply across apps and devices, wasting storage and making cleanup risky.</p>
-            </div>
-          </article>
-          <article class="slide">
-            <img src="assets/hd/duplicate-optimization.png" alt="HyperVault duplicate optimization visual" />
-            <div class="slide-copy">
-              <h3>Cleanup should not mean data loss</h3>
-              <p>HyperVault is designed for non-destructive duplicate optimization, helping users reduce waste while preserving logical continuity.</p>
-            </div>
-          </article>
-        </div>
-        <div class="carousel-controls">
-          <button aria-label="Previous problem slide" data-prev>‹</button>
-          <div class="dots" data-dots></div>
-          <button aria-label="Next problem slide" data-next>›</button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section solution" id="solution">
-      <div class="section-heading centered reveal">
-        <span class="eyebrow green">The Solution</span>
-        <h2>The missing contextual intelligence layer for Android</h2>
-        <p>
-          HyperVault unifies content discovery, duplicate optimization, contextual protection, secure transfer, wearable-aware authentication and one-tap emergency actions in one platform.
-        </p>
-      </div>
-
-      <div class="pillar-grid">
-        <article class="pillar reveal">
-          <span>01</span>
-          <h3>Content Intelligence</h3>
-          <p>Find files by category, source, app and context — not just folder paths.</p>
-        </article>
-        <article class="pillar reveal">
-          <span>02</span>
-          <h3>Storage Intelligence</h3>
-          <p>Reduce duplicate waste with virtualization instead of destructive cleanup.</p>
-        </article>
-        <article class="pillar reveal">
-          <span>03</span>
-          <h3>Security Intelligence</h3>
-          <p>Protect sensitive content without breaking gallery or app workflows.</p>
-        </article>
-        <article class="pillar reveal">
-          <span>04</span>
-          <h3>Transfer Intelligence</h3>
-          <p>Move content with its structure, relationships and security policies intact.</p>
-        </article>
-        <article class="pillar reveal">
-          <span>05</span>
-          <h3>Wearable Trust</h3>
-          <p>Use smart rings, bands, watches, cards and keychains for continuous trust.</p>
-        </article>
-        <article class="pillar reveal">
-          <span>06</span>
-          <h3>Emergency Intelligence</h3>
-          <p>Trigger SOS, live location, media sharing and trusted-contact workflows fast.</p>
-        </article>
-      </div>
-
     </section>
 
     <section class="section products" id="products">

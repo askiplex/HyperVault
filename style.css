@@ -1602,9 +1602,9 @@ p {
 
 .deep-pillar-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, .8fr);
   gap: 24px;
-  align-items: stretch;
+  align-items: center;
 }
 
 .deep-pillar-visual {
@@ -1630,103 +1630,141 @@ p {
   cursor: zoom-in;
 }
 
-.deep-pillar-stack {
+.deep-pillar-banner {
   display: grid;
-  grid-template-columns: repeat(5, minmax(78px, 1fr));
-  gap: 12px;
-  align-items: end;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: stretch;
 }
 
-.deep-pillar {
+.pillar-banner-nav {
+  width: 50px;
+  height: 50px;
+  border: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--navy), #2f3640);
+  color: #fff;
+  font-size: 1.8rem;
+  line-height: 1;
+  box-shadow: 0 14px 36px rgba(27,31,36,.16);
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.pillar-banner-nav:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 18px 42px rgba(27,31,36,.2);
+}
+
+.pillar-banner-nav:focus-visible {
+  outline: 2px solid rgba(255,122,0,.45);
+  outline-offset: 3px;
+}
+
+.pillar-banner-card {
   position: relative;
   display: flex;
-  min-height: 520px;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 22px 16px 26px;
+  justify-content: center;
+  min-height: 100%;
+  padding: 32px 28px;
+  border-radius: 26px;
+  background: linear-gradient(145deg, rgba(255,255,255,.95), rgba(244,246,247,.9));
   border: 1px solid rgba(27,31,36,.11);
-  border-radius: 18px 18px 9px 9px;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.96), rgba(244,246,247,.9)),
-    radial-gradient(circle at 50% 0%, rgba(255,122,0,.14), transparent 42%);
-  box-shadow: 0 18px 48px rgba(27,31,36,.1);
+  box-shadow: 0 24px 64px rgba(27,31,36,.12);
   overflow: hidden;
-  transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease;
 }
 
-.deep-pillar:nth-child(1) { min-height: 430px; }
-.deep-pillar:nth-child(2) { min-height: 470px; }
-.deep-pillar:nth-child(3) { min-height: 520px; }
-.deep-pillar:nth-child(4) { min-height: 480px; }
-.deep-pillar:nth-child(5) { min-height: 445px; }
-
-.deep-pillar::before {
+.pillar-banner-card::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
-  height: 9px;
+  height: 8px;
   background: linear-gradient(90deg, var(--orange), var(--copper), var(--blue));
 }
 
-.deep-pillar::after {
+.pillar-banner-card::after {
   content: "";
   position: absolute;
-  inset: auto 12px 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(27,31,36,.1);
-  box-shadow: 0 10px 20px rgba(27,31,36,.12);
+  right: 24px;
+  bottom: 20px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,122,0,.12), transparent 70%);
+  pointer-events: none;
 }
 
-.deep-pillar:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255,122,0,.3);
-  box-shadow: 0 30px 72px rgba(27,31,36,.16);
+.pillar-banner-copy {
+  position: relative;
+  z-index: 1;
 }
 
-.deep-pillar span {
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 18px;
-  border-radius: 14px;
-  color: white;
-  font-family: var(--display);
-  font-size: .82rem;
-  font-weight: 900;
-  box-shadow: 0 12px 24px rgba(27,31,36,.14);
+.pillar-banner-copy .eyebrow {
+  display: inline-flex;
+  margin-bottom: 16px;
 }
 
-.deep-pillar h3 {
+.pillar-banner-copy h3 {
   margin: 0 0 12px;
   color: var(--navy);
-  font-size: clamp(1rem, 1.2vw, 1.18rem);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
   line-height: 1.18;
 }
 
-.deep-pillar p {
+.pillar-banner-copy p {
   margin: 0;
-  color: rgba(27,31,36,.72);
-  font-size: .88rem;
-  font-weight: 720;
-  line-height: 1.5;
+  color: rgba(27,31,36,.74);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.7;
+  max-width: 440px;
 }
 
-.deep-pillar.dedupe-card::before {
-  background: linear-gradient(90deg, var(--orange), #ffb168);
+.deep-pillar-banner .dots {
+  justify-content: center;
+  margin-top: 18px;
 }
 
-.deep-pillar.security-card::before {
-  background: linear-gradient(90deg, var(--navy), var(--blue));
+.deep-pillar-banner .dot {
+  width: 10px;
+  height: 10px;
+  background: rgba(27,31,36,.2);
 }
 
-.deep-pillar.mobility-card::before {
-  background: linear-gradient(90deg, var(--green), var(--copper));
+.deep-pillar-banner .dot.active {
+  width: 30px;
+  background: var(--orange);
 }
 
-.deep-pillar.wearable-card::before {
-  background: linear-gradient(90deg, #6640ff, var(--orange));
+@media (max-width: 980px) {
+  .deep-pillar-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .deep-pillar-visual img {
+    min-height: 360px;
+  }
+
+  .deep-pillar-banner {
+    grid-template-columns: 44px minmax(0, 1fr) 44px;
+  }
+}
+
+@media (max-width: 560px) {
+  .deep-pillar-banner {
+    grid-template-columns: 1fr;
+  }
+
+  .pillar-banner-nav {
+    display: none;
+  }
+
+  .pillar-banner-card {
+    padding: 24px 20px;
+  }
 }
 
 .adoption-section {
