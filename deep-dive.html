@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HyperVault Deep Dive covering technology pillars, platform architecture, core capabilities, and ecosystem." />
+  <title>Deep Dive | HyperVault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" type="image/png" href="assets/hypervault-logo-mark.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="scrollProgress" class="scroll-progress"></div>
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
+  <div class="page-aurora aurora-a"></div>
+  <div class="page-aurora aurora-b"></div>
+  <div class="noise"></div>
+
+  <header class="site-header" id="top">
+    <nav class="nav">
+      <a href="index.html" class="brand" aria-label="HyperVault home">
+        <span class="brand-mark"><img src="assets/hypervault-logo-mark.png" alt="" /></span>
+        <span>
+          <strong><span>Hyper</span><span class="brand-vault">Vault</span></strong>
+          <small>SECURE | ORGANIZE | PROTECT</small>
+        </span>
+      </a>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">Menu</button>
+      <div class="nav-links">
+        <details class="nav-dropdown">
+          <summary>
+            <span>About</span>
+            <span class="nav-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="nav-submenu">
+            <a href="about.html">
+              <span class="submenu-dot green-dot"></span>
+              <span>
+                <strong>About Us</strong>
+                <small>Company vision</small>
+              </span>
+            </a>
+            <a href="roadmap.html">
+              <span class="submenu-dot blue-dot"></span>
+              <span>
+                <strong>Roadmap & Timeline</strong>
+                <small>Milestones and plan</small>
+              </span>
+            </a>
+            <a href="leadership.html">
+              <span class="submenu-dot orange-dot"></span>
+              <span>
+                <strong>HyperVault - Leadership Team</strong>
+                <small>Founding leadership</small>
+              </span>
+            </a>
+            <a href="ip.html">
+              <span class="submenu-dot navy-dot"></span>
+              <span>
+                <strong>IP - Intellectual Property</strong>
+                <small>Patent portfolio</small>
+              </span>
+            </a>
+          </div>
+        </details>
+        <a href="index.html#problem">Problem</a>
+        <a href="index.html#solution">Solution</a>
+        <a href="deep-dive.html" aria-current="page">Deep Dive</a>
+        <a href="index.html#products">Products</a>
+        <details class="nav-dropdown">
+          <summary>
+            <span>Business</span>
+            <span class="nav-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="nav-submenu">
+            <a href="business.html#business-model">
+              <span class="submenu-dot green-dot"></span>
+              <span>
+                <strong>Business Model</strong>
+                <small>Monetization path</small>
+              </span>
+            </a>
+            <a href="business.html#investor">
+              <span class="submenu-dot orange-dot"></span>
+              <span>
+                <strong>Investor Snapshot</strong>
+                <small>Funding and progress</small>
+              </span>
+            </a>
+          </div>
+        </details>
+        <a href="index.html#faqs">FAQs</a>
+        <a href="index.html#contact" class="nav-cta">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="subpage-main">
+    <section class="section subpage-hero">
+      <div class="subpage-intro reveal">
+        <span class="eyebrow blue">Deep Dive</span>
+        <h1>HyperVault Deep Dive</h1>
+        <p>Explore the technology pillars, platform architecture, core capabilities, and ecosystem that turn HyperVault into a connected Android intelligence layer.</p>
+        <div class="subpage-actions">
+          <a class="btn primary" href="#technology-pillars">Technology Pillars</a>
+          <a class="btn secondary" href="#platform-architecture">Platform Architecture</a>
+        </div>
+      </div>
+      <aside class="subpage-panel reveal" aria-label="Deep Dive page sections">
+        <h2>On This Page</h2>
+        <div class="subpage-link-grid">
+          <a class="subpage-link" href="#technology-pillars">
+            <span class="submenu-dot orange-dot"></span>
+            <span><strong>Technology Pillars</strong><small>Five pillar foundation</small></span>
+          </a>
+          <a class="subpage-link" href="#platform-architecture">
+            <span class="submenu-dot blue-dot"></span>
+            <span><strong>Platform Architecture</strong><small>Intelligence core</small></span>
+          </a>
+          <a class="subpage-link" href="#core-capabilities">
+            <span class="submenu-dot navy-dot"></span>
+            <span><strong>Core Capabilities</strong><small>Feature layers</small></span>
+          </a>
+          <a class="subpage-link" href="#hypervault-ecosystem">
+            <span class="submenu-dot green-dot"></span>
+            <span><strong>HyperVault Ecosystem</strong><small>Connected platform</small></span>
+          </a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section deep-dive-pillars subpage-content" id="technology-pillars">
+      <div class="section-heading centered reveal">
+        <span class="eyebrow orange">Technology Pillars</span>
+        <h2>Five pillars shape the HyperVault intelligence foundation</h2>
+        <p>HyperVault is built on virtualization, context, trust, mobility, and wearable-aware authentication so users can manage sensitive Android data without fragmented tools.</p>
+      </div>
+
+      <div class="deep-pillar-layout">
+        <figure class="deep-pillar-visual magic-frame reveal">
+          <img src="assets/pillars/hypervault-what-is-dashboard.png" alt="HyperVault technology pillars visual showing virtualized data categories, deduplication, security, mobility, and wearable trust" />
+        </figure>
+        <div class="deep-pillar-stack reveal" aria-label="HyperVault technology pillars">
+          <article class="deep-pillar category-card">
+            <span>01</span>
+            <h3>Data Category Virtualization</h3>
+            <p>Organizes photos, documents, videos, downloads, and app-originated files by meaning and source.</p>
+          </article>
+          <article class="deep-pillar dedupe-card">
+            <span>02</span>
+            <h3>Data Deduplication Virtualization</h3>
+            <p>Reduces duplicate clutter through logical references while protecting user continuity.</p>
+          </article>
+          <article class="deep-pillar security-card">
+            <span>03</span>
+            <h3>Data Security Virtualization</h3>
+            <p>Applies contextual vault behavior around sensitive files, categories, and app workflows.</p>
+          </article>
+          <article class="deep-pillar mobility-card">
+            <span>04</span>
+            <h3>Data Mobility Virtualization</h3>
+            <p>Moves content through trusted, context-aware transfer paths across devices and destinations.</p>
+          </article>
+          <article class="deep-pillar wearable-card">
+            <span>05</span>
+            <h3>Wearable-Aware Authentication</h3>
+            <p>Uses wearable proximity and trust signals for secure access, continuity, and emergency actions.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section platform subpage-content" id="platform-architecture">
+      <div class="section-heading reveal">
+        <span class="eyebrow blue">Platform Architecture</span>
+        <h2>One architecture connecting apps, files, devices, and wearables</h2>
+        <p>The HyperVault core uses context, file intelligence, policy, trust state, and transfer awareness to orchestrate secure mobile data workflows.</p>
+      </div>
+      <div class="architecture-card magic-frame reveal">
+        <img src="assets/hd/hypervault-architecture.png" alt="HyperVault contextual intelligence architecture diagram" />
+      </div>
+    </section>
+
+    <section class="section subpage-content" id="core-capabilities">
+      <div class="feature-carousel magic-frame reveal" data-carousel="features">
+        <div class="feature-header">
+          <div>
+            <span class="eyebrow">Core Capabilities</span>
+            <h2>Capabilities users experience directly</h2>
+            <p>Each capability is designed to make Android storage easier to understand, safer to access, and more reliable to move.</p>
+          </div>
+          <div class="carousel-controls compact">
+            <button aria-label="Previous feature slide" data-prev>&lsaquo;</button>
+            <div class="dots" data-dots></div>
+            <button aria-label="Next feature slide" data-next>&rsaquo;</button>
+          </div>
+        </div>
+        <div class="carousel-track visual-track">
+          <article class="slide active">
+            <img src="assets/hd/hypervault-intelligent-file-explorer.png" alt="HyperVault intelligent file explorer" />
+            <div class="slide-copy">
+              <h3>Intelligent File Explorer</h3>
+              <p>All files become easier to discover, organize, secure, and transfer from one unified app view.</p>
+            </div>
+          </article>
+          <article class="slide">
+            <img src="assets/hd/contextual-encryption-security-and-vault.png" alt="Contextual encryption security and vault interface" />
+            <div class="slide-copy">
+              <h3>Contextual Encryption and Vault</h3>
+              <p>PDFs, Office files, photos, audio, and app-originated media can be protected automatically by context.</p>
+            </div>
+          </article>
+          <article class="slide">
+            <img src="assets/hd/duplicate-optimization.png" alt="HyperVault duplicate optimization interface" />
+            <div class="slide-copy">
+              <h3>Duplicate Optimization</h3>
+              <p>Duplicate-aware logic reduces storage waste while keeping content relationships understandable.</p>
+            </div>
+          </article>
+          <article class="slide">
+            <img src="assets/hd/hypervault-mobile-context-aware.png" alt="HyperVault context-aware mobile security" />
+            <div class="slide-copy">
+              <h3>Context-Aware Protection</h3>
+              <p>Security responds to content type, source app, trust state, and device relationship.</p>
+            </div>
+          </article>
+          <article class="slide">
+            <img src="assets/hd/wearabletrust-and-emergency-ecosystem.png" alt="Wearable trust and emergency ecosystem" />
+            <div class="slide-copy">
+              <h3>Wearable Trust and Emergency</h3>
+              <p>Smart rings and wearables extend security beyond the phone with one-tap emergency workflows.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section solution subpage-content" id="hypervault-ecosystem">
+      <div class="section-heading centered reveal">
+        <span class="eyebrow green">HyperVault Ecosystem</span>
+        <h2>Connected intelligence around one secure mobile core</h2>
+        <p>HyperVault connects content discovery, duplicate optimization, contextual protection, secure transfer, wearable trust, and emergency workflows into one Android-first ecosystem.</p>
+      </div>
+      <div class="solution-ecosystem magic-frame reveal">
+        <div class="ecosystem-copy">
+          <span class="eyebrow green">HyperVault Ecosystem</span>
+          <h3>Six connected intelligence layers</h3>
+          <p>Inspect how file intelligence, duplicate optimization, security, wearable trust, transfer, and enterprise readiness work together.</p>
+        </div>
+        <img src="assets/hd/hypervault-ecosystem-solution.png" alt="HyperVault ecosystem diagram showing intelligent file explorer, duplicate optimization, contextual encryption, wearable trust, secure transfer, and cloud enterprise readiness" />
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a href="index.html" class="brand">
+      <span class="brand-mark"><img src="assets/hypervault-logo-mark.png" alt="" /></span>
+      <span><strong><span>Hyper</span><span class="brand-vault">Vault</span></strong><small>SECURE | ORGANIZE | PROTECT</small></span>
+    </a>
+    <p>&copy; 2026 ASKIPLEX Technologies. Built for investor-ready product storytelling.</p>
+  </footer>
+
+  <button class="top-button" id="topButton" aria-label="Go to top">Top</button>
+
+  <div class="image-lightbox" id="imageLightbox" aria-hidden="true">
+    <div class="image-lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="imageLightboxTitle">
+      <button class="image-lightbox-close" id="imageLightboxClose" type="button" aria-label="Close image preview">x</button>
+      <img id="imageLightboxImg" alt="" />
+      <div class="image-lightbox-caption" id="imageLightboxTitle"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
