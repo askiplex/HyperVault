@@ -512,21 +512,16 @@ a {
 .subpage-panel {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 22px;
+  justify-content: flex-start;
+  gap: 16px;
   padding: 24px;
-}
-
-.subpage-panel h2 {
-  margin: 0;
-  color: var(--navy);
-  font-family: var(--display);
-  font-size: 1.35rem;
 }
 
 .subpage-link-grid {
   display: grid;
   gap: 10px;
+  flex: 1;
+  align-content: start;
 }
 
 .subpage-link {

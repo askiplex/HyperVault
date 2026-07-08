@@ -17,10 +17,29 @@ carousels.forEach((carousel) => {
     return button;
   });
 
+  const productLineHeader = carousel.querySelector('.product-line-header');
+  const productLineEyebrow = productLineHeader?.querySelector('.eyebrow');
+  const productLineTitle = productLineHeader?.querySelector('h3');
+
   function show(nextIndex, userInitiated = false) {
     index = (nextIndex + slides.length) % slides.length;
     slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
     dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+
+    if (carousel.dataset.carousel === 'product-line' && slides[index]) {
+      const currentSlide = slides[index];
+      const category = currentSlide.dataset.productCategory;
+      const subtitle = currentSlide.dataset.productSubtitle;
+
+      if (productLineEyebrow && category) {
+        productLineEyebrow.textContent = category;
+      }
+
+      if (productLineTitle && subtitle) {
+        productLineTitle.textContent = subtitle;
+      }
+    }
+
     if (userInitiated) restart();
   }
 
