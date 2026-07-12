@@ -1511,11 +1511,23 @@ p {
   position: relative;
   min-height: auto;
   aspect-ratio: 16 / 9;
-  border-radius: 24px;
+  border-radius: 28px;
   overflow: hidden;
   background:
     radial-gradient(circle at 50% 20%, rgba(31,122,255,.08), transparent 18rem),
     white;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.3);
+}
+
+.hero-carousel-track::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background:
+    linear-gradient(180deg, rgba(7,27,71,.08), rgba(7,27,71,.1) 45%, rgba(7,27,71,.38)),
+    linear-gradient(90deg, rgba(7,27,71,.08), transparent 28%, transparent 72%, rgba(7,27,71,.08));
+  pointer-events: none;
 }
 
 .hero-carousel .slide {
@@ -1577,28 +1589,66 @@ p {
   position: absolute;
   left: 16px;
   right: auto;
-  bottom: 16px;
+  bottom: 38px;
+  z-index: 4;
   display: grid;
   gap: 4px;
   max-width: min(440px, calc(100% - 32px));
-  padding: 12px 14px;
-  border: 1px solid rgba(255,255,255,.7);
-  border-radius: 18px;
-  background: rgba(255,255,255,.88);
-  box-shadow: 0 18px 44px rgba(7,27,71,.12);
-  backdrop-filter: blur(14px);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .hero-slide-caption strong {
-  color: var(--navy);
+  color: white;
   font-family: var(--display);
-  font-size: .95rem;
+  font-size: 1.22rem;
+  text-shadow: 0 2px 18px rgba(0,0,0,.35);
 }
 
 .hero-slide-caption span {
-  color: var(--muted);
-  font-size: .82rem;
+  color: rgba(255,255,255,.84);
+  font-size: .86rem;
   font-weight: 700;
+  text-shadow: 0 2px 16px rgba(0,0,0,.36);
+}
+
+.hero-story-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  z-index: 5;
+  width: min(540px, calc(100% - 210px));
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+  transform: translateX(-50%);
+}
+
+.hero-story-dots .dot {
+  flex: 1 1 0;
+  max-width: 58px;
+  height: 5px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255,255,255,.34);
+  box-shadow: 0 1px 8px rgba(0,0,0,.2);
+  cursor: pointer;
+  transition: max-width .2s ease, background .2s ease, transform .2s ease;
+}
+
+.hero-story-dots .dot:hover,
+.hero-story-dots .dot:focus-visible {
+  background: rgba(255,255,255,.68);
+  transform: translateY(-1px);
+}
+
+.hero-story-dots .dot.active {
+  max-width: 76px;
+  background: rgba(255,255,255,.94);
 }
 
 .phone-stage {
@@ -4084,10 +4134,24 @@ p {
   .hero-slide-caption {
     left: 10px;
     right: auto;
-    bottom: 10px;
+    bottom: 30px;
     max-width: min(360px, calc(100% - 20px));
-    padding: 11px 12px;
-    border-radius: 14px;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .hero-slide-caption strong {
+    font-size: 1rem;
+  }
+
+  .hero-story-dots {
+    bottom: 10px;
+    width: min(300px, calc(100% - 92px));
+    gap: 5px;
+  }
+
+  .hero-story-dots .dot {
+    height: 4px;
   }
 
   .hero-video-controls {
