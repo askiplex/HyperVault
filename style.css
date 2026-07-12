@@ -451,6 +451,19 @@ a {
   padding: 96px 0;
 }
 
+.home-page main {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-page .hero { order: 1; }
+.home-page .adoption-section { order: 2; }
+.home-page .pillar-showcase { order: 3; }
+.home-page .products { order: 4; }
+.home-page .target { order: 5; }
+.home-page .faqs { order: 6; }
+.home-page .cta { order: 7; }
+
 .subpage-main {
   padding-bottom: 80px;
 }
