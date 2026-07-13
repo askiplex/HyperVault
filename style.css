@@ -4017,6 +4017,20 @@ p {
     grid-template-columns: 1fr;
   }
 
+  .hero-tech-banner {
+    text-align: center;
+  }
+
+  .hero-tech-banner .hero-eyebrow {
+    align-self: center;
+    justify-content: center;
+  }
+
+  .hero-copy h1 span {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .hero-intro-stack {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
