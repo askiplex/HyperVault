@@ -4741,6 +4741,384 @@ p {
   }
 }
 
+/* Product ecosystem hierarchy */
+.product-ecosystem-shell {
+  position: relative;
+  width: 100%;
+}
+
+.ecosystem-hierarchy {
+  position: relative;
+  padding: 8px clamp(8px, 2vw, 24px) 0;
+}
+
+.ecosystem-root {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 340px);
+  min-height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto;
+  padding: 14px 22px;
+  border: 1px solid rgba(255,122,0,.35);
+  border-radius: 24px;
+  color: #eef1f3;
+  background:
+    linear-gradient(145deg, rgba(17,20,23,.98), rgba(48,54,60,.96)),
+    radial-gradient(circle at 10% 0%, rgba(255,122,0,.2), transparent 10rem);
+  box-shadow: 0 24px 64px rgba(27,31,36,.22), inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.ecosystem-root::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -34px;
+  width: 2px;
+  height: 34px;
+  background: linear-gradient(180deg, var(--orange), rgba(7,87,212,.55));
+  transform: translateX(-50%);
+}
+
+.ecosystem-root-mark {
+  flex: 0 0 auto;
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+}
+
+.ecosystem-root-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 18px rgba(0,0,0,.38));
+}
+
+.ecosystem-root > span:last-child {
+  display: grid;
+  gap: 3px;
+}
+
+.ecosystem-root strong {
+  font-family: var(--display);
+  font-size: 1.55rem;
+}
+
+.ecosystem-root small {
+  color: rgba(238,241,243,.68);
+  font-weight: 800;
+}
+
+.ecosystem-branches {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.2vw, 28px);
+  margin-top: 34px;
+  padding-top: 34px;
+}
+
+.ecosystem-branches::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16.666%;
+  right: 16.666%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--green), var(--blue));
+  box-shadow: 0 0 18px rgba(7,87,212,.18);
+}
+
+.ecosystem-branch {
+  --branch-color: var(--orange);
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 126px;
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  border: 1px solid rgba(7,27,71,.11);
+  border-radius: 24px;
+  color: var(--navy);
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 18px 48px rgba(7,27,71,.09);
+  text-align: left;
+  cursor: pointer;
+  transition: transform .26s ease, box-shadow .26s ease, border-color .26s ease, background .26s ease;
+}
+
+.ecosystem-branch:nth-child(2) { --branch-color: var(--green); }
+.ecosystem-branch:nth-child(3) { --branch-color: var(--blue); }
+
+.ecosystem-branch::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -34px;
+  width: 2px;
+  height: 34px;
+  background: var(--branch-color);
+  transform: translateX(-50%);
+}
+
+.ecosystem-branch::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -39px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--branch-color);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--branch-color) 15%, transparent);
+  transform: translateX(-50%);
+}
+
+.ecosystem-branch:hover,
+.ecosystem-branch:focus-visible {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--branch-color) 52%, transparent);
+  box-shadow: 0 26px 64px rgba(7,27,71,.15);
+}
+
+.ecosystem-branch.active {
+  border-color: var(--branch-color);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.98), rgba(246,250,255,.9)),
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--branch-color) 15%, transparent), transparent 13rem);
+  box-shadow: 0 26px 72px color-mix(in srgb, var(--branch-color) 20%, transparent);
+  transform: translateY(-6px);
+}
+
+.ecosystem-node-media {
+  width: 104px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #f4f7fa;
+}
+
+.ecosystem-node-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.ecosystem-node-copy {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.ecosystem-node-copy small {
+  color: var(--branch-color);
+  font-weight: 950;
+}
+
+.ecosystem-node-copy strong {
+  color: var(--navy);
+  font-family: var(--display);
+  font-size: clamp(1rem, 1.45vw, 1.3rem);
+  line-height: 1.1;
+}
+
+.ecosystem-node-copy span {
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 750;
+}
+
+.ecosystem-panels {
+  margin-top: clamp(24px, 3vw, 38px);
+}
+
+.ecosystem-panel[hidden] {
+  display: none;
+}
+
+.ecosystem-panel.active {
+  animation: ecosystemPanelIn .45s ease both;
+}
+
+@keyframes ecosystemPanelIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.product-category-carousel {
+  position: relative;
+  margin-bottom: 0;
+  border-top: 4px solid var(--orange);
+}
+
+[data-product-panel="wearables"] .product-category-carousel { border-top-color: var(--green); }
+[data-product-panel="cloud"] .product-category-carousel { border-top-color: var(--blue); }
+
+.product-category-carousel .product-line-track {
+  min-height: clamp(590px, 58vw, 760px);
+}
+
+.product-category-carousel .product-line-slide img {
+  width: min(720px, 100%);
+  max-height: 510px;
+}
+
+.product-category-carousel .carousel-controls .dot {
+  width: 9px;
+  height: 9px;
+  min-height: 0;
+  padding: 0;
+  border-radius: 999px;
+  background: rgba(7,27,71,.24);
+  box-shadow: none;
+}
+
+.product-category-carousel .carousel-controls .dot.active {
+  width: 28px;
+  background: var(--orange);
+}
+
+@media (max-width: 900px) {
+  .ecosystem-branch {
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 10px;
+    min-height: 108px;
+    padding: 9px;
+    border-radius: 18px;
+  }
+
+  .ecosystem-node-media {
+    width: 72px;
+    height: 72px;
+    border-radius: 14px;
+  }
+
+  .ecosystem-node-copy span {
+    display: none;
+  }
+
+  .product-category-carousel .product-line-track {
+    min-height: 650px;
+  }
+}
+
+@media (max-width: 720px) {
+  .ecosystem-hierarchy {
+    padding: 0;
+  }
+
+  .ecosystem-root {
+    width: min(100%, 286px);
+    min-height: 88px;
+    gap: 12px;
+    padding: 10px 16px;
+    border-radius: 20px;
+  }
+
+  .ecosystem-root-mark {
+    width: 58px;
+    height: 58px;
+  }
+
+  .ecosystem-root strong {
+    font-size: 1.25rem;
+  }
+
+  .ecosystem-root small {
+    font-size: .7rem;
+  }
+
+  .ecosystem-branches {
+    gap: 7px;
+    margin-top: 28px;
+    padding-top: 28px;
+  }
+
+  .ecosystem-branches::before {
+    left: 16%;
+    right: 16%;
+  }
+
+  .ecosystem-branch {
+    grid-template-columns: 1fr;
+    grid-template-rows: 48px auto;
+    gap: 7px;
+    min-height: 118px;
+    padding: 8px 5px;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .ecosystem-branch::before {
+    top: -28px;
+    height: 28px;
+  }
+
+  .ecosystem-branch::after {
+    top: -33px;
+  }
+
+  .ecosystem-node-media {
+    width: 52px;
+    height: 48px;
+    margin: 0 auto;
+    border-radius: 11px;
+  }
+
+  .ecosystem-node-copy {
+    gap: 2px;
+  }
+
+  .ecosystem-node-copy small {
+    font-size: .62rem;
+  }
+
+  .ecosystem-node-copy strong {
+    font-size: clamp(.68rem, 3.1vw, .82rem);
+    line-height: 1.12;
+  }
+
+  .ecosystem-panels {
+    margin-top: 22px;
+  }
+
+  .product-category-carousel {
+    padding: 12px;
+    border-radius: 22px;
+  }
+
+  .product-category-carousel .product-line-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .product-category-carousel .product-line-track {
+    min-height: 540px;
+  }
+
+  .product-category-carousel .product-line-slide img {
+    width: 100%;
+    max-height: 350px;
+    border-radius: 16px;
+  }
+
+  .product-category-carousel .product-line-slide .slide-copy {
+    padding: 16px 2px 0;
+  }
+
+  .product-category-carousel .product-line-slide .slide-copy h3 {
+    font-size: 1.35rem;
+  }
+}
+
 @media (max-width: 420px) {
   h1 {
     font-size: 2.45rem;

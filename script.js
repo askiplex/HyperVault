@@ -54,6 +54,43 @@ carousels.forEach((carousel) => {
   restart();
 });
 
+document.querySelectorAll('[data-product-ecosystem]').forEach((ecosystem) => {
+  const tabs = [...ecosystem.querySelectorAll('[data-product-tab]')];
+  const panels = [...ecosystem.querySelectorAll('[data-product-panel]')];
+
+  function activateProduct(key, focusTab = false) {
+    ecosystem.dataset.activeProduct = key;
+
+    tabs.forEach((tab) => {
+      const active = tab.dataset.productTab === key;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (active && focusTab) tab.focus();
+    });
+
+    panels.forEach((panel) => {
+      const active = panel.dataset.productPanel === key;
+      panel.hidden = !active;
+      panel.classList.toggle('active', active);
+    });
+  }
+
+  tabs.forEach((tab, tabIndex) => {
+    tab.addEventListener('click', () => activateProduct(tab.dataset.productTab));
+    tab.addEventListener('keydown', (event) => {
+      if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      let nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : tabIndex + (event.key === 'ArrowRight' ? 1 : -1);
+      nextIndex = (nextIndex + tabs.length) % tabs.length;
+      activateProduct(tabs[nextIndex].dataset.productTab, true);
+    });
+  });
+
+  const initialTab = tabs.find((tab) => tab.classList.contains('active')) || tabs[0];
+  if (initialTab) activateProduct(initialTab.dataset.productTab);
+});
+
 const pillarCarousel = document.querySelector('[data-pillar-carousel]');
 
 if (pillarCarousel) {

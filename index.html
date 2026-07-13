@@ -507,74 +507,83 @@
       <div class="section-heading centered reveal">
         <span class="eyebrow orange">Product Ecosystem</span>
         <h2>Three product lines. One unified platform.</h2>
-        <p>Start with a free Android app, upgrade to premium intelligence, then extend trust through smart wearables.</p>
+        <p>Explore the connected HyperVault hierarchy across Android intelligence, wearable trust and secure cloud mobility.</p>
       </div>
 
-      <div class="product-line-carousel magic-frame reveal" data-carousel="product-line">
-        <div class="product-line-header">
-          <div>
-            <span class="eyebrow orange">Wearable Product Line</span>
-            <h3>Trust devices designed for real-world access, safety and continuity</h3>
+      <div class="product-ecosystem-shell reveal" data-product-ecosystem>
+        <div class="ecosystem-hierarchy" aria-label="HyperVault product hierarchy">
+          <div class="ecosystem-root">
+            <span class="ecosystem-root-mark"><img src="assets/hypervault-hero-shield-transparent.png" alt="" /></span>
+            <span><strong>HyperVault</strong><small>Unified Intelligence Platform</small></span>
           </div>
-          <div class="carousel-controls compact">
-            <button aria-label="Previous product line slide" data-prev>‹</button>
-            <div class="dots" data-dots></div>
-            <button aria-label="Next product line slide" data-next>›</button>
+          <div class="ecosystem-branches" role="tablist" aria-label="Product ecosystem categories">
+            <button class="ecosystem-branch active" type="button" role="tab" aria-selected="true" aria-controls="product-panel-app" id="product-tab-app" data-product-tab="app">
+              <span class="ecosystem-node-media"><img src="assets/hd/products/hypervault-freemium-app.png" alt="" /></span>
+              <span class="ecosystem-node-copy"><small>01</small><strong>HyperVault App</strong><span>Android intelligence</span></span>
+            </button>
+            <button class="ecosystem-branch" type="button" role="tab" aria-selected="false" aria-controls="product-panel-wearables" id="product-tab-wearables" data-product-tab="wearables">
+              <span class="ecosystem-node-media"><img src="assets/hd/product-line/smart-ring.png" alt="" /></span>
+              <span class="ecosystem-node-copy"><small>02</small><strong>Smart Wearables</strong><span>Continuous trust</span></span>
+            </button>
+            <button class="ecosystem-branch" type="button" role="tab" aria-selected="false" aria-controls="product-panel-cloud" id="product-tab-cloud" data-product-tab="cloud">
+              <span class="ecosystem-node-media"><img src="assets/hd/product-line/HyperVault_Drive.png" alt="" /></span>
+              <span class="ecosystem-node-copy"><small>03</small><strong>Cloud</strong><span>Secure mobility</span></span>
+            </button>
           </div>
         </div>
-        <div class="carousel-track product-line-track">
-          <article class="slide active product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Trust devices designed for real-world access, safety and continuity">
-            <img src="assets/hd/product-line/smart-ring.png" alt="HyperVault Smart Rings product visual for secure discreet wearable trust" />
-            <div class="slide-copy">
-              <h3>Smart Rings</h3>
-              <p>Secure, discreet and always with the user. Smart rings extend HyperVault trust into everyday authentication and emergency activation moments.</p>
+
+        <div class="ecosystem-panels">
+          <section class="ecosystem-panel active" id="product-panel-app" role="tabpanel" aria-labelledby="product-tab-app" data-product-panel="app">
+            <div class="product-line-carousel product-category-carousel magic-frame" data-carousel="product-line">
+              <div class="product-line-header">
+                <div><span class="eyebrow orange">HyperVault App</span><h3>Android storage intelligence for every stage of the user journey</h3></div>
+                <div class="carousel-controls compact"><button aria-label="Previous HyperVault App slide" data-prev>‹</button><div class="dots" data-dots></div><button aria-label="Next HyperVault App slide" data-next>›</button></div>
+              </div>
+              <div class="carousel-track product-line-track">
+                <article class="slide active product-line-slide" data-product-category="HyperVault App" data-product-subtitle="Essential organization, discovery and file mobility">
+                  <img src="assets/hd/products/hypervault-freemium-app.png" alt="HyperVault Freemium Android app product capabilities" />
+                  <div class="slide-copy"><h3>HyperVault Freemium App</h3><p>Content-centric exploration, file management, organization and essential transfer tools create an accessible starting point for every Android user.</p></div>
+                </article>
+                <article class="slide product-line-slide" data-product-category="HyperVault App" data-product-subtitle="Advanced intelligence, security and control">
+                  <img src="assets/hd/products/hypervault-premium-app.png" alt="HyperVault Premium Android app product capabilities" />
+                  <div class="slide-copy"><h3>HyperVault Premium App</h3><p>Duplicate virtualization, contextual security, advanced transfers, emergency services and wearable-aware authentication extend the core app.</p></div>
+                </article>
+
+              </div>
             </div>
-          </article>
-          <article class="slide product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Trust devices designed for real-world access, safety and continuity">
-            <img src="assets/hd/product-line/smart-bands.png" alt="HyperVault Smart Bands product visual for continuous authentication and health-aware trust" />
-            <div class="slide-copy">
-              <h3>Smart Bands</h3>
-              <p>Continuous authentication and health-aware trust signals for users who need always-on wearable context.</p>
+          </section>
+
+          <section class="ecosystem-panel" id="product-panel-wearables" role="tabpanel" aria-labelledby="product-tab-wearables" data-product-panel="wearables" hidden>
+            <div class="product-line-carousel product-category-carousel magic-frame" data-carousel="product-line">
+              <div class="product-line-header">
+                <div><span class="eyebrow green">Wearable Product Line</span><h3>Trust devices designed for real-world access, safety and continuity</h3></div>
+                <div class="carousel-controls compact"><button aria-label="Previous wearable product slide" data-prev>‹</button><div class="dots" data-dots></div><button aria-label="Next wearable product slide" data-next>›</button></div>
+              </div>
+              <div class="carousel-track product-line-track">
+                <article class="slide active product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Secure, discreet and always with the user"><img src="assets/hd/product-line/smart-ring.png" alt="HyperVault Smart Rings for secure discreet wearable trust" /><div class="slide-copy"><h3>Smart Rings</h3><p>Discreet wearable trust for everyday authentication, proximity intelligence and emergency activation moments.</p></div></article>
+                <article class="slide product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Continuous authentication and health-aware trust"><img src="assets/hd/product-line/smart-bands.png" alt="HyperVault Smart Bands for continuous authentication" /><div class="slide-copy"><h3>Smart Bands</h3><p>Continuous authentication and health-aware trust signals for users who need always-on wearable context.</p></div></article>
+                <article class="slide product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Real-time alerts, trusted actions and quick response"><img src="assets/hd/product-line/smart-watches.png" alt="HyperVault Smart Watches for alerts and trusted actions" /><div class="slide-copy"><h3>Smart Watches</h3><p>Real-time alerts, trusted actions and quick response surfaces for safety, access and contextual intelligence.</p></div></article>
+                <article class="slide product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Always-with-you trusted access"><img src="assets/hd/product-line/smart-keychains.png" alt="HyperVault Smart Keychains for one-tap trusted access" /><div class="slide-copy"><h3>Smart Keychains</h3><p>One-tap access, fallback authentication and simple emergency trigger patterns in an always-with-you form.</p></div></article>
+                <article class="slide product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Tap-to-authenticate secure access"><img src="assets/hd/product-line/smart-cards.png" alt="HyperVault Smart Cards for tap-to-authenticate access" /><div class="slide-copy"><h3>Smart Cards</h3><p>Tap-to-authenticate secure access for individuals, teams and enterprise-ready trust workflows.</p></div></article>
+              </div>
             </div>
-          </article>
-          <article class="slide product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Trust devices designed for real-world access, safety and continuity">
-            <img src="assets/hd/product-line/smart-watches.png" alt="HyperVault Smart Watches product visual for real-time alerts and quick actions" />
-            <div class="slide-copy">
-              <h3>Smart Watches</h3>
-              <p>Real-time alerts, trusted actions and quick response surfaces for safety, access and contextual intelligence workflows.</p>
+          </section>
+
+          <section class="ecosystem-panel" id="product-panel-cloud" role="tabpanel" aria-labelledby="product-tab-cloud" data-product-panel="cloud" hidden>
+            <div class="product-line-carousel product-category-carousel magic-frame" data-carousel="product-line">
+              <div class="product-line-header">
+                <div><span class="eyebrow blue">Cloud &amp; Mobility</span><h3>Secure continuity across cloud, connected storage and portable access</h3></div>
+                <div class="carousel-controls compact"><button aria-label="Previous Cloud product slide" data-prev>‹</button><div class="dots" data-dots></div><button aria-label="Next Cloud product slide" data-next>›</button></div>
+              </div>
+              <div class="carousel-track product-line-track">
+<!--                 <article class="slide active product-line-slide" data-product-category="HyperVault Cloud" data-product-subtitle="Context-aware synchronization and enterprise readiness"><img src="assets/hypervault-ecosystem-solution.png" alt="HyperVault Cloud and enterprise readiness ecosystem" /><div class="slide-copy"><h3>HyperVault Cloud</h3><p>Context-aware synchronization preserves organization, protection and trusted access as content moves beyond the device.</p></div></article>
+ -->                <article class="slide product-line-slide" data-product-category="HyperVault Drive" data-product-subtitle="Secure cloud storage and smart access"><img src="assets/hd/product-line/HyperVault_Drive.png" alt="HyperVault Drive secure cloud storage and smart access" /><div class="slide-copy"><h3>HyperVault Drive</h3><p>Secure connected storage for mobile content, synchronized across devices and trusted workflows.</p></div></article>
+                <article class="slide product-line-slide" data-product-category="HyperVault USB Drive Stick" data-product-subtitle="Portable. Secure. Always with you."><img src="assets/hd/product-line/HyperVault_usb_drive_stick.png" alt="HyperVault USB Drive Stick secure portable storage" /><div class="slide-copy"><h3>HyperVault USB Drive Stick</h3><p>Portable secure storage for important Android files, trusted mobility and dependable offline access.</p></div></article>
+              </div>
             </div>
-          </article>
-          <article class="slide product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Trust devices designed for real-world access, safety and continuity">
-            <img src="assets/hd/product-line/smart-keychains.png" alt="HyperVault Smart Keychains product visual for one-tap trusted access" />
-            <div class="slide-copy">
-              <h3>Smart Keychains</h3>
-              <p>Always-with-you trust for one-tap access, fallback authentication and simple emergency trigger patterns.</p>
-            </div>
-          </article>
-          <article class="slide product-line-slide" data-product-category="Wearable Product Line" data-product-subtitle="Trust devices designed for real-world access, safety and continuity">
-            <img src="assets/hd/product-line/smart-cards.png" alt="HyperVault Smart Cards product visual for tap-to-authenticate secure access" />
-            <div class="slide-copy">
-              <h3>Smart Cards</h3>
-              <p>Tap-to-authenticate secure access for users, teams and enterprise-ready trust workflows.</p>
-            </div>
-          </article>
-          <article class="slide product-line-slide" data-product-category="HyperVault USB Drive Stick" data-product-subtitle="Portable. Secure. Always with you.">
-            <img src="assets/hd/product-line/HyperVault_usb_drive_stick.png" alt="HyperVault USB Drive Stick secure portable storage" />
-            <div class="slide-copy">
-              <h3>HyperVault USB Drive Stick</h3>
-              <p>Portable secure storage for important Android files, designed for trusted mobility and offline access.</p>
-            </div>
-          </article>
-          <article class="slide product-line-slide" data-product-category="HyperVault Drive" data-product-subtitle="Secure cloud storage and smart access">
-            <img src="assets/hd/product-line/HyperVault_Drive.png" alt="HyperVault Drive cloud storage visual showing secure drive access" />
-            <div class="slide-copy">
-              <h3>HyperVault Drive</h3>
-              <p>Secure cloud storage and smart access for mobile content, synchronized across devices and trusted workflows.</p>
-            </div>
-          </article>
+          </section>
         </div>
       </div>
-
     </section>
 
     <section class="section target" id="users">
