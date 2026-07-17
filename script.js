@@ -430,3 +430,86 @@ imageLightboxImg?.addEventListener('click', closeImageLightbox);
 imageLightbox?.addEventListener('click', (event) => {
   if (event.target === imageLightbox) closeImageLightbox();
 });
+
+// Investor financial projection selector
+document.querySelectorAll('[data-financial-projections]').forEach((widget) => {
+  const rows = [...widget.querySelectorAll('.projection-row')];
+  const dots = [...widget.querySelectorAll('.projection-dots button')];
+  const fields = {
+    year: widget.querySelector('[data-finance-year]'),
+    timeline: widget.querySelector('[data-finance-timeline]'),
+    phase: widget.querySelector('[data-finance-phase]'),
+    deliverables: widget.querySelector('[data-finance-deliverables]'),
+    spend: widget.querySelector('[data-finance-spend]'),
+    revenue: widget.querySelector('[data-finance-revenue]'),
+    outcome: widget.querySelector('[data-finance-outcome]'),
+    spendBar: widget.querySelector('[data-finance-spend-bar]'),
+    revenueBar: widget.querySelector('[data-finance-revenue-bar]')
+  };
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let activeIndex = 0;
+  let timer;
+
+  function selectProjection(nextIndex, userInitiated = false) {
+    activeIndex = (nextIndex + rows.length) % rows.length;
+    const row = rows[activeIndex];
+    if (!row) return;
+
+    rows.forEach((item, index) => {
+      const active = index === activeIndex;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
+    dots.forEach((dot, index) => {
+      const active = index === activeIndex;
+      dot.classList.toggle('active', active);
+      dot.setAttribute('aria-pressed', String(active));
+    });
+
+    if (fields.year) fields.year.textContent = row.dataset.year;
+    if (fields.timeline) fields.timeline.textContent = row.dataset.timeline;
+    if (fields.phase) fields.phase.textContent = row.dataset.phase;
+    if (fields.deliverables) fields.deliverables.textContent = row.dataset.deliverables;
+    if (fields.spend) fields.spend.textContent = row.dataset.spend;
+    if (fields.revenue) fields.revenue.textContent = row.dataset.revenue;
+    if (fields.outcome) fields.outcome.textContent = row.dataset.outcome;
+    if (fields.spendBar) fields.spendBar.style.width = `${row.dataset.spendFill}%`;
+    if (fields.revenueBar) fields.revenueBar.style.width = `${row.dataset.revenueFill}%`;
+
+    if (userInitiated) restartProjectionTimer();
+  }
+
+  function stopProjectionTimer() {
+    clearInterval(timer);
+  }
+
+  function startProjectionTimer() {
+    stopProjectionTimer();
+    if (reducedMotion.matches || rows.length < 2) return;
+    timer = setInterval(() => selectProjection(activeIndex + 1), 5600);
+  }
+
+  function restartProjectionTimer() {
+    stopProjectionTimer();
+    startProjectionTimer();
+  }
+
+  rows.forEach((row, index) => {
+    row.addEventListener('click', () => selectProjection(index, true));
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => selectProjection(index, true));
+  });
+
+  widget.addEventListener('mouseenter', stopProjectionTimer);
+  widget.addEventListener('mouseleave', startProjectionTimer);
+  widget.addEventListener('focusin', stopProjectionTimer);
+  widget.addEventListener('focusout', (event) => {
+    if (!widget.contains(event.relatedTarget)) startProjectionTimer();
+  });
+  reducedMotion.addEventListener?.('change', startProjectionTimer);
+
+  selectProjection(0);
+  startProjectionTimer();
+});

@@ -4911,6 +4911,774 @@ p {
   }
 }
 
+/* Business: financial projections and fund utilization */
+.investor-financial-card {
+  position: relative;
+  margin: 8px 0 30px;
+  overflow: hidden;
+  border: 1px solid rgba(7,27,71,.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(7,27,71,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7,27,71,.03) 1px, transparent 1px),
+    linear-gradient(145deg, #f9fbfe, #edf4fc);
+  background-size: 30px 30px, 30px 30px, auto;
+  box-shadow: 0 28px 80px rgba(7,27,71,.14);
+}
+
+.investor-financial-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 3;
+  height: 5px;
+  background: linear-gradient(90deg, #0757d4, #00a48f 38%, #ff7100 68%, #ffb000);
+}
+
+.financial-card-heading {
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.financial-card-heading h3 {
+  margin: 9px 0 8px;
+  color: var(--navy);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.08;
+}
+
+.financial-card-heading p {
+  max-width: 760px;
+  margin: 0;
+  color: #58657a;
+}
+
+.financial-heading-mark {
+  min-width: 166px;
+  padding: 10px 13px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgba(255,255,255,.82);
+  border-radius: 7px;
+  background: linear-gradient(145deg, #111820, #2a343d);
+  box-shadow: 0 14px 30px rgba(17,24,32,.2);
+  font-size: .66rem;
+  font-weight: 900;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.financial-heading-mark img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  filter: drop-shadow(0 7px 10px rgba(0,0,0,.45));
+}
+
+.projection-table {
+  padding: 0 18px 22px;
+}
+
+.projection-table-head,
+.projection-row {
+  display: grid;
+  grid-template-columns: .82fr 1.42fr .63fr .63fr 1.15fr;
+  align-items: stretch;
+}
+
+.projection-table-head {
+  min-height: 58px;
+  overflow: hidden;
+  color: white;
+  border-radius: 7px;
+  background: linear-gradient(90deg, #071b47, #092864);
+  box-shadow: 0 13px 30px rgba(7,27,71,.18);
+}
+
+.projection-table-head > span {
+  min-width: 0;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-right: 1px solid rgba(255,255,255,.18);
+  font-size: .73rem;
+  font-weight: 900;
+}
+
+.projection-table-head > span:last-child {
+  border-right: 0;
+}
+
+.projection-table-head svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  fill: none;
+  stroke: #ff9a3d;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.projection-row {
+  width: 100%;
+  min-height: 112px;
+  margin-top: 9px;
+  padding: 0;
+  overflow: hidden;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  border: 1px solid rgba(7,27,71,.12);
+  border-left: 4px solid transparent;
+  border-radius: 7px;
+  background: rgba(255,255,255,.82);
+  box-shadow: 0 9px 22px rgba(7,27,71,.07);
+  cursor: pointer;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
+
+.projection-row:hover,
+.projection-row:focus-visible {
+  transform: translateY(-3px);
+  border-color: rgba(7,87,212,.45);
+  box-shadow: 0 16px 34px rgba(7,87,212,.13);
+  outline: none;
+}
+
+.projection-row.active {
+  border-left-color: #ff7100;
+  background: white;
+  box-shadow: 0 16px 36px rgba(7,87,212,.15), inset 0 0 0 1px rgba(7,87,212,.12);
+}
+
+.projection-row > span {
+  min-width: 0;
+  padding: 14px 12px;
+  border-right: 1px solid rgba(7,27,71,.09);
+}
+
+.projection-row > span:last-child {
+  border-right: 0;
+}
+
+.projection-year {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projection-year > b {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  color: white;
+  border-radius: 50%;
+  background: #071b47;
+  box-shadow: 0 9px 20px rgba(7,27,71,.22);
+  font-size: .78rem;
+}
+
+.projection-year strong,
+.projection-year small,
+.projection-deliverable i,
+.projection-deliverable strong,
+.projection-deliverable small,
+.projection-money small,
+.projection-money strong {
+  display: block;
+}
+
+.projection-year strong {
+  color: var(--navy);
+  font-size: .85rem;
+}
+
+.projection-year small {
+  margin-top: 3px;
+  color: #6c7789;
+  font-size: .65rem;
+  font-weight: 750;
+}
+
+.projection-deliverable {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.projection-deliverable i {
+  margin-bottom: 5px;
+  color: #0757d4;
+  font-size: .61rem;
+  font-style: normal;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.projection-deliverable strong {
+  color: var(--navy);
+  font-size: .83rem;
+}
+
+.projection-deliverable small {
+  margin-top: 3px;
+  color: #5d687b;
+  font-size: .64rem;
+  font-weight: 680;
+  line-height: 1.35;
+}
+
+.projection-money {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.projection-money small {
+  margin-bottom: 5px;
+  color: #788294;
+  font-size: .57rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.projection-money strong {
+  color: #071b47;
+  font-size: clamp(1.1rem, 2vw, 1.55rem);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.revenue-money strong {
+  color: #008d7a;
+}
+
+.projection-outcome {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #263650;
+  font-size: .68rem;
+  font-weight: 760;
+  line-height: 1.35;
+}
+
+.projection-outcome svg {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  fill: none;
+  stroke: #ff7100;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.financial-insights {
+  display: grid;
+  grid-template-columns: 1.08fr .92fr;
+  color: white;
+  background: linear-gradient(145deg, #111820, #24303a);
+  border-top: 1px solid rgba(255,255,255,.1);
+}
+
+.fund-utilization,
+.projection-focus {
+  min-width: 0;
+  padding: 28px;
+}
+
+.fund-utilization {
+  border-right: 1px solid rgba(255,255,255,.12);
+}
+
+.financial-subheading > span {
+  display: block;
+  margin-bottom: 4px;
+  color: #ff9c43;
+  font-size: .67rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.financial-subheading h4 {
+  margin: 0;
+  color: white;
+  font-size: 1.45rem;
+}
+
+.financial-subheading p {
+  margin: 5px 0 0;
+  color: rgba(255,255,255,.62);
+  font-size: .72rem;
+}
+
+.utilization-layout {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  align-items: center;
+  gap: 22px;
+}
+
+.utilization-ring {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(#0757d4 0 30%, #00a4cf 30% 50%, #ff7100 50% 85%, #00a48f 85% 100%);
+  box-shadow: 0 18px 34px rgba(0,0,0,.25), 0 0 0 8px rgba(255,255,255,.04);
+  transition: transform .35s ease;
+}
+
+.utilization-ring:hover {
+  transform: rotate(3deg) scale(1.035);
+}
+
+.utilization-ring::before {
+  content: "";
+  width: 116px;
+  height: 116px;
+  grid-area: 1 / 1;
+  border-radius: 50%;
+  background: #18222b;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.1);
+}
+
+.utilization-ring > span {
+  position: relative;
+  z-index: 1;
+  grid-area: 1 / 1;
+  text-align: center;
+}
+
+.utilization-ring strong,
+.utilization-ring small {
+  display: block;
+}
+
+.utilization-ring strong {
+  color: white;
+  font-size: 1.55rem;
+}
+
+.utilization-ring small {
+  margin-top: 3px;
+  color: rgba(255,255,255,.56);
+  font-size: .62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.utilization-legend {
+  display: grid;
+  gap: 8px;
+}
+
+.utilization-item {
+  min-width: 0;
+  padding: 8px 0;
+  display: grid;
+  grid-template-columns: 9px 1fr;
+  align-items: center;
+  gap: 9px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.utilization-item:last-child {
+  border-bottom: 0;
+}
+
+.utilization-item > i {
+  width: 9px;
+  height: 32px;
+  border-radius: 3px;
+  background: #0757d4;
+}
+
+.transfer-use > i { background: #00a4cf; }
+.wearable-use > i { background: #ff7100; }
+.health-use > i { background: #00a48f; }
+
+.utilization-item strong,
+.utilization-item small {
+  display: block;
+}
+
+.utilization-item strong {
+  color: white;
+  font-size: .75rem;
+}
+
+.utilization-item small {
+  margin-top: 2px;
+  color: rgba(255,255,255,.58);
+  font-size: .64rem;
+  font-weight: 750;
+}
+
+.projection-focus {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.projection-focus::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 18%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+  transform: skewX(-18deg);
+  animation: financeFocusSheen 4.8s ease-in-out infinite;
+}
+
+.projection-focus-top {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.projection-focus-top > span {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 950;
+}
+
+.projection-focus-top > small {
+  color: rgba(255,255,255,.58);
+  font-size: .7rem;
+  font-weight: 800;
+}
+
+.projection-focus-phase {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 12px 0 7px;
+  color: #ff9c43;
+  font-size: .64rem;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.projection-focus > h4 {
+  position: relative;
+  z-index: 1;
+  min-height: 48px;
+  margin: 0 0 18px;
+  color: rgba(255,255,255,.88);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.focus-metrics {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.focus-metric {
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 7px;
+  background: rgba(255,255,255,.05);
+}
+
+.focus-metric span {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.focus-metric small {
+  color: rgba(255,255,255,.55);
+  font-size: .58rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.focus-metric strong {
+  color: white;
+  font-size: 1.12rem;
+  white-space: nowrap;
+}
+
+.focus-metric > i {
+  height: 4px;
+  margin-top: 10px;
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(255,255,255,.1);
+}
+
+.focus-metric > i > b {
+  height: 100%;
+  display: block;
+  border-radius: inherit;
+  background: #ff7100;
+  transition: width .65s cubic-bezier(.2,.7,.2,1);
+}
+
+.focus-revenue > i > b {
+  background: #00a48f;
+}
+
+.focus-outcome {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-left: 3px solid #00a48f;
+  background: rgba(0,164,143,.08);
+}
+
+.focus-outcome svg {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  fill: none;
+  stroke: #48d3bf;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.focus-outcome small,
+.focus-outcome strong {
+  display: block;
+}
+
+.focus-outcome small {
+  color: rgba(255,255,255,.5);
+  font-size: .57rem;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.focus-outcome strong {
+  margin-top: 3px;
+  color: white;
+  font-size: .72rem;
+  line-height: 1.35;
+}
+
+.projection-dots {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.projection-dots button {
+  position: relative;
+  width: 34px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.projection-dots button::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  top: 8px;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(255,255,255,.22);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  transition: background-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+
+.projection-dots button:hover::before,
+.projection-dots button:focus-visible::before {
+  background: rgba(255,255,255,.5);
+  transform: scaleY(1.3);
+}
+
+.projection-dots button:focus-visible {
+  outline: 2px solid #ff9c43;
+  outline-offset: 2px;
+}
+
+.projection-dots button.active::before {
+  background: #ff7100;
+  box-shadow: 0 0 14px rgba(255,113,0,.48);
+}
+
+@keyframes financeFocusSheen {
+  0%, 22% { left: -30%; }
+  72%, 100% { left: 116%; }
+}
+
+@media (max-width: 980px) {
+  .projection-table-head,
+  .projection-row {
+    grid-template-columns: .78fr 1.25fr .58fr .58fr 1.08fr;
+  }
+
+  .projection-table-head > span,
+  .projection-row > span {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .projection-outcome svg {
+    width: 26px;
+    height: 26px;
+    flex-basis: 26px;
+  }
+
+  .financial-insights {
+    grid-template-columns: 1fr;
+  }
+
+  .fund-utilization {
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+  }
+
+  .utilization-layout {
+    grid-template-columns: 170px 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .financial-card-heading {
+    padding: 24px 16px;
+    align-items: flex-start;
+  }
+
+  .financial-heading-mark {
+    min-width: 0;
+    padding: 8px;
+  }
+
+  .financial-heading-mark img {
+    width: 38px;
+    height: 38px;
+  }
+
+  .financial-heading-mark span {
+    display: none;
+  }
+
+  .projection-table {
+    padding: 0 10px 16px;
+  }
+
+  .projection-table-head {
+    display: none;
+  }
+
+  .projection-row {
+    grid-template-columns: 1fr 1fr;
+    min-height: 0;
+  }
+
+  .projection-row > span {
+    border-right: 0;
+    border-bottom: 1px solid rgba(7,27,71,.08);
+  }
+
+  .projection-year,
+  .projection-deliverable,
+  .projection-outcome {
+    grid-column: 1 / -1;
+  }
+
+  .projection-money {
+    min-height: 76px;
+  }
+
+  .projection-money:nth-of-type(3) {
+    border-right: 1px solid rgba(7,27,71,.08);
+  }
+
+  .projection-outcome {
+    min-height: 72px;
+    border-bottom: 0 !important;
+  }
+
+  .fund-utilization,
+  .projection-focus {
+    padding: 24px 16px;
+  }
+
+  .utilization-layout {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .utilization-legend {
+    width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .financial-card-heading h3 {
+    font-size: 1.65rem;
+  }
+
+  .focus-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projection-row,
+  .utilization-ring,
+  .focus-metric > i > b,
+  .projection-dots button {
+    transition: none;
+  }
+
+  .projection-focus::after {
+    animation: none;
+  }
+}
+
 .timeline {
   position: relative;
   display: grid;
@@ -7951,5 +8719,148 @@ p {
   .feature-header {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+/* Business page hero and menu card */
+.business-hero {
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, .5fr);
+}
+
+.business-intro {
+  border-color: rgba(255,122,0,.22);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(145deg, rgba(17,20,23,.98), rgba(45,52,58,.94));
+  background-size: 30px 30px, 30px 30px, auto;
+  box-shadow: 0 28px 76px rgba(17,20,23,.23), inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.business-intro::after {
+  height: 5px;
+  background: linear-gradient(90deg, #ff7100, #ffb000 32%, #4a4f55 68%, #d1d5db);
+}
+
+.business-intro .eyebrow {
+  color: #ff9c43;
+  background: rgba(255,122,0,.1);
+  border-color: rgba(255,122,0,.2);
+}
+
+.business-intro h1 {
+  max-width: 760px;
+  color: #f4f6f7;
+  font-size: clamp(2.1rem, 4vw, 3.55rem);
+  line-height: 1.08;
+  text-shadow: 0 16px 38px rgba(0,0,0,.25);
+}
+
+.business-intro p {
+  max-width: 720px;
+  color: rgba(209,213,219,.82);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.business-intro .subpage-actions {
+  margin-top: 24px;
+}
+
+.business-intro .btn {
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 7px;
+  font-size: .78rem;
+}
+
+.business-intro .btn.primary {
+  background: linear-gradient(145deg, #ff7a00, #b84b00);
+  box-shadow: 0 12px 28px rgba(255,122,0,.2);
+}
+
+.business-intro .btn.secondary {
+  color: #f4f6f7;
+  border-color: rgba(209,213,219,.24);
+  background: rgba(255,255,255,.08);
+}
+
+.business-panel {
+  padding: 20px;
+  border-color: rgba(45,52,58,.14);
+  border-radius: 8px;
+  background:
+    linear-gradient(rgba(7,27,71,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(7,27,71,.025) 1px, transparent 1px),
+    linear-gradient(145deg, rgba(255,255,255,.96), rgba(232,237,241,.9));
+  background-size: 26px 26px, 26px 26px, auto;
+  box-shadow: 0 24px 64px rgba(17,20,23,.14);
+}
+
+.business-panel h2 {
+  margin: 0;
+  color: #1b1f23;
+  font-size: 1.12rem;
+}
+
+.business-panel .subpage-link-grid {
+  gap: 8px;
+}
+
+.business-panel .subpage-link {
+  min-height: 55px;
+  padding: 10px;
+  border-color: rgba(45,52,58,.11);
+  border-radius: 7px;
+  background: rgba(255,255,255,.7);
+  box-shadow: inset 3px 0 0 transparent;
+}
+
+.business-panel .subpage-link:hover,
+.business-panel .subpage-link:focus-visible {
+  transform: translateX(4px);
+  border-color: rgba(255,122,0,.22);
+  background: white;
+  box-shadow: inset 3px 0 0 #ff7100, 0 12px 26px rgba(27,31,36,.1);
+}
+
+.business-panel .subpage-link strong {
+  color: #252b31;
+  font-size: .84rem;
+}
+
+.business-panel .subpage-link small {
+  color: #69727d;
+  font-size: .68rem;
+}
+
+@media (max-width: 1180px) {
+  .business-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .business-intro {
+    padding: 28px 20px;
+  }
+
+  .business-intro h1 {
+    font-size: clamp(1.85rem, 9vw, 2.55rem);
+    line-height: 1.1;
+  }
+
+  .business-intro p {
+    font-size: .9rem;
+  }
+
+  .business-intro .btn {
+    flex: 1 1 150px;
+    justify-content: center;
+  }
+
+  .business-panel {
+    padding: 16px;
   }
 }
