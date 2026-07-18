@@ -10,7 +10,7 @@
   <link rel="icon" type="image/png" href="assets/hypervault-logo-mark.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="business-page">
   <div id="scrollProgress" class="scroll-progress"></div>
   <div class="bg-orb orb-one"></div>
   <div class="bg-orb orb-two"></div>
@@ -28,6 +28,7 @@
       </a>
       <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
       <div class="nav-links">
+        <a href="index.html">Overview</a>
         <a href="index.html#products">Products</a>
         <details class="nav-dropdown">
           <summary aria-current="page">
@@ -35,6 +36,13 @@
             <span class="nav-chevron" aria-hidden="true"></span>
           </summary>
           <div class="nav-submenu">
+            <a href="#business-model">
+              <span class="submenu-dot green-dot"></span>
+              <span>
+                <strong>Business Model</strong>
+                <small>Monetization path</small>
+              </span>
+            </a>
             <a href="#market-opportunity">
               <span class="submenu-dot blue-dot"></span>
               <span>
@@ -42,11 +50,11 @@
                 <small>Software and wearables</small>
               </span>
             </a>
-            <a href="#business-model">
-              <span class="submenu-dot green-dot"></span>
+            <a href="#users">
+              <span class="submenu-dot navy-dot"></span>
               <span>
-                <strong>Business Model</strong>
-                <small>Monetization path</small>
+                <strong>Target Users</strong>
+                <small>Audience and expansion</small>
               </span>
             </a>
             <a href="#investor">
@@ -102,151 +110,10 @@
   </header>
 
   <main class="subpage-main">
-    <section class="section subpage-hero business-hero">
-      <div class="subpage-intro business-intro reveal">
-        <span class="eyebrow green">Business</span>
-        <h1>Freemium acquisition, premium monetization, wearable expansion</h1>
-        <p>HyperVault's business strategy starts with a useful Android app, expands through premium intelligence, and extends long-term value through trusted smart wearables.</p>
-        <div class="subpage-actions">
-          <a class="btn primary" href="#market-opportunity">Market Opportunity</a>
-          <a class="btn primary" href="#business-model">Business Model</a>
-          <a class="btn secondary" href="#investor">Investor Snapshot</a>
-        </div>
-      </div>
-      <aside class="subpage-panel business-panel reveal" aria-label="Business page sections">
-        <h2>Business Menu</h2>
-        <div class="subpage-link-grid">
-          <a class="subpage-link" href="#market-opportunity">
-            <span class="submenu-dot blue-dot"></span>
-            <span><strong>Market Opportunity</strong><small>Software and wearable growth</small></span>
-          </a>
-          <a class="subpage-link" href="#business-model">
-            <span class="submenu-dot green-dot"></span>
-            <span><strong>Business Model</strong><small>Revenue and expansion path</small></span>
-          </a>
-          <a class="subpage-link" href="#investor">
-            <span class="submenu-dot orange-dot"></span>
-            <span><strong>Investor Snapshot</strong><small>Funding and progress</small></span>
-          </a>
-        </div>
-      </aside>
-    </section>
-
-    <section class="section market-opportunity reveal" id="market-opportunity" aria-labelledby="market-opportunity-title">
-      <div class="market-opportunity-heading">
-        <span class="eyebrow orange">Market Opportunity</span>
-        <h2 id="market-opportunity-title">One platform. Two accelerating markets.</h2>
-        <p>HyperVault sits where intelligent mobile software, privacy-first data management, wearable authentication, and emergency intelligence converge.</p>
-      </div>
-
-      <div class="market-convergence" aria-label="HyperVault market convergence">
-        <span>Mobile intelligence</span>
-        <span>Contextual security</span>
-        <strong aria-label="HyperVault">
-          <img src="assets/hypervault-logo-mark.png" alt="" />
-          Hyper<span>Vault</span>
-        </strong>
-        <span>Wearable trust</span>
-        <span>Emergency readiness</span>
-      </div>
-
-      <div class="market-opportunity-grid">
-        <article class="market-lane software-market">
-          <header class="market-lane-header">
-            <span class="market-lane-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>
-            </span>
-            <div>
-              <span class="market-kicker">Massive installed base</span>
-              <h3>Software Market Opportunity</h3>
-            </div>
-          </header>
-
-          <div class="market-metric-grid">
-            <div class="market-metric market-metric-featured">
-              <div class="market-share-ring" aria-hidden="true"><span>60%+</span></div>
-              <p>Android powers a majority share of the global smartphone market.</p>
-            </div>
-            <div class="market-metric">
-              <span class="market-metric-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>
-              </span>
-              <strong>3B+</strong>
-              <p>active Android devices worldwide</p>
-            </div>
-            <div class="market-metric">
-              <span class="market-metric-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M9 6h6M12 18h.01"/></svg>
-              </span>
-              <strong>1.2B</strong>
-              <p>smartphones shipped annually</p>
-            </div>
-          </div>
-
-          <div class="market-pressure" aria-label="Software market demand signals">
-            <h4>Why demand keeps expanding</h4>
-            <div class="market-signal"><span class="signal-icon" aria-hidden="true">01</span><p>Growing storage, privacy, and multi-device complexity</p><i style="--signal: 92%"></i></div>
-            <div class="market-signal"><span class="signal-icon" aria-hidden="true">02</span><p>Rising duplicate content and storage inefficiency</p><i style="--signal: 84%"></i></div>
-            <div class="market-signal"><span class="signal-icon" aria-hidden="true">03</span><p>Demand for secure, privacy-focused mobile ecosystems</p><i style="--signal: 96%"></i></div>
-            <div class="market-signal"><span class="signal-icon" aria-hidden="true">04</span><p>More cross-device file and media interactions</p><i style="--signal: 78%"></i></div>
-          </div>
-        </article>
-
-        <article class="market-lane wearable-market">
-          <header class="market-lane-header">
-            <span class="market-lane-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M6 3h12l1 4-1 2 1 2-1 4H6l-1-4 1-2-1-2 1-4Z"/><rect width="8" height="6" x="8" y="6" rx="1"/><path d="M8 15v6h8v-6"/></svg>
-            </span>
-            <div>
-              <span class="market-kicker">Trust moves beyond the phone</span>
-              <h3>Wearable Market Opportunity</h3>
-            </div>
-          </header>
-
-          <div class="wearable-growth-stage">
-            <div class="growth-metric">
-              <span>Projected through 2033</span>
-              <strong>22.5<small>%</small></strong>
-              <p>Smart ring CAGR</p>
-            </div>
-            <div class="growth-chart" aria-label="Illustrative wearable market growth trend">
-              <span class="growth-line" aria-hidden="true"></span>
-              <span class="growth-bar" style="--bar-height: 28%"><i>Now</i></span>
-              <span class="growth-bar" style="--bar-height: 43%"></span>
-              <span class="growth-bar" style="--bar-height: 61%"></span>
-              <span class="growth-bar" style="--bar-height: 79%"></span>
-              <span class="growth-bar" style="--bar-height: 100%"><i>2033</i></span>
-            </div>
-            <div class="growth-metric market-value">
-              <span>Wearable technology</span>
-              <strong><small>USD</small>229B</strong>
-              <p>projected market value</p>
-            </div>
-          </div>
-
-          <div class="wearable-device-row" aria-label="Wearable product categories">
-            <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg>Smart rings</span>
-            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10l2 5-2 3 2 3-2 9H7l-2-9 2-3-2-3 2-5Z"/><rect width="8" height="7" x="8" y="7" rx="2"/></svg>Smart bands</span>
-            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6l1 4h3v12h-3l-1 4H9l-1-4H5V6h3l1-4Z"/><circle cx="12" cy="12" r="3"/></svg>Smart watches</span>
-          </div>
-
-          <div class="market-pressure" aria-label="Wearable market demand signals">
-            <h4>What is creating momentum</h4>
-            <div class="market-signal"><span class="signal-icon" aria-hidden="true">01</span><p>Safety and emergency wearables are becoming mainstream</p><i style="--signal: 90%"></i></div>
-            <div class="market-signal"><span class="signal-icon" aria-hidden="true">02</span><p>Continuous monitoring is expanding across ecosystems</p><i style="--signal: 82%"></i></div>
-            <div class="market-signal"><span class="signal-icon" aria-hidden="true">03</span><p>Wearables are evolving into trusted authentication devices</p><i style="--signal: 95%"></i></div>
-            <div class="market-signal"><span class="signal-icon" aria-hidden="true">04</span><p>Lightweight, always-available devices fit daily behavior</p><i style="--signal: 86%"></i></div>
-          </div>
-        </article>
-      </div>
-
-      <p class="market-reference-note">Directional market indicators shown from the supplied business reference. Refresh figures against current cited research before external publication.</p>
-    </section>
-
     <section class="section business subpage-content" id="business-model">
       <div class="section-heading reveal">
         <span class="eyebrow green">Business Model</span>
-        <h2>Freemium acquisition, premium subscription, wearable revenue</h2>
+        <h1 class="business-page-title">Freemium acquisition, premium subscription, wearable revenue</h1>
         <p>HyperVault moves users from free content exploration into premium security, duplicate optimization, advanced transfer intelligence, and wearable-enabled trust.</p>
       </div>
 
@@ -430,6 +297,137 @@
         <div class="business-image magic-frame reveal">
           <img src="assets/hd/hypervault-business-model.png" alt="HyperVault business model visual" />
         </div>
+      </div>
+    </section>
+
+    <section class="section market-opportunity reveal" id="market-opportunity" aria-labelledby="market-opportunity-title">
+      <div class="market-opportunity-heading">
+        <span class="eyebrow orange">Market Opportunity</span>
+        <h2 id="market-opportunity-title">One platform. Two accelerating markets.</h2>
+        <p>HyperVault sits where intelligent mobile software, privacy-first data management, wearable authentication, and emergency intelligence converge.</p>
+      </div>
+
+      <div class="market-convergence" aria-label="HyperVault market convergence">
+        <span>Mobile intelligence</span>
+        <span>Contextual security</span>
+        <strong aria-label="HyperVault">
+          <img src="assets/hypervault-logo-mark.png" alt="" />
+          Hyper<span>Vault</span>
+        </strong>
+        <span>Wearable trust</span>
+        <span>Emergency readiness</span>
+      </div>
+
+      <div class="market-opportunity-grid">
+        <article class="market-lane software-market">
+          <header class="market-lane-header">
+            <span class="market-lane-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></svg>
+            </span>
+            <div>
+              <span class="market-kicker">Massive installed base</span>
+              <h3>Software Market Opportunity</h3>
+            </div>
+          </header>
+
+          <div class="market-metric-grid">
+            <div class="market-metric market-metric-featured">
+              <div class="market-share-ring" aria-hidden="true"><span>60%+</span></div>
+              <p>Android powers a majority share of the global smartphone market.</p>
+            </div>
+            <div class="market-metric">
+              <span class="market-metric-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 0 20M12 2a15.3 15.3 0 0 0 0 20"/></svg>
+              </span>
+              <strong>3B+</strong>
+              <p>active Android devices worldwide</p>
+            </div>
+            <div class="market-metric">
+              <span class="market-metric-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M9 6h6M12 18h.01"/></svg>
+              </span>
+              <strong>1.2B</strong>
+              <p>smartphones shipped annually</p>
+            </div>
+          </div>
+
+          <div class="market-pressure" aria-label="Software market demand signals">
+            <h4>Why demand keeps expanding</h4>
+            <div class="market-signal"><span class="signal-icon" aria-hidden="true">01</span><p>Growing storage, privacy, and multi-device complexity</p><i style="--signal: 92%"></i></div>
+            <div class="market-signal"><span class="signal-icon" aria-hidden="true">02</span><p>Rising duplicate content and storage inefficiency</p><i style="--signal: 84%"></i></div>
+            <div class="market-signal"><span class="signal-icon" aria-hidden="true">03</span><p>Demand for secure, privacy-focused mobile ecosystems</p><i style="--signal: 96%"></i></div>
+            <div class="market-signal"><span class="signal-icon" aria-hidden="true">04</span><p>More cross-device file and media interactions</p><i style="--signal: 78%"></i></div>
+          </div>
+        </article>
+
+        <article class="market-lane wearable-market">
+          <header class="market-lane-header">
+            <span class="market-lane-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 3h12l1 4-1 2 1 2-1 4H6l-1-4 1-2-1-2 1-4Z"/><rect width="8" height="6" x="8" y="6" rx="1"/><path d="M8 15v6h8v-6"/></svg>
+            </span>
+            <div>
+              <span class="market-kicker">Trust moves beyond the phone</span>
+              <h3>Wearable Market Opportunity</h3>
+            </div>
+          </header>
+
+          <div class="wearable-growth-stage">
+            <div class="growth-metric">
+              <span>Projected through 2033</span>
+              <strong>22.5<small>%</small></strong>
+              <p>Smart ring CAGR</p>
+            </div>
+            <div class="growth-chart" aria-label="Illustrative wearable market growth trend">
+              <span class="growth-line" aria-hidden="true"></span>
+              <span class="growth-bar" style="--bar-height: 28%"><i>Now</i></span>
+              <span class="growth-bar" style="--bar-height: 43%"></span>
+              <span class="growth-bar" style="--bar-height: 61%"></span>
+              <span class="growth-bar" style="--bar-height: 79%"></span>
+              <span class="growth-bar" style="--bar-height: 100%"><i>2033</i></span>
+            </div>
+            <div class="growth-metric market-value">
+              <span>Wearable technology</span>
+              <strong><small>USD</small>229B</strong>
+              <p>projected market value</p>
+            </div>
+          </div>
+
+          <div class="wearable-device-row" aria-label="Wearable product categories">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="3"/></svg>Smart rings</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10l2 5-2 3 2 3-2 9H7l-2-9 2-3-2-3 2-5Z"/><rect width="8" height="7" x="8" y="7" rx="2"/></svg>Smart bands</span>
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 2h6l1 4h3v12h-3l-1 4H9l-1-4H5V6h3l1-4Z"/><circle cx="12" cy="12" r="3"/></svg>Smart watches</span>
+          </div>
+
+          <div class="market-pressure" aria-label="Wearable market demand signals">
+            <h4>What is creating momentum</h4>
+            <div class="market-signal"><span class="signal-icon" aria-hidden="true">01</span><p>Safety and emergency wearables are becoming mainstream</p><i style="--signal: 90%"></i></div>
+            <div class="market-signal"><span class="signal-icon" aria-hidden="true">02</span><p>Continuous monitoring is expanding across ecosystems</p><i style="--signal: 82%"></i></div>
+            <div class="market-signal"><span class="signal-icon" aria-hidden="true">03</span><p>Wearables are evolving into trusted authentication devices</p><i style="--signal: 95%"></i></div>
+            <div class="market-signal"><span class="signal-icon" aria-hidden="true">04</span><p>Lightweight, always-available devices fit daily behavior</p><i style="--signal: 86%"></i></div>
+          </div>
+        </article>
+      </div>
+
+      <p class="market-reference-note">Directional market indicators shown from the supplied business reference. Refresh figures against current cited research before external publication.</p>
+    </section>
+
+    <section class="section target business-target" id="users">
+      <div class="section-heading centered reveal">
+        <span class="eyebrow blue">Target Users</span>
+        <h2>Built for Android power users today — ready for safety, healthcare and enterprise workflows tomorrow</h2>
+      </div>
+      <div class="target-layout">
+        <div class="target-card reveal">
+          <h3>Core Android Users</h3>
+          <p>Android power users, students, professionals, content creators, privacy-conscious users, multi-device users and storage-intensive users.</p>
+        </div>
+        <div class="target-card reveal">
+          <h3>Safety &amp; Wearable Users</h3>
+          <p>Wearable device users, women safety users, parents, senior citizens, health and wellness users and field workers.</p>
+        </div>
+      </div>
+      <div class="wide-image magic-frame reveal">
+        <img src="assets/hd/industry-or-domain-expansion.png" alt="HyperVault industry and domain expansion segments" />
       </div>
     </section>
 
@@ -640,9 +638,9 @@
         </div>
       </div>
 
-      <div class="wide-image magic-frame reveal">
+ <!--      <div class="wide-image magic-frame reveal">
         <img src="assets/hd/apx-hypervault-executivesummary.jpg" alt="HyperVault executive summary and investor overview" />
-      </div>
+      </div> -->
     </section>
   </main>
 

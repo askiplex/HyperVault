@@ -53,6 +53,7 @@ carousels.forEach((carousel) => {
   const productLineHeader = carousel.querySelector('.product-line-header');
   const productLineEyebrow = productLineHeader?.querySelector('.eyebrow');
   const productLineTitle = productLineHeader?.querySelector('h3');
+  const productLineCounter = productLineHeader?.querySelector('[data-product-counter]');
   const pillarHeading = carousel.querySelector('[data-pillar-heading]');
 
   function show(nextIndex, userInitiated = false) {
@@ -82,6 +83,10 @@ carousels.forEach((carousel) => {
 
       if (productLineTitle && subtitle) {
         productLineTitle.textContent = subtitle;
+      }
+
+      if (productLineCounter) {
+        productLineCounter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
       }
     }
 
