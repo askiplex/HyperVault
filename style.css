@@ -10083,3 +10083,76 @@ p {
     max-height: 360px;
   }
 }
+
+/* Deep Dive page heading hierarchy */
+.deep-dive-page .evolution-intro > .eyebrow,
+.deep-dive-page .deep-dive-intro > .eyebrow,
+.deep-dive-page .section-heading > .eyebrow,
+.deep-dive-page .pillar-showcase-head > .eyebrow,
+.deep-dive-page .feature-header > div > .eyebrow {
+  display: block;
+  font-family: var(--display);
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.deep-dive-page .evolution-intro > .eyebrow,
+.deep-dive-page .deep-dive-intro > .eyebrow {
+  color: #ffb066;
+}
+
+.deep-dive-page .evolution-intro > h1,
+.deep-dive-page .deep-dive-intro > h1,
+.deep-dive-page .section-heading > h2,
+.deep-dive-page .pillar-showcase-head > h2,
+.deep-dive-page .feature-header > div > h2 {
+  max-width: 900px;
+  margin: 12px 0 0;
+  font-size: 2rem !important;
+  line-height: 1.18 !important;
+}
+
+.deep-dive-page .section-heading.centered > h2,
+.deep-dive-page .pillar-showcase-head > h2 {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.deep-dive-page .evolution-subtitle,
+.deep-dive-page .deep-dive-subtitle,
+.deep-dive-page .section-heading > p,
+.deep-dive-page .pillar-showcase-head > p,
+.deep-dive-page .feature-header > div > p {
+  max-width: 720px;
+  margin-top: 14px;
+  font-size: .94rem !important;
+  line-height: 1.65 !important;
+}
+
+.deep-dive-page .section-heading.centered > p,
+.deep-dive-page .pillar-showcase-head > p {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (max-width: 720px) {
+  .deep-dive-page .evolution-intro > .eyebrow,
+  .deep-dive-page .deep-dive-intro > .eyebrow,
+  .deep-dive-page .section-heading > .eyebrow,
+  .deep-dive-page .pillar-showcase-head > .eyebrow,
+  .deep-dive-page .feature-header > div > .eyebrow {
+    font-size: 2.45rem;
+  }
+
+  .deep-dive-page .evolution-intro > h1,
+  .deep-dive-page .deep-dive-intro > h1,
+  .deep-dive-page .section-heading > h2,
+  .deep-dive-page .pillar-showcase-head > h2,
+  .deep-dive-page .feature-header > div > h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.25 !important;
+  }
+}
