@@ -1,17 +1,50 @@
 const carousels = document.querySelectorAll('[data-carousel]');
 
+const pillarLabels = {
+  content: 'Content-Centric Storage Virtualization',
+  deduplication: 'Data Deduplication Virtualization',
+  security: 'Contextual Security Virtualization',
+  mobility: 'Data Mobility Virtualization',
+  wearable: 'Wearable Aware Authentication'
+};
+
+const pillarOrder = ['content', 'deduplication', 'security', 'mobility', 'wearable'];
+
 carousels.forEach((carousel) => {
-  const slides = [...carousel.querySelectorAll('.slide')];
+  const sourceSlides = [...carousel.querySelectorAll('.slide')];
+  const slides = carousel.dataset.carousel === 'hero'
+    ? sourceSlides
+        .map((slide, sourceIndex) => ({ slide, sourceIndex }))
+        .sort((a, b) => {
+          const pillarDifference = pillarOrder.indexOf(a.slide.dataset.pillar) - pillarOrder.indexOf(b.slide.dataset.pillar);
+          return pillarDifference || a.sourceIndex - b.sourceIndex;
+        })
+        .map(({ slide }) => slide)
+    : sourceSlides;
   const dotsHolder = carousel.querySelector('[data-dots]');
   const nextButtons = [...carousel.querySelectorAll('[data-next]')];
   const prevButtons = [...carousel.querySelectorAll('[data-prev]')];
   let index = 0;
   let timer;
 
-  const dots = slides.map((_, i) => {
+  if (carousel.dataset.carousel === 'hero') {
+    const track = carousel.querySelector('.hero-carousel-track');
+    const firstControl = track?.querySelector('.hero-slider-arrow, .hero-story-dots');
+    slides.forEach((slide) => track?.insertBefore(slide, firstControl || null));
+  }
+
+  const dots = slides.map((slide, i) => {
     const button = document.createElement('button');
     button.className = 'dot';
-    button.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    const pillar = slide.dataset.pillar;
+    const slideTitle = slide.querySelector('.hero-slide-caption strong, .slide-copy h3')?.textContent?.trim();
+    if (pillar) {
+      button.dataset.pillar = pillar;
+      if (i > 0 && slides[i - 1].dataset.pillar !== pillar) button.classList.add('pillar-start');
+    }
+    button.setAttribute('aria-label', pillar && slideTitle
+      ? `${pillarLabels[pillar]}: ${slideTitle}`
+      : `Go to slide ${i + 1}`);
     button.addEventListener('click', () => show(i, true));
     dotsHolder?.appendChild(button);
     return button;
@@ -20,11 +53,23 @@ carousels.forEach((carousel) => {
   const productLineHeader = carousel.querySelector('.product-line-header');
   const productLineEyebrow = productLineHeader?.querySelector('.eyebrow');
   const productLineTitle = productLineHeader?.querySelector('h3');
+  const pillarHeading = carousel.querySelector('[data-pillar-heading]');
 
   function show(nextIndex, userInitiated = false) {
     index = (nextIndex + slides.length) % slides.length;
     slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
     dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+
+    const activePillar = slides[index]?.dataset.pillar;
+    if (pillarHeading && activePillar && pillarLabels[activePillar]) {
+      if (carousel.dataset.activePillar !== activePillar) {
+        pillarHeading.classList.remove('pillar-heading-enter');
+        void pillarHeading.offsetWidth;
+        pillarHeading.classList.add('pillar-heading-enter');
+      }
+      carousel.dataset.activePillar = activePillar;
+      pillarHeading.textContent = pillarLabels[activePillar];
+    }
 
     if (carousel.dataset.carousel === 'product-line' && slides[index]) {
       const currentSlide = slides[index];
