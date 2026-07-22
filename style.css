@@ -10404,6 +10404,36 @@ body.hero-presentation-open {
   border-bottom: 1px solid rgba(27,31,36,.14);
 }
 
+.product-showcase-launch.product-showcase-launch-all {
+  --product-accent: #ff7a00;
+  position: relative;
+  min-width: 184px;
+  height: 42px;
+  margin: 20px auto 0;
+  overflow: hidden;
+  border-color: rgba(76,140,255,.55);
+  background: linear-gradient(110deg, #07182f, #0b2b4a 68%, #123652);
+  box-shadow: 0 14px 32px rgba(7,27,71,.2);
+  font-size: .76rem;
+}
+
+.product-showcase-launch.product-showcase-launch-all::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff7a00 0 33%, #4c9cff 33% 66%, #58be4b 66% 100%);
+}
+
+.product-showcase-launch.product-showcase-launch-all:hover,
+.product-showcase-launch.product-showcase-launch-all:focus-visible {
+  border-color: rgba(255,255,255,.76);
+  background: linear-gradient(110deg, #0a2340, #104069 68%, #16496f);
+  box-shadow: 0 18px 38px rgba(7,27,71,.26);
+}
+
 .product-title-lockup h2 {
   margin: 0;
   font-size: clamp(2.55rem, 4.4vw, 4.35rem);

@@ -579,15 +579,19 @@ if (productShowcasePlayer) {
   let pointerStartX = 0;
 
   function collectItems(key) {
-    const panel = document.querySelector(`[data-product-panel="${key}"]`);
-    return panel ? [...panel.querySelectorAll('.product-line-slide')].map((slide) => ({
-      category: slide.dataset.productCategory || panel.querySelector('.eyebrow')?.textContent?.trim() || 'HyperVault Products',
-      image: slide.querySelector('img')?.getAttribute('src') || '',
-      alt: slide.querySelector('img')?.alt || '',
-      title: slide.querySelector('.slide-copy h3')?.textContent?.trim() || '',
-      description: slide.querySelector('.slide-copy p')?.textContent?.trim() || '',
-      features: [...slide.querySelectorAll('.product-feature-list li')].map((item) => item.textContent.trim())
-    })) : [];
+    const productKeys = key === 'all' ? ['app', 'wearables', 'cloud'] : [key];
+    return productKeys.flatMap((productKey) => {
+      const panel = document.querySelector(`[data-product-panel="${productKey}"]`);
+      return panel ? [...panel.querySelectorAll('.product-line-slide')].map((slide) => ({
+        productKey,
+        category: slide.dataset.productCategory || panel.querySelector('.eyebrow')?.textContent?.trim() || 'HyperVault Products',
+        image: slide.querySelector('img')?.getAttribute('src') || '',
+        alt: slide.querySelector('img')?.alt || '',
+        title: slide.querySelector('.slide-copy h3')?.textContent?.trim() || '',
+        description: slide.querySelector('.slide-copy p')?.textContent?.trim() || '',
+        features: [...slide.querySelectorAll('.product-feature-list li')].map((item) => item.textContent.trim())
+      })) : [];
+    });
   }
 
   function setProgress(value) {
@@ -600,6 +604,7 @@ if (productShowcasePlayer) {
     const item = items[activeIndex];
     if (!item) return;
 
+    productShowcasePlayer.dataset.showcaseProduct = item.productKey || 'app';
     if (image) {
       image.src = item.image;
       image.alt = item.alt;
