@@ -1102,7 +1102,7 @@ p {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   height: 100%;
   max-width: none;
@@ -1178,7 +1178,7 @@ p {
   position: relative;
   z-index: 1;
   max-width: 100%;
-  margin: 22px 0 0;
+  margin: 0;
   font-size: clamp(2.05rem, 3.6vw, 3.25rem);
   line-height: 1.14;
 }
@@ -1731,6 +1731,32 @@ p {
   object-position: center center;
   border-radius: 0;
   background: transparent;
+}
+
+.hero-carousel .pillar-overview-slide {
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(74, 130, 255, .12), transparent 52%),
+    linear-gradient(145deg, #f7faff, #e8f0ff 58%, #dce8fb);
+}
+
+.hero-carousel .pillar-overview-slide > img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: saturate(1.03) contrast(1.015);
+}
+
+.hero-carousel .pillar-overview-caption {
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .hero-slider-arrow {
@@ -6651,6 +6677,7 @@ p {
   }
 
   .hero-tech-banner {
+    min-height: auto;
     text-align: center;
   }
 
