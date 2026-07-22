@@ -839,3 +839,231 @@ document.querySelectorAll('[data-financial-projections]').forEach((widget) => {
   selectProjection(0);
   startProjectionTimer();
 });
+
+// Business page card presentations
+if (document.body.classList.contains('business-page')) {
+  const businessPresentations = [
+    {
+      section: '#business-model',
+      heading: ':scope > .section-heading',
+      label: 'Business Model',
+      kind: 'business',
+      slides: [
+        ['.business-model-story > .model-story-heading', 'Revenue Transformation'],
+        ['.legacy-model-panel', 'Current Utility Scenario'],
+        ['.hypervault-model-panel', 'Recurring Revenue Engine'],
+        ['.business-model-story > .model-value-strip', 'Recurring Value Layers'],
+        [':scope > .wide-image', 'Product-Line Economics'],
+        ['.business-layout > .revenue-card:not(.orange-card)', 'Subscription Revenue'],
+        ['.business-layout > .revenue-card.orange-card', 'Hardware Revenue'],
+        ['.business-layout > .business-image', 'Business Model Overview']
+      ],
+      cleanup: ['.business-model-story', '.business-layout']
+    },
+    {
+      section: '#market-opportunity',
+      heading: ':scope > .market-opportunity-heading',
+      label: 'Market Opportunity',
+      kind: 'market',
+      slides: [
+        [':scope > .market-convergence', 'Market Convergence'],
+        ['.market-opportunity-grid > .software-market', 'Software Market Opportunity'],
+        ['.market-opportunity-grid > .wearable-market', 'Wearable Market Opportunity']
+      ],
+      cleanup: ['.market-opportunity-grid'],
+      note: ':scope > .market-reference-note'
+    },
+    {
+      section: '#users',
+      heading: ':scope > .section-heading',
+      label: 'Target Users',
+      kind: 'users',
+      slides: [
+        ['.target-layout > .target-card:first-child', 'Core Android Users'],
+        ['.target-layout > .target-card:last-child', 'Safety & Wearable Users'],
+        [':scope > .wide-image', 'Industry & Domain Expansion']
+      ],
+      cleanup: ['.target-layout']
+    },
+    {
+      section: '#investor',
+      heading: ':scope > .section-heading',
+      label: 'Investor Snapshot',
+      kind: 'investor',
+      slides: [
+        [':scope > .funding-ask', 'Current Funding Ask'],
+        ['.investor-grid > .fund-card:nth-child(1)', 'Current Progress'],
+        ['.investor-grid > .fund-card:nth-child(2)', 'IP Portfolio'],
+        ['.investor-grid > .fund-card:nth-child(3)', 'Round Objective'],
+        [':scope > .investor-financial-card', 'Financial Projections & Fund Utilization']
+      ],
+      cleanup: ['.investor-grid']
+    }
+  ];
+
+  businessPresentations.forEach((configuration) => {
+    const section = document.querySelector(configuration.section);
+    const heading = section?.querySelector(configuration.heading);
+    if (!section || !heading) return;
+
+    const entries = configuration.slides
+      .map(([selector, title]) => ({ node: section.querySelector(selector), title }))
+      .filter(({ node }) => Boolean(node));
+    if (!entries.length) return;
+
+    const showcase = document.createElement('div');
+    showcase.className = 'business-section-showcase';
+
+    const carousel = document.createElement('div');
+    carousel.className = 'business-card-carousel';
+    carousel.dataset.businessKind = configuration.kind;
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-roledescription', 'carousel');
+    carousel.setAttribute('aria-label', `${configuration.label} card presentation`);
+
+    const carouselHeader = document.createElement('div');
+    carouselHeader.className = 'business-carousel-header';
+    carouselHeader.innerHTML = `<div><small>${configuration.label}</small><strong data-business-slide-title></strong></div><span class="business-carousel-counter" data-business-slide-counter></span>`;
+
+    const track = document.createElement('div');
+    track.className = 'business-carousel-track';
+
+    const previous = document.createElement('button');
+    previous.className = 'business-carousel-arrow business-carousel-prev';
+    previous.type = 'button';
+    previous.setAttribute('aria-label', `Previous ${configuration.label} card`);
+    previous.textContent = '‹';
+
+    const next = document.createElement('button');
+    next.className = 'business-carousel-arrow business-carousel-next';
+    next.type = 'button';
+    next.setAttribute('aria-label', `Next ${configuration.label} card`);
+    next.textContent = '›';
+
+    const dots = document.createElement('div');
+    dots.className = 'business-carousel-dots';
+    dots.setAttribute('aria-label', `${configuration.label} presentation slides`);
+
+    const slides = entries.map(({ node, title }, index) => {
+      const slide = document.createElement('article');
+      slide.className = 'business-card-slide';
+      if (node.matches('.wide-image, .business-image')) slide.classList.add('business-media-slide');
+      if (node.matches('.target-card, .fund-card, .revenue-card, .model-story-heading, .model-value-strip, .market-convergence')) slide.classList.add('business-compact-slide');
+      slide.dataset.businessSlideTitle = title;
+      slide.setAttribute('role', 'group');
+      slide.setAttribute('aria-roledescription', 'slide');
+      slide.setAttribute('aria-label', `${index + 1} of ${entries.length}: ${title}`);
+      node.classList.add('visible');
+      node.querySelectorAll?.('.reveal').forEach((element) => element.classList.add('visible'));
+      slide.appendChild(node);
+      track.appendChild(slide);
+      return slide;
+    });
+
+    const dotButtons = slides.map((slide, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Show ${slide.dataset.businessSlideTitle}`);
+      dots.appendChild(dot);
+      return dot;
+    });
+
+    track.append(previous, next, dots);
+    carousel.append(carouselHeader, track);
+    section.insertBefore(showcase, heading);
+    heading.classList.add('business-showcase-intro', 'visible');
+    showcase.append(heading, carousel);
+
+    if (configuration.note) {
+      const note = section.querySelector(configuration.note);
+      if (note) {
+        note.classList.add('business-showcase-note');
+        heading.appendChild(note);
+      }
+    }
+
+    configuration.cleanup.forEach((selector) => {
+      const emptyWrapper = section.querySelector(selector);
+      if (emptyWrapper) emptyWrapper.hidden = true;
+    });
+
+    const title = carousel.querySelector('[data-business-slide-title]');
+    const counter = carousel.querySelector('[data-business-slide-counter]');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let activeIndex = 0;
+    let timer;
+    let pointerStartX = 0;
+    let inView = true;
+
+    function showSlide(nextIndex, userInitiated = false) {
+      activeIndex = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const active = index === activeIndex;
+        slide.classList.toggle('active', active);
+        slide.hidden = !active;
+        slide.setAttribute('aria-hidden', String(!active));
+        if (active) slide.scrollTop = 0;
+      });
+      dotButtons.forEach((dot, index) => {
+        const active = index === activeIndex;
+        dot.classList.toggle('active', active);
+        dot.setAttribute('aria-current', active ? 'true' : 'false');
+      });
+      if (title) title.textContent = slides[activeIndex].dataset.businessSlideTitle;
+      if (counter) counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+      if (userInitiated) restartTimer();
+    }
+
+    function stopTimer() {
+      clearInterval(timer);
+    }
+
+    function startTimer() {
+      stopTimer();
+      if (!inView || reducedMotion.matches || slides.length < 2) return;
+      timer = setInterval(() => showSlide(activeIndex + 1), 6200);
+    }
+
+    function restartTimer() {
+      stopTimer();
+      startTimer();
+    }
+
+    previous.addEventListener('click', () => showSlide(activeIndex - 1, true));
+    next.addEventListener('click', () => showSlide(activeIndex + 1, true));
+    dotButtons.forEach((dot, index) => dot.addEventListener('click', () => showSlide(index, true)));
+    carousel.addEventListener('mouseenter', stopTimer);
+    carousel.addEventListener('mouseleave', startTimer);
+    carousel.addEventListener('focusin', stopTimer);
+    carousel.addEventListener('focusout', (event) => {
+      if (!carousel.contains(event.relatedTarget)) startTimer();
+    });
+    track.addEventListener('pointerdown', (event) => {
+      if (event.target.closest('button, a, input, select, textarea')) return;
+      stopTimer();
+      pointerStartX = event.clientX;
+    });
+    track.addEventListener('pointerup', (event) => {
+      if (!pointerStartX || event.target.closest('button, a, input, select, textarea')) return;
+      const distance = event.clientX - pointerStartX;
+      pointerStartX = 0;
+      if (Math.abs(distance) >= 60) showSlide(activeIndex + (distance < 0 ? 1 : -1), true);
+      else startTimer();
+    });
+    track.addEventListener('pointercancel', () => {
+      pointerStartX = 0;
+      startTimer();
+    });
+
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      if (inView) startTimer();
+      else stopTimer();
+    }, { threshold: .18 });
+    visibilityObserver.observe(carousel);
+    reducedMotion.addEventListener?.('change', startTimer);
+
+    showSlide(0);
+    startTimer();
+  });
+}
