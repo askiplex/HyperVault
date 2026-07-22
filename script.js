@@ -108,7 +108,7 @@ document.querySelectorAll('[data-product-ecosystem]').forEach((ecosystem) => {
   const tabs = [...ecosystem.querySelectorAll('[data-product-tab]')];
   const panels = [...ecosystem.querySelectorAll('[data-product-panel]')];
 
-  function activateProduct(key, focusTab = false) {
+  function activateProduct(key, focusTab = false, revealPanel = false) {
     ecosystem.dataset.activeProduct = key;
 
     tabs.forEach((tab) => {
@@ -124,16 +124,24 @@ document.querySelectorAll('[data-product-ecosystem]').forEach((ecosystem) => {
       panel.hidden = !active;
       panel.classList.toggle('active', active);
     });
+
+    if (revealPanel) {
+      const panelRegion = ecosystem.querySelector('.ecosystem-panels');
+      requestAnimationFrame(() => panelRegion?.scrollIntoView({
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        block: 'start'
+      }));
+    }
   }
 
   tabs.forEach((tab, tabIndex) => {
-    tab.addEventListener('click', () => activateProduct(tab.dataset.productTab));
+    tab.addEventListener('click', () => activateProduct(tab.dataset.productTab, false, true));
     tab.addEventListener('keydown', (event) => {
       if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
       event.preventDefault();
       let nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : tabIndex + (event.key === 'ArrowRight' ? 1 : -1);
       nextIndex = (nextIndex + tabs.length) % tabs.length;
-      activateProduct(tabs[nextIndex].dataset.productTab, true);
+      activateProduct(tabs[nextIndex].dataset.productTab, true, true);
     });
   });
 
@@ -480,6 +488,210 @@ imageLightboxImg?.addEventListener('click', closeImageLightbox);
 imageLightbox?.addEventListener('click', (event) => {
   if (event.target === imageLightbox) closeImageLightbox();
 });
+
+// ===== Full-screen product category showcase =====
+const productShowcasePlayer = document.querySelector('[data-product-showcase-player]');
+
+if (productShowcasePlayer) {
+  const stage = productShowcasePlayer.querySelector('.product-showcase-stage');
+  const image = productShowcasePlayer.querySelector('[data-showcase-image]');
+  const category = productShowcasePlayer.querySelector('[data-showcase-category]');
+  const title = productShowcasePlayer.querySelector('[data-showcase-title]');
+  const description = productShowcasePlayer.querySelector('[data-showcase-description]');
+  const features = productShowcasePlayer.querySelector('[data-showcase-features]');
+  const progress = productShowcasePlayer.querySelector('[data-showcase-progress]');
+  const timeline = productShowcasePlayer.querySelector('.product-showcase-timeline');
+  const counter = productShowcasePlayer.querySelector('[data-showcase-counter]');
+  const toggle = productShowcasePlayer.querySelector('[data-showcase-toggle]');
+  const toggleIcon = toggle?.querySelector('span');
+  const close = productShowcasePlayer.querySelector('[data-showcase-close]');
+  const previous = productShowcasePlayer.querySelector('[data-showcase-prev]');
+  const next = productShowcasePlayer.querySelector('[data-showcase-next]');
+  const duration = 5200;
+  let items = [];
+  let activeIndex = 0;
+  let playing = false;
+  let elapsed = 0;
+  let startedAt = 0;
+  let frame = 0;
+  let returnFocus;
+  let enteredFullscreen = false;
+  let closing = false;
+  let pointerStartX = 0;
+
+  function collectItems(key) {
+    const panel = document.querySelector(`[data-product-panel="${key}"]`);
+    return panel ? [...panel.querySelectorAll('.product-line-slide')].map((slide) => ({
+      category: slide.dataset.productCategory || panel.querySelector('.eyebrow')?.textContent?.trim() || 'HyperVault Products',
+      image: slide.querySelector('img')?.getAttribute('src') || '',
+      alt: slide.querySelector('img')?.alt || '',
+      title: slide.querySelector('.slide-copy h3')?.textContent?.trim() || '',
+      description: slide.querySelector('.slide-copy p')?.textContent?.trim() || '',
+      features: [...slide.querySelectorAll('.product-feature-list li')].map((item) => item.textContent.trim())
+    })) : [];
+  }
+
+  function setProgress(value) {
+    const percent = Math.min(100, Math.max(0, value));
+    if (progress) progress.style.width = `${percent}%`;
+    timeline?.setAttribute('aria-valuenow', String(Math.round(percent)));
+  }
+
+  function render(animate = true) {
+    const item = items[activeIndex];
+    if (!item) return;
+
+    if (image) {
+      image.src = item.image;
+      image.alt = item.alt;
+    }
+    if (category) category.textContent = item.category;
+    if (title) title.textContent = item.title;
+    if (description) description.textContent = item.description;
+    if (features) {
+      features.replaceChildren(...item.features.map((feature) => {
+        const listItem = document.createElement('li');
+        listItem.textContent = feature;
+        return listItem;
+      }));
+    }
+    if (counter) counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(items.length).padStart(2, '0')}`;
+
+    elapsed = 0;
+    startedAt = performance.now();
+    setProgress(0);
+    if (animate && stage) {
+      stage.classList.remove('is-changing');
+      void stage.offsetWidth;
+      stage.classList.add('is-changing');
+    }
+  }
+
+  function updateToggle() {
+    if (!toggle || !toggleIcon) return;
+    toggleIcon.textContent = playing ? '❚❚' : '▶';
+    toggle.setAttribute('aria-label', playing ? 'Pause product showcase' : 'Play product showcase');
+  }
+
+  function tick(timestamp) {
+    if (!playing) return;
+    if (!startedAt) startedAt = timestamp - elapsed;
+    elapsed = timestamp - startedAt;
+    setProgress((elapsed / duration) * 100);
+    if (elapsed >= duration) {
+      activeIndex = (activeIndex + 1) % items.length;
+      render();
+    }
+    frame = requestAnimationFrame(tick);
+  }
+
+  function play() {
+    if (playing || !items.length) return;
+    playing = true;
+    startedAt = performance.now() - elapsed;
+    updateToggle();
+    frame = requestAnimationFrame(tick);
+  }
+
+  function pause() {
+    if (!playing) return;
+    playing = false;
+    cancelAnimationFrame(frame);
+    updateToggle();
+  }
+
+  function goTo(nextIndex) {
+    if (!items.length) return;
+    activeIndex = (nextIndex + items.length) % items.length;
+    render();
+    if (playing) {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(tick);
+    }
+  }
+
+  async function openShowcase(key, trigger) {
+    items = collectItems(key);
+    if (!items.length) return;
+    activeIndex = 0;
+    returnFocus = trigger;
+    productShowcasePlayer.dataset.showcaseProduct = key;
+    productShowcasePlayer.hidden = false;
+    productShowcasePlayer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('product-showcase-open');
+    render(false);
+    play();
+    close?.focus();
+
+    enteredFullscreen = false;
+    if (productShowcasePlayer.requestFullscreen) {
+      try {
+        await productShowcasePlayer.requestFullscreen();
+        enteredFullscreen = document.fullscreenElement === productShowcasePlayer;
+      } catch {
+        enteredFullscreen = false;
+      }
+    }
+  }
+
+  async function closeShowcase() {
+    if (closing || productShowcasePlayer.hidden) return;
+    closing = true;
+    pause();
+    if (document.fullscreenElement === productShowcasePlayer) {
+      try {
+        await document.exitFullscreen();
+      } catch {
+        // The fixed overlay remains a complete fallback when fullscreen exits unexpectedly.
+      }
+    }
+    productShowcasePlayer.hidden = true;
+    productShowcasePlayer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('product-showcase-open');
+    image?.removeAttribute('src');
+    setProgress(0);
+    returnFocus?.focus();
+    closing = false;
+    enteredFullscreen = false;
+  }
+
+  document.querySelectorAll('[data-product-showcase-launch]').forEach((button) => {
+    button.addEventListener('click', () => openShowcase(button.dataset.productShowcaseLaunch, button));
+  });
+
+  toggle?.addEventListener('click', () => {
+    if (playing) pause();
+    else play();
+  });
+  previous?.addEventListener('click', () => goTo(activeIndex - 1));
+  next?.addEventListener('click', () => goTo(activeIndex + 1));
+  close?.addEventListener('click', closeShowcase);
+
+  stage?.addEventListener('pointerdown', (event) => {
+    pointerStartX = event.clientX;
+  });
+  stage?.addEventListener('pointerup', (event) => {
+    const distance = event.clientX - pointerStartX;
+    if (Math.abs(distance) < 55) return;
+    goTo(activeIndex + (distance < 0 ? 1 : -1));
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (productShowcasePlayer.hidden) return;
+    if (event.key === 'Escape') closeShowcase();
+    if (event.key === 'ArrowLeft') goTo(activeIndex - 1);
+    if (event.key === 'ArrowRight') goTo(activeIndex + 1);
+    if (event.key === ' ') {
+      event.preventDefault();
+      if (playing) pause();
+      else play();
+    }
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    if (enteredFullscreen && !document.fullscreenElement && !closing) closeShowcase();
+  });
+}
 
 // Investor financial projection selector
 document.querySelectorAll('[data-financial-projections]').forEach((widget) => {
