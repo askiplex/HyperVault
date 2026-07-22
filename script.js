@@ -52,6 +52,7 @@ carousels.forEach((carousel) => {
     document.body.classList.remove('hero-presentation-open');
     presentationUsesFullscreen = false;
     updatePresentationButton(false);
+    restart();
   }
 
   async function openPresentation() {
@@ -140,7 +141,10 @@ carousels.forEach((carousel) => {
 
   function restart() {
     clearInterval(timer);
-    timer = setInterval(() => show(index + 1), carousel.dataset.carousel === 'features' ? 5200 : 4600);
+    const delay = carousel.dataset.carousel === 'hero'
+      ? (carousel.classList.contains('is-presentation-mode') ? 8000 : 7000)
+      : carousel.dataset.carousel === 'features' ? 5200 : 4600;
+    timer = setInterval(() => show(index + 1), delay);
   }
 
   nextButtons.forEach((next) => next.addEventListener('click', () => show(index + 1, true)));
@@ -524,9 +528,13 @@ document.querySelectorAll('main img').forEach((image) => {
   image.setAttribute('role', 'button');
   image.setAttribute('aria-label', `${image.alt || 'Image'} - open larger preview`);
 
-  image.addEventListener('click', () => openImageLightbox(image));
+  image.addEventListener('click', () => {
+    if (image.closest('.hero-carousel.is-presentation-mode')) return;
+    openImageLightbox(image);
+  });
   image.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' || event.key === ' ') {
+      if (image.closest('.hero-carousel.is-presentation-mode')) return;
       event.preventDefault();
       openImageLightbox(image);
     }
@@ -535,6 +543,7 @@ document.querySelectorAll('main img').forEach((image) => {
 
 document.querySelectorAll('.hero-carousel .slide').forEach((slide) => {
   slide.addEventListener('click', (event) => {
+    if (slide.closest('.hero-carousel.is-presentation-mode')) return;
     if (event.target.closest('button')) return;
     if (event.target.closest('img')) return;
     const image = slide.querySelector('img');
