@@ -24,8 +24,53 @@ carousels.forEach((carousel) => {
   const dotsHolder = carousel.querySelector('[data-dots]');
   const nextButtons = [...carousel.querySelectorAll('[data-next]')];
   const prevButtons = [...carousel.querySelectorAll('[data-prev]')];
+  const presentationButton = carousel.querySelector('[data-hero-presentation]');
   let index = 0;
   let timer;
+  let presentationUsesFullscreen = false;
+
+  function updatePresentationButton(active) {
+    if (!presentationButton) return;
+    const label = active ? 'Exit full screen slideshow' : 'Play all HyperVault slides in full screen';
+    presentationButton.classList.toggle('active', active);
+    presentationButton.setAttribute('aria-label', label);
+    presentationButton.title = label;
+    const icon = presentationButton.querySelector('span');
+    if (icon) icon.textContent = active ? '×' : '⛶';
+  }
+
+  async function closePresentation(exitNativeFullscreen = true) {
+    if (!presentationButton) return;
+    if (exitNativeFullscreen && document.fullscreenElement === carousel && document.exitFullscreen) {
+      try {
+        await document.exitFullscreen();
+      } catch {
+        // The fixed presentation layer remains available if the browser rejects the exit request.
+      }
+    }
+    carousel.classList.remove('is-presentation-mode');
+    document.body.classList.remove('hero-presentation-open');
+    presentationUsesFullscreen = false;
+    updatePresentationButton(false);
+  }
+
+  async function openPresentation() {
+    if (!presentationButton) return;
+    carousel.classList.add('is-presentation-mode');
+    document.body.classList.add('hero-presentation-open');
+    updatePresentationButton(true);
+    show(0, true);
+
+    presentationUsesFullscreen = false;
+    if (carousel.requestFullscreen) {
+      try {
+        await carousel.requestFullscreen();
+        presentationUsesFullscreen = document.fullscreenElement === carousel;
+      } catch {
+        presentationUsesFullscreen = false;
+      }
+    }
+  }
 
   if (carousel.dataset.carousel === 'hero') {
     const track = carousel.querySelector('.hero-carousel-track');
@@ -100,6 +145,20 @@ carousels.forEach((carousel) => {
 
   nextButtons.forEach((next) => next.addEventListener('click', () => show(index + 1, true)));
   prevButtons.forEach((prev) => prev.addEventListener('click', () => show(index - 1, true)));
+  presentationButton?.addEventListener('click', () => {
+    if (carousel.classList.contains('is-presentation-mode')) closePresentation();
+    else openPresentation();
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    if (presentationUsesFullscreen && document.fullscreenElement !== carousel) closePresentation(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && carousel.classList.contains('is-presentation-mode') && document.fullscreenElement !== carousel) {
+      closePresentation(false);
+    }
+  });
   show(0);
   restart();
 });

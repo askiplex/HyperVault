@@ -9590,6 +9590,129 @@ p {
   }
 }
 
+/* Full-screen Introduction presentation */
+.hero-carousel-header > span[data-pillar-heading] {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.hero-presentation-toggle {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: 8px;
+  color: #f7f9fb;
+  background: rgba(255,255,255,.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  cursor: pointer;
+  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.hero-presentation-toggle span {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.hero-presentation-toggle:hover,
+.hero-presentation-toggle:focus-visible,
+.hero-presentation-toggle.active {
+  color: #fff;
+  border-color: color-mix(in srgb, var(--active-pillar-accent) 72%, white);
+  background: var(--active-pillar-accent);
+  transform: translateY(-1px);
+}
+
+body.hero-presentation-open {
+  overflow: hidden;
+}
+
+.hero-carousel.is-presentation-mode,
+.hero-carousel:fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  min-height: 100dvh;
+  margin: 0;
+  padding: clamp(10px, 1.4vw, 20px);
+  border: 0;
+  border-radius: 0;
+  background:
+    radial-gradient(circle at 80% 12%, var(--active-pillar-soft), transparent 32%),
+    linear-gradient(145deg, #111417, #252c32);
+  box-shadow: none;
+}
+
+.hero-carousel:fullscreen::backdrop {
+  background: #111417;
+}
+
+.hero-carousel.is-presentation-mode .hero-carousel-header,
+.hero-carousel:fullscreen .hero-carousel-header {
+  min-height: clamp(48px, 6vh, 68px);
+  padding: 4px 8px 12px 24px;
+}
+
+.hero-carousel.is-presentation-mode .hero-carousel-header > span,
+.hero-carousel:fullscreen .hero-carousel-header > span {
+  font-size: clamp(.82rem, 1.35vw, 1.08rem);
+}
+
+.hero-carousel.is-presentation-mode .hero-carousel-track,
+.hero-carousel:fullscreen .hero-carousel-track {
+  min-height: 0;
+  aspect-ratio: auto;
+  border-radius: clamp(12px, 1.5vw, 24px);
+}
+
+.hero-carousel.is-presentation-mode .hero-presentation-toggle,
+.hero-carousel:fullscreen .hero-presentation-toggle {
+  width: 40px;
+  height: 40px;
+}
+
+@media (orientation: portrait) {
+  .hero-carousel.is-presentation-mode .hero-carousel-track,
+  .hero-carousel:fullscreen .hero-carousel-track {
+    flex: 0 0 auto;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: auto 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-presentation-toggle {
+    width: 32px;
+    height: 32px;
+    border-radius: 7px;
+  }
+
+  .hero-presentation-toggle span {
+    font-size: 1.1rem;
+  }
+
+  .hero-carousel.is-presentation-mode,
+  .hero-carousel:fullscreen {
+    padding: 8px;
+  }
+
+  .hero-carousel.is-presentation-mode .hero-carousel-header,
+  .hero-carousel:fullscreen .hero-carousel-header {
+    min-height: 50px;
+    padding: 3px 4px 9px 18px;
+  }
+}
+
 /* Wearable trust and emergency ecosystem slide */
 .hero-carousel .wearable-ecosystem-slide {
   background:
