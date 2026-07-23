@@ -25,9 +25,21 @@ carousels.forEach((carousel) => {
   const nextButtons = [...carousel.querySelectorAll('[data-next]')];
   const prevButtons = [...carousel.querySelectorAll('[data-prev]')];
   const presentationButton = carousel.querySelector('[data-hero-presentation]');
+  const presentationCounter = presentationButton ? document.createElement('small') : null;
   let index = 0;
   let timer;
   let presentationUsesFullscreen = false;
+  let presentationPlaceholder = null;
+
+  if (presentationCounter) {
+    presentationCounter.className = 'hero-presentation-counter';
+    presentationCounter.setAttribute('aria-live', 'polite');
+    presentationButton.before(presentationCounter);
+  }
+
+  function usePhonePresentationPopup() {
+    return window.matchMedia('(pointer: coarse)').matches && Math.min(window.innerWidth, window.innerHeight) <= 720;
+  }
 
   function updatePresentationButton(active) {
     if (!presentationButton) return;
@@ -49,7 +61,16 @@ carousels.forEach((carousel) => {
       }
     }
     carousel.classList.remove('is-presentation-mode');
+    carousel.classList.remove('is-mobile-presentation');
     document.body.classList.remove('hero-presentation-open');
+    document.body.classList.remove('hero-mobile-presentation-open');
+    carousel.removeAttribute('role');
+    carousel.removeAttribute('aria-modal');
+    carousel.removeAttribute('aria-label');
+    if (presentationPlaceholder?.parentNode) {
+      presentationPlaceholder.parentNode.replaceChild(carousel, presentationPlaceholder);
+    }
+    presentationPlaceholder = null;
     presentationUsesFullscreen = false;
     updatePresentationButton(false);
     restart();
@@ -59,10 +80,22 @@ carousels.forEach((carousel) => {
     if (!presentationButton) return;
     carousel.classList.add('is-presentation-mode');
     document.body.classList.add('hero-presentation-open');
+    carousel.setAttribute('role', 'dialog');
+    carousel.setAttribute('aria-modal', 'true');
+    carousel.setAttribute('aria-label', 'HyperVault slide presentation');
     updatePresentationButton(true);
     show(0, true);
 
     presentationUsesFullscreen = false;
+    if (usePhonePresentationPopup()) {
+      presentationPlaceholder = document.createComment('HyperVault mobile presentation');
+      carousel.parentNode?.insertBefore(presentationPlaceholder, carousel);
+      document.body.appendChild(carousel);
+      carousel.classList.add('is-mobile-presentation');
+      document.body.classList.add('hero-mobile-presentation-open');
+      presentationButton.focus({ preventScroll: true });
+      return;
+    }
     if (carousel.requestFullscreen) {
       try {
         await carousel.requestFullscreen();
@@ -106,6 +139,9 @@ carousels.forEach((carousel) => {
     index = (nextIndex + slides.length) % slides.length;
     slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
     dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+    if (presentationCounter) {
+      presentationCounter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+    }
 
     const activePillar = slides[index]?.dataset.pillar;
     if (pillarHeading && activePillar && pillarLabels[activePillar]) {
@@ -784,6 +820,7 @@ document.querySelectorAll('[data-financial-projections]').forEach((widget) => {
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let activeIndex = 0;
   let timer;
+  let coordinatedCycle = false;
 
   function selectProjection(nextIndex, userInitiated = false) {
     activeIndex = (nextIndex + rows.length) % rows.length;
@@ -821,7 +858,14 @@ document.querySelectorAll('[data-financial-projections]').forEach((widget) => {
   function startProjectionTimer() {
     stopProjectionTimer();
     if (reducedMotion.matches || rows.length < 2) return;
-    timer = setInterval(() => selectProjection(activeIndex + 1), 5600);
+    timer = setInterval(() => {
+      if (coordinatedCycle && activeIndex === rows.length - 1) {
+        stopProjectionTimer();
+        widget.dispatchEvent(new CustomEvent('hypervault:projection-cycle-complete', { bubbles: true }));
+        return;
+      }
+      selectProjection(activeIndex + 1);
+    }, 5600);
   }
 
   function restartProjectionTimer() {
@@ -844,6 +888,16 @@ document.querySelectorAll('[data-financial-projections]').forEach((widget) => {
     if (!widget.contains(event.relatedTarget)) startProjectionTimer();
   });
   reducedMotion.addEventListener?.('change', startProjectionTimer);
+
+  widget.addEventListener('hypervault:projection-cycle-start', () => {
+    coordinatedCycle = true;
+    selectProjection(0);
+    startProjectionTimer();
+  });
+  widget.addEventListener('hypervault:projection-cycle-stop', () => {
+    coordinatedCycle = false;
+    stopProjectionTimer();
+  });
 
   selectProjection(0);
   startProjectionTimer();
@@ -900,12 +954,11 @@ if (document.body.classList.contains('business-page')) {
       kind: 'investor',
       slides: [
         [':scope > .funding-ask', 'Current Funding Ask'],
-        ['.investor-grid > .fund-card:nth-child(1)', 'Current Progress'],
-        ['.investor-grid > .fund-card:nth-child(2)', 'IP Portfolio'],
-        ['.investor-grid > .fund-card:nth-child(3)', 'Round Objective'],
-        [':scope > .investor-financial-card', 'Financial Projections & Fund Utilization']
+        [':scope > .investor-readiness-overview', 'Investor Readiness'],
+        [':scope > .fund-utilization-section', 'Fund Utilization'],
+        [':scope > .investor-financial-card', 'Financial Projections']
       ],
-      cleanup: ['.investor-grid']
+      cleanup: []
     }
   ];
 
@@ -959,6 +1012,14 @@ if (document.body.classList.contains('business-page')) {
       if (node.matches('.target-card, .fund-card, .revenue-card, .model-story-heading, .model-value-strip, .market-convergence')) slide.classList.add('business-compact-slide');
       if (node.matches('.business-economics-overview')) slide.classList.add('business-economics-slide');
       if (node.matches('.revenue-card')) slide.classList.add('business-revenue-slide');
+      if (node.matches('.market-convergence')) slide.classList.add('business-market-convergence-slide');
+      if (node.matches('.market-lane')) slide.classList.add('business-market-slide');
+      if (node.matches('.target-card')) slide.classList.add('business-target-slide');
+      if (node.matches('.target-expansion-visual')) slide.classList.add('business-target-expansion-slide');
+      if (node.matches('.funding-ask')) slide.classList.add('business-funding-slide');
+      if (node.matches('.fund-utilization-section')) slide.classList.add('business-fund-utilization-slide');
+      if (node.matches('.investor-readiness-overview')) slide.classList.add('business-investor-readiness-slide');
+      if (node.matches('.investor-financial-card')) slide.classList.add('business-financial-slide');
       slide.dataset.businessSlideTitle = title;
       slide.setAttribute('role', 'group');
       slide.setAttribute('aria-roledescription', 'slide');
@@ -1009,10 +1070,12 @@ if (document.body.classList.contains('business-page')) {
       activeIndex = (nextIndex + slides.length) % slides.length;
       slides.forEach((slide, index) => {
         const active = index === activeIndex;
+        const projection = slide.querySelector('[data-financial-projections]');
         slide.classList.toggle('active', active);
         slide.hidden = !active;
         slide.setAttribute('aria-hidden', String(!active));
         if (active) slide.scrollTop = 0;
+        else projection?.dispatchEvent(new CustomEvent('hypervault:projection-cycle-stop'));
       });
       dotButtons.forEach((dot, index) => {
         const active = index === activeIndex;
@@ -1021,7 +1084,11 @@ if (document.body.classList.contains('business-page')) {
       });
       if (title) title.textContent = slides[activeIndex].dataset.businessSlideTitle;
       if (counter) counter.textContent = `${String(activeIndex + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
-      if (userInitiated) restartTimer();
+      const activeProjection = slides[activeIndex].querySelector('[data-financial-projections]');
+      if (activeProjection) {
+        stopTimer();
+        activeProjection.dispatchEvent(new CustomEvent('hypervault:projection-cycle-start'));
+      } else if (userInitiated) restartTimer();
     }
 
     function stopTimer() {
@@ -1031,6 +1098,7 @@ if (document.body.classList.contains('business-page')) {
     function startTimer() {
       stopTimer();
       if (!inView || reducedMotion.matches || slides.length < 2) return;
+      if (slides[activeIndex]?.querySelector('[data-financial-projections]')) return;
       timer = setInterval(() => showSlide(activeIndex + 1), 6200);
     }
 
@@ -1065,10 +1133,22 @@ if (document.body.classList.contains('business-page')) {
       startTimer();
     });
 
+    carousel.addEventListener('hypervault:projection-cycle-complete', (event) => {
+      if (!inView || !slides[activeIndex]?.contains(event.target)) return;
+      showSlide(activeIndex + 1);
+      startTimer();
+    });
+
     const visibilityObserver = new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;
-      if (inView) startTimer();
-      else stopTimer();
+      const activeProjection = slides[activeIndex]?.querySelector('[data-financial-projections]');
+      if (inView) {
+        if (activeProjection) activeProjection.dispatchEvent(new CustomEvent('hypervault:projection-cycle-start'));
+        else startTimer();
+      } else {
+        stopTimer();
+        activeProjection?.dispatchEvent(new CustomEvent('hypervault:projection-cycle-stop'));
+      }
     }, { threshold: .18 });
     visibilityObserver.observe(carousel);
     reducedMotion.addEventListener?.('change', startTimer);
