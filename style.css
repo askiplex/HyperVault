@@ -4264,6 +4264,37 @@ p {
   line-height: 1.25;
 }
 
+.business-economics-overview {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(7,87,212,.13);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #f9fbff, #edf4fc);
+  box-shadow: 0 22px 60px rgba(7,27,71,.1);
+}
+
+.economics-visual {
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(7,87,212,.09);
+  border-radius: 7px;
+  background: #fff;
+}
+
+.economics-visual img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+  filter: none;
+}
+
 @keyframes revenueFlow {
   to { background-position: 200% 0; }
 }
@@ -11601,6 +11632,12 @@ body.product-showcase-open {
   line-height: 1.03 !important;
 }
 
+#business-model .business-showcase-intro .business-page-title {
+  max-width: 28rem;
+  font-size: clamp(1.35rem, 2vw, 1.72rem) !important;
+  line-height: 1.24 !important;
+}
+
 .business-page .business-showcase-intro > p {
   max-width: 100%;
   margin: 20px 0 0;
@@ -11771,6 +11808,101 @@ body.product-showcase-open {
   border: 0;
   object-fit: contain;
   background: #f8fbff;
+}
+
+.business-card-slide.business-economics-slide {
+  display: grid;
+  align-content: stretch;
+  padding: 14px 24px 46px;
+  overflow: hidden;
+}
+
+.business-card-slide.business-economics-slide > .business-economics-overview {
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 12px;
+  background: linear-gradient(145deg, #fff, #edf4fb);
+}
+
+.business-card-slide.business-economics-slide .model-value-strip {
+  margin: 0;
+}
+
+.business-card-slide.business-revenue-slide {
+  display: grid;
+  align-content: stretch;
+  padding: 18px 34px 46px;
+  overflow: hidden;
+}
+
+.business-card-slide.business-revenue-slide > .revenue-card {
+  height: 100%;
+  min-height: 0;
+  padding: 22px 28px;
+  border: 1px solid rgba(7,87,212,.12);
+  border-radius: 8px;
+  background: linear-gradient(145deg, #fff, #edf4fb);
+  box-shadow: 0 16px 36px rgba(7,27,71,.1);
+  backdrop-filter: none;
+  filter: none;
+}
+
+.business-card-slide.business-revenue-slide .revenue-card h3 {
+  font-size: 1.28rem;
+}
+
+.business-card-slide.business-revenue-slide .revenue-card ul {
+  flex: 0 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 12px 0;
+  column-gap: 18px;
+}
+
+.business-card-slide.business-revenue-slide .revenue-card li {
+  min-width: 0;
+  padding: 9px 0 9px 30px;
+  font-size: .82rem;
+  line-height: 1.25;
+}
+
+.business-card-slide.business-revenue-slide .subscription-price-panel {
+  flex: 0 0 auto;
+  margin-top: auto;
+  padding: 12px 14px;
+}
+
+.business-card-slide.business-revenue-slide .price-panel-heading {
+  margin-bottom: 9px;
+  padding-bottom: 8px;
+}
+
+.business-card-slide.business-revenue-slide .price-option {
+  padding: 9px 11px;
+}
+
+.business-card-slide.business-revenue-slide .price-option strong,
+.business-card-slide.business-revenue-slide .revenue-card .price-option strong {
+  font-size: clamp(1.45rem, 2.3vw, 1.85rem);
+}
+
+.business-card-slide.business-revenue-slide .orange-card > strong:last-child {
+  margin-top: auto;
+  padding: 14px 16px;
+  border-left: 3px solid var(--orange);
+  border-radius: 6px;
+  background: rgba(255,122,0,.1);
+}
+
+.business-card-carousel[data-business-kind="business"] .business-card-slide > .legacy-model-panel,
+.business-card-carousel[data-business-kind="business"] .business-card-slide > .hypervault-model-panel,
+.business-card-carousel[data-business-kind="business"] .business-card-slide > .model-story-heading {
+  min-height: 100%;
+  border-color: rgba(7,87,212,.13);
+  background-color: #fff;
+  backdrop-filter: none;
+  filter: none;
 }
 
 .business-card-slide .investor-financial-card,
@@ -11961,6 +12093,12 @@ body.product-showcase-open {
     line-height: 1.06 !important;
   }
 
+  #business-model .business-showcase-intro .business-page-title {
+    max-width: 100%;
+    font-size: 1.25rem !important;
+    line-height: 1.28 !important;
+  }
+
   .business-page .business-showcase-intro > p {
     margin-top: 15px;
     font-size: .86rem;
@@ -11994,6 +12132,71 @@ body.product-showcase-open {
 
   .business-card-slide {
     padding: 12px 12px 42px;
+  }
+
+  .business-card-slide.business-economics-slide,
+  .business-card-slide.business-revenue-slide {
+    padding: 10px 12px 42px;
+  }
+
+  .business-card-slide.business-economics-slide > .business-economics-overview {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .business-card-slide.business-economics-slide .model-value-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    padding: 6px;
+  }
+
+  .business-card-slide.business-economics-slide .model-value-strip > span,
+  .business-card-slide.business-economics-slide .model-value-strip > span:nth-child(3) {
+    min-height: 47px;
+    padding: 6px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.12);
+  }
+
+  .business-card-slide.business-economics-slide .model-value-strip > span:last-child {
+    grid-column: 1 / -1;
+    border-bottom: 0;
+  }
+
+  .business-card-slide.business-revenue-slide > .revenue-card {
+    padding: 17px 14px;
+  }
+
+  .business-card-slide.business-revenue-slide .revenue-card h3 {
+    font-size: 1.12rem;
+  }
+
+  .business-card-slide.business-revenue-slide .revenue-card ul {
+    grid-template-columns: 1fr;
+    margin: 8px 0;
+  }
+
+  .business-card-slide.business-revenue-slide .revenue-card li {
+    padding: 7px 0 7px 28px;
+    font-size: .76rem;
+  }
+
+  .business-card-slide.business-revenue-slide .price-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .business-card-slide.business-revenue-slide .subscription-price-panel {
+    padding: 10px;
+  }
+
+  .business-card-slide.business-revenue-slide .price-option {
+    padding: 8px 7px;
+  }
+
+  .business-card-slide.business-revenue-slide .price-option strong,
+  .business-card-slide.business-revenue-slide .revenue-card .price-option strong {
+    font-size: 1.35rem;
   }
 
   .business-card-slide .market-convergence {

@@ -861,8 +861,7 @@ if (document.body.classList.contains('business-page')) {
         ['.business-model-story > .model-story-heading', 'Revenue Transformation'],
         ['.legacy-model-panel', 'Current Utility Scenario'],
         ['.hypervault-model-panel', 'Recurring Revenue Engine'],
-        ['.business-model-story > .model-value-strip', 'Recurring Value Layers'],
-        [':scope > .wide-image', 'Product-Line Economics'],
+        [':scope > .business-economics-overview', 'Value Layers & Economics'],
         ['.business-layout > .revenue-card:not(.orange-card)', 'Subscription Revenue'],
         ['.business-layout > .revenue-card.orange-card', 'Hardware Revenue'],
         ['.business-layout > .business-image', 'Business Model Overview']
@@ -958,6 +957,8 @@ if (document.body.classList.contains('business-page')) {
       slide.className = 'business-card-slide';
       if (node.matches('.wide-image, .business-image')) slide.classList.add('business-media-slide');
       if (node.matches('.target-card, .fund-card, .revenue-card, .model-story-heading, .model-value-strip, .market-convergence')) slide.classList.add('business-compact-slide');
+      if (node.matches('.business-economics-overview')) slide.classList.add('business-economics-slide');
+      if (node.matches('.revenue-card')) slide.classList.add('business-revenue-slide');
       slide.dataset.businessSlideTitle = title;
       slide.setAttribute('role', 'group');
       slide.setAttribute('aria-roledescription', 'slide');
