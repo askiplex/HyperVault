@@ -3,8 +3,9 @@
 
 The output is consumed directly by chatbot.js on GitHub Pages. It combines:
 1. Curated website knowledge.
-2. FAQ entries already visible in index.html.
-3. Q&A blocks extracted from FAQ and handbook PDFs.
+2. Visible content extracted from every substantive website page.
+3. FAQ entries already visible in index.html.
+4. Q&A blocks extracted from FAQ and handbook PDFs.
 """
 
 from __future__ import annotations
@@ -33,6 +34,20 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE_KNOWLEDGE = ROOT / "assets" / "chatbot" / "base-knowledge.json"
 OUTPUT = ROOT / "assets" / "chatbot" / "knowledge.json"
 FAQ_HTML = ROOT / "index.html"
+EXCLUDED_WEBSITE_PAGES = {"evolution.html", "thanks.html"}
+WEBSITE_PAGES = tuple(
+    page for page in sorted(ROOT.glob("*.html"))
+    if page.name not in EXCLUDED_WEBSITE_PAGES
+)
+WEBSITE_LABELS = {
+    "index.html": "HyperVault Overview and Products",
+    "business.html": "HyperVault Business",
+    "deep-dive.html": "HyperVault Deep Dive",
+    "about.html": "About HyperVault",
+    "roadmap.html": "HyperVault Roadmap and Timeline",
+    "leadership.html": "HyperVault Leadership Team",
+    "ip.html": "HyperVault Intellectual Property",
+}
 PDF_DIRECTORIES = (
     ROOT / "assets" / "downloads",
     ROOT / "assets" / "chatbot" / "faqs",
@@ -89,7 +104,196 @@ def slugify(value: str) -> str:
 
 def question_keywords(question: str, document_label: str = "") -> list[str]:
     values = WORD_RE.findall(f"{question} {document_label}".lower())
-    return sorted({word for word in values if word not in STOP_WORDS})[:24]
+    keywords: list[str] = []
+    seen: set[str] = set()
+    for word in values:
+        if word in STOP_WORDS or word in seen:
+            continue
+        seen.add(word)
+        keywords.append(word)
+        if len(keywords) == 30:
+            break
+    return keywords
+
+
+def chunk_text(value: str, maximum: int = 1200) -> list[str]:
+    value = normalize_text(value)
+    if len(value) <= maximum:
+        return [value] if value else []
+
+    sentences = re.split(r"(?<=[.!?])\s+", value)
+    chunks: list[str] = []
+    current = ""
+    for sentence in sentences:
+        if len(sentence) > maximum:
+            words = sentence.split()
+            for word in words:
+                candidate = f"{current} {word}".strip()
+                if current and len(candidate) > maximum:
+                    chunks.append(current)
+                    current = word
+                else:
+                    current = candidate
+            continue
+
+        candidate = f"{current} {sentence}".strip()
+        if current and len(candidate) > maximum:
+            chunks.append(current)
+            current = sentence
+        else:
+            current = candidate
+
+    if current:
+        chunks.append(current)
+    return chunks
+
+
+class WebsiteSectionParser(HTMLParser):
+    """Collect visible page text in section and heading-sized knowledge blocks."""
+
+    SKIP_TAGS = {"script", "style", "noscript", "svg", "nav", "footer", "form", "template", "button"}
+    HEADING_TAGS = {"h1", "h2", "h3", "h4"}
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.sections: list[dict[str, Any]] = []
+        self.completed: list[dict[str, Any]] = []
+        self.skip_depth = 0
+        self.skip_tag: str | None = None
+        self.heading_tag: str | None = None
+
+    @staticmethod
+    def finish_segment(section: dict[str, Any]) -> None:
+        heading = normalize_text(" ".join(section["heading_parts"]))
+        body = normalize_text(" ".join(section["body_parts"]))
+        if heading or body:
+            section["segments"].append((heading, body))
+        section["heading_parts"] = []
+        section["body_parts"] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        tag = tag.lower()
+        if self.skip_depth:
+            if tag == self.skip_tag:
+                self.skip_depth += 1
+            return
+        if tag in self.SKIP_TAGS:
+            self.skip_depth = 1
+            self.skip_tag = tag
+            return
+
+        attributes = dict(attrs)
+        if tag == "section":
+            classes = (attributes.get("class") or "").split()
+            section_id = attributes.get("id") or attributes.get("aria-labelledby") or ""
+            self.sections.append(
+                {
+                    "id": section_id,
+                    "classes": classes,
+                    "segments": [],
+                    "heading_parts": [],
+                    "body_parts": [],
+                }
+            )
+            return
+
+        if not self.sections or tag not in self.HEADING_TAGS:
+            return
+
+        section = self.sections[-1]
+        self.finish_segment(section)
+        if not section["id"] and attributes.get("id"):
+            section["id"] = attributes["id"]
+        self.heading_tag = tag
+
+    def handle_endtag(self, tag: str) -> None:
+        tag = tag.lower()
+        if self.skip_depth:
+            if tag == self.skip_tag:
+                self.skip_depth -= 1
+                if not self.skip_depth:
+                    self.skip_tag = None
+            return
+        if tag == self.heading_tag:
+            self.heading_tag = None
+            return
+        if tag == "section" and self.sections:
+            section = self.sections.pop()
+            self.finish_segment(section)
+            self.completed.append(section)
+
+    def handle_data(self, data: str) -> None:
+        if self.skip_depth or not self.sections:
+            return
+        text = normalize_text(data)
+        if not text:
+            return
+        target = self.sections[-1]
+        if self.heading_tag:
+            target["heading_parts"].append(text)
+        else:
+            target["body_parts"].append(text)
+
+
+def extract_website_content() -> list[dict[str, Any]]:
+    entries: list[dict[str, Any]] = []
+    seen_content: set[str] = set()
+
+    for page in WEBSITE_PAGES:
+        parser = WebsiteSectionParser()
+        parser.feed(page.read_text(encoding="utf-8"))
+        page_label = WEBSITE_LABELS.get(
+            page.name,
+            normalize_text(page.stem.replace("-", " ")).title(),
+        )
+        page_count = 0
+
+        for section_index, section in enumerate(parser.completed, 1):
+            section_id = section["id"]
+            if page.name == "index.html" and section_id == "faqs":
+                continue
+
+            fallback_title = page_label
+            for segment_index, (heading, body) in enumerate(section["segments"], 1):
+                title = heading or fallback_title
+                content = body or heading
+                if len(content) < 28:
+                    continue
+
+                content_hash = hashlib.sha256(
+                    normalize_text(f"{title} {content}").lower().encode("utf-8")
+                ).hexdigest()
+                if content_hash in seen_content:
+                    continue
+                seen_content.add(content_hash)
+
+                chunks = chunk_text(content)
+                for part_index, chunk in enumerate(chunks, 1):
+                    part_label = f" - Part {part_index}" if len(chunks) > 1 else ""
+                    anchor = f"#{section_id}" if section_id else ""
+                    question = f"What does HyperVault explain about {title}?"
+                    entries.append(
+                        {
+                            "id": (
+                                f"page-{page.stem}-{section_index:02d}-{segment_index:02d}"
+                                f"-part-{part_index:02d}-{slugify(title)[:42]}"
+                            ),
+                            "title": f"{title}{part_label}",
+                            "question": question,
+                            "answer": chunk,
+                            "keywords": question_keywords(f"{title} {chunk[:500]}", page_label),
+                            "sourceLabel": f"{page_label} - {title}",
+                            "url": f"{page.name}{anchor}",
+                            "type": "website-page",
+                            "document": page.name,
+                            "section": section_id,
+                        }
+                    )
+                    page_count += 1
+
+        print(f"Indexed {page_count:3d} content blocks from {page.name}")
+
+    return entries
 
 
 class WebsiteFaqParser(HTMLParser):
@@ -293,10 +497,14 @@ def validate_entries(entries: list[dict[str, Any]]) -> None:
         if entry["id"] in seen:
             raise ValueError(f"Duplicate knowledge id: {entry['id']}")
         seen.add(entry["id"])
+        source_path = str(entry["url"]).split("#", 1)[0]
+        if source_path and "://" not in source_path and not (ROOT / source_path).is_file():
+            raise ValueError(f"Knowledge source does not exist: {source_path}")
 
 
 def main() -> int:
     base_entries = load_base_entries()
+    website_content = extract_website_content()
     website_faqs = extract_website_faqs()
     pdfs = discover_pdfs()
     pdf_entries: list[dict[str, Any]] = []
@@ -305,7 +513,7 @@ def main() -> int:
         pdf_entries.extend(extracted)
         print(f"Indexed {len(extracted):3d} questions from {pdf.relative_to(ROOT)}")
 
-    entries = base_entries + website_faqs + pdf_entries
+    entries = base_entries + website_content + website_faqs + pdf_entries
     validate_entries(entries)
 
     payload = {
@@ -313,6 +521,8 @@ def main() -> int:
         "entryCount": len(entries),
         "sources": {
             "curatedWebsite": len(base_entries),
+            "websiteContent": len(website_content),
+            "websitePages": [page.relative_to(ROOT).as_posix() for page in WEBSITE_PAGES],
             "websiteFaqs": len(website_faqs),
             "pdfFaqs": len(pdf_entries),
             "pdfDocuments": [pdf.relative_to(ROOT).as_posix() for pdf in pdfs],

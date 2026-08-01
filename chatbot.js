@@ -217,7 +217,7 @@
         });
 
         if (originalTokens.length && directMatches === originalTokens.length) score += 16;
-        if (entry.type === "website" || entry.type === "website-faq") score += 2;
+        if (["website", "website-page", "website-faq"].includes(entry.type)) score += 2;
 
         return { entry, score, directMatches };
       })

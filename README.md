@@ -23,11 +23,12 @@ Included:
 The chatbot uses `assets/chatbot/knowledge.json`, generated from:
 
 - Curated website answers in `assets/chatbot/base-knowledge.json`
+- Visible section content from every substantive HyperVault HTML page
 - FAQ items displayed in `index.html`
 - PDF handbooks in `assets/downloads`
 - Additional FAQ PDFs placed in `assets/chatbot/faqs`
 
-After adding or replacing a PDF, rebuild the knowledge index:
+After changing website content or adding/replacing a PDF, rebuild the knowledge index:
 
 ```powershell
 python tools/build_chatbot_knowledge.py
