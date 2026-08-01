@@ -1,0 +1,202 @@
+[
+  {
+    "id": "overview-what-is-hypervault",
+    "title": "What is HyperVault?",
+    "question": "What is HyperVault?",
+    "answer": "HyperVault is a unified Android-first platform for storage, security, mobility, wearable trust, and emergency intelligence. It organizes mobile content by meaning and source, optimizes duplicate data, applies contextual protection, preserves organization during transfers, and can use wearables as additional trust signals.",
+    "keywords": ["overview", "introduction", "android", "platform", "trust intelligence", "storage", "security", "mobility"],
+    "sourceLabel": "HyperVault Overview",
+    "url": "index.html",
+    "type": "website"
+  },
+  {
+    "id": "overview-five-pillars",
+    "title": "What are the five HyperVault pillars?",
+    "question": "What are the five HyperVault technology pillars?",
+    "answer": "The five pillars are Content-Centric Storage Virtualization, Data Deduplication Virtualization, Contextual Security Virtualization, Data Mobility Virtualization, and Wearable Aware Authentication. Together they create a contextual intelligence layer for Android data.",
+    "keywords": ["pillars", "technology", "virtualization", "deduplication", "contextual security", "data mobility", "wearable authentication"],
+    "sourceLabel": "Technology Pillars",
+    "url": "deep-dive.html#technology-pillars",
+    "type": "website"
+  },
+  {
+    "id": "pillar-storage",
+    "title": "Content-Centric Storage Virtualization",
+    "question": "How does HyperVault organize mobile content?",
+    "answer": "HyperVault organizes photos, documents, videos, downloads, and app-originated files into meaningful virtual categories. Users can discover content by category, application, time, source, and context instead of depending only on physical folder paths.",
+    "keywords": ["content", "storage", "categories", "photos", "documents", "videos", "downloads", "apps", "organization", "find files"],
+    "sourceLabel": "Storage Virtualization",
+    "url": "deep-dive.html#technology-pillars",
+    "type": "website"
+  },
+  {
+    "id": "pillar-deduplication",
+    "title": "Data Deduplication Virtualization",
+    "question": "How does duplicate virtualization work?",
+    "answer": "HyperVault is designed to reduce duplicate clutter through logical references and optimization workflows rather than forcing destructive cleanup. The goal is to reclaim storage while preserving the user's best files, relationships, and normal workflows.",
+    "keywords": ["duplicate", "duplicates", "dedupe", "deduplication", "storage waste", "optimization", "virtualization", "cleanup"],
+    "sourceLabel": "Deduplication Virtualization",
+    "url": "deep-dive.html#technology-pillars",
+    "type": "website"
+  },
+  {
+    "id": "pillar-security",
+    "title": "Contextual Security Virtualization",
+    "question": "How does HyperVault protect sensitive content?",
+    "answer": "HyperVault applies contextual protection and vault behavior around sensitive content, categories, and usage patterns. Its direction is security without unnecessarily hiding, relocating, or isolating files from normal gallery and application workflows.",
+    "keywords": ["security", "secure vault", "protect", "sensitive", "encryption", "privacy", "context", "access control"],
+    "sourceLabel": "Contextual Security",
+    "url": "deep-dive.html#technology-pillars",
+    "type": "website"
+  },
+  {
+    "id": "pillar-mobility",
+    "title": "Data Mobility Virtualization",
+    "question": "How does HyperVault move files between devices?",
+    "answer": "HyperVault's mobility layer is designed to move content while preserving its organization, relationships, context, and applicable security policies. This supports smarter transfers across devices instead of treating every file as an isolated object.",
+    "keywords": ["mobility", "transfer", "move files", "devices", "relationships", "organization", "secure transfer", "usb", "drive"],
+    "sourceLabel": "Data Mobility",
+    "url": "deep-dive.html#technology-pillars",
+    "type": "website"
+  },
+  {
+    "id": "pillar-wearable-authentication",
+    "title": "Wearable Aware Authentication",
+    "question": "How do wearables work with HyperVault?",
+    "answer": "A compatible ring, band, watch, card, or keychain can act as an additional trust endpoint for proximity, authentication, discreet activation, and emergency workflows. Wearables enhance the platform but are not a mandatory dependency; the Android software remains the core product.",
+    "keywords": ["wearable", "ring", "smart ring", "band", "watch", "card", "keychain", "authentication", "proximity", "trust"],
+    "sourceLabel": "Wearable Authentication",
+    "url": "index.html#products",
+    "type": "website"
+  },
+  {
+    "id": "products-hypervault-app",
+    "title": "HyperVault App",
+    "question": "What does the HyperVault Android app include?",
+    "answer": "The HyperVault app is the software foundation of the ecosystem. Its product direction combines content-centric exploration, file management, intelligent categories, duplicate optimization, contextual security, transfer intelligence, and emergency workflows in one Android experience.",
+    "keywords": ["app", "android app", "mobile app", "freemium", "premium", "features", "software"],
+    "sourceLabel": "HyperVault Products",
+    "url": "index.html#products",
+    "type": "website"
+  },
+  {
+    "id": "products-cloud",
+    "title": "HyperVault Cloud and Drives",
+    "question": "What cloud and drive products are planned?",
+    "answer": "The product ecosystem presents a Cloud line for secure mobility, including HyperVault Cloud, HyperVault Drive, and a HyperVault USB Drive Stick concept. These products extend organized and protected data movement beyond a single phone.",
+    "keywords": ["cloud", "hypervault drive", "usb drive", "usb stick", "storage drive", "sync", "backup"],
+    "sourceLabel": "HyperVault Products",
+    "url": "index.html#products",
+    "type": "website"
+  },
+  {
+    "id": "emergency-intelligence",
+    "title": "Emergency Intelligence",
+    "question": "What problem does HyperVault Emergency Intelligence solve?",
+    "answer": "Emergency Intelligence focuses on response coordination, not just sending an alert. The platform direction includes rapid activation, trusted-contact escalation, location and context sharing, evidence preservation, retries, fallback workflows, and wearable-assisted actions during a limited response window.",
+    "keywords": ["emergency", "sos", "panic button", "safety", "location", "evidence", "trusted contacts", "alerts", "response"],
+    "sourceLabel": "Emergency Intelligence FAQ",
+    "url": "index.html#faqs",
+    "type": "website"
+  },
+  {
+    "id": "architecture",
+    "title": "Platform Architecture",
+    "question": "How is the HyperVault platform architecture organized?",
+    "answer": "The architecture connects apps, files, devices, and wearables through a contextual intelligence core. Context, file intelligence, policy, trust state, and transfer awareness are intended to orchestrate secure Android data workflows across the ecosystem.",
+    "keywords": ["architecture", "platform", "context engine", "policy", "trust state", "apps", "files", "devices"],
+    "sourceLabel": "Platform Architecture",
+    "url": "deep-dive.html#platform-architecture",
+    "type": "website"
+  },
+  {
+    "id": "business-model",
+    "title": "HyperVault Business Model",
+    "question": "How does HyperVault plan to make money?",
+    "answer": "The business model begins with a useful freemium Android app, progresses to premium subscriptions and advanced plans, and can expand into B2B licensing, wearable products, cloud services, and ecosystem partnerships. The strategy is designed to create recurring software revenue with additional hardware and platform opportunities.",
+    "keywords": ["business model", "revenue", "monetization", "money", "freemium", "premium", "subscription", "pricing", "b2b", "licensing"],
+    "sourceLabel": "Business Model",
+    "url": "business.html#business-model",
+    "type": "website"
+  },
+  {
+    "id": "market-opportunity",
+    "title": "Market Opportunity",
+    "question": "What market opportunity is HyperVault pursuing?",
+    "answer": "HyperVault is positioned at the convergence of intelligent mobile software, privacy-first data management, wearable authentication, and emergency intelligence. Its opportunity spans consumer Android software, trusted wearables, secure cloud mobility, and future enterprise or public-safety workflows.",
+    "keywords": ["market", "opportunity", "android users", "software market", "wearables market", "growth", "investor"],
+    "sourceLabel": "Market Opportunity",
+    "url": "business.html#market-opportunity",
+    "type": "website"
+  },
+  {
+    "id": "target-users",
+    "title": "Target Users",
+    "question": "Who is HyperVault designed for?",
+    "answer": "Initial target users include Android power users, students, professionals, content creators, privacy-conscious users, multi-device users, and storage-intensive users. The roadmap can also support wearable users, families, senior citizens, field workers, healthcare scenarios, and enterprise safety workflows.",
+    "keywords": ["users", "target users", "audience", "customers", "students", "professionals", "creators", "families", "seniors", "field workers"],
+    "sourceLabel": "Target Users",
+    "url": "business.html#users",
+    "type": "website"
+  },
+  {
+    "id": "investor-snapshot",
+    "title": "Investor Snapshot",
+    "question": "What is HyperVault's current funding focus?",
+    "answer": "The website presents a focused seed round intended to complete product engineering, embedded-system development, smart-ring prototyping, pilot readiness, and market validation. Review the Investor Snapshot for the current funding ask, planned runway, execution priorities, and projections.",
+    "keywords": ["investor", "funding", "seed", "capital", "runway", "financial", "investment", "prototype"],
+    "sourceLabel": "Investor Snapshot",
+    "url": "business.html#investor",
+    "type": "website"
+  },
+  {
+    "id": "roadmap",
+    "title": "Roadmap and Timeline",
+    "question": "What is on the HyperVault roadmap?",
+    "answer": "The roadmap tracks quarter-by-quarter progress from early emergency prototypes through storage and security intelligence, platform integration, user validation, and wearable infrastructure. The dedicated roadmap page contains the detailed sequence and milestones.",
+    "keywords": ["roadmap", "timeline", "milestones", "quarter", "launch", "development", "progress", "prototype"],
+    "sourceLabel": "Roadmap and Timeline",
+    "url": "roadmap.html#roadmap",
+    "type": "website"
+  },
+  {
+    "id": "intellectual-property",
+    "title": "Intellectual Property",
+    "question": "How is HyperVault protecting its intellectual property?",
+    "answer": "HyperVault's protection strategy combines execution, product architecture, accumulated expertise, brand, ecosystem integration, and intellectual-property development. The IP page describes the portfolio and how protection supports, rather than replaces, product execution and market validation.",
+    "keywords": ["ip", "intellectual property", "patent", "patents", "moat", "defensibility", "copying", "protection"],
+    "sourceLabel": "Intellectual Property",
+    "url": "ip.html#ip",
+    "type": "website"
+  },
+  {
+    "id": "company-leadership",
+    "title": "Company and Leadership",
+    "question": "Who is building HyperVault?",
+    "answer": "HyperVault is being developed by ASKIPLEX Technologies. The About and Leadership pages describe the company vision, founding leadership, product direction, and operating focus behind the platform.",
+    "keywords": ["company", "askiplex", "founder", "leadership", "team", "who built", "about"],
+    "sourceLabel": "About HyperVault",
+    "url": "about.html#about",
+    "type": "website"
+  },
+  {
+    "id": "availability",
+    "title": "Product Availability",
+    "question": "Can I download or buy HyperVault today?",
+    "answer": "The website presents HyperVault as a platform under active development and validation. It does not currently provide a public app-store download or product-purchase link. Use the contact form to request updates, partnership discussions, or launch information.",
+    "keywords": ["download", "buy", "available", "availability", "launch", "release", "app store", "play store", "demo"],
+    "sourceLabel": "Contact HyperVault",
+    "url": "index.html#contact",
+    "type": "website"
+  },
+  {
+    "id": "contact",
+    "title": "Contact HyperVault",
+    "question": "How can I contact the HyperVault team?",
+    "answer": "Use the contact form on the Overview page for product, partnership, investor, or general enquiries. The form routes the enquiry to the HyperVault team and then displays a confirmation page.",
+    "keywords": ["contact", "email", "enquiry", "inquiry", "partner", "partnership", "message", "team"],
+    "sourceLabel": "Contact HyperVault",
+    "url": "index.html#contact",
+    "type": "website"
+  }
+]
