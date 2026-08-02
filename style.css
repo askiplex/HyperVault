@@ -7643,8 +7643,8 @@ p {
   border-top: 4px solid var(--orange);
 }
 
-[data-product-panel="wearables"] .product-category-carousel { border-top-color: var(--green); }
-[data-product-panel="cloud"] .product-category-carousel { border-top-color: var(--blue); }
+[data-product-panel="wearables"] .product-category-carousel { border-top-color: var(--blue); }
+[data-product-panel="cloud"] .product-category-carousel { border-top-color: var(--green); }
 
 .product-category-carousel .product-line-track {
   min-height: clamp(590px, 58vw, 760px);
@@ -9750,9 +9750,9 @@ p {
   margin-top: clamp(32px, 4vw, 52px);
 }
 
-.products [data-product-panel="app"] { --product-accent: #e76f00; }
-.products [data-product-panel="wearables"] { --product-accent: #0f7652; }
-.products [data-product-panel="cloud"] { --product-accent: #3659a7; }
+.products [data-product-panel="app"] { --product-accent: #ff7a00; }
+.products [data-product-panel="wearables"] { --product-accent: #4c9cff; }
+.products [data-product-panel="cloud"] { --product-accent: #58be4b; }
 
 .products .product-category-carousel {
   padding: 0;
@@ -9776,7 +9776,9 @@ p {
   padding: 22px clamp(20px, 3vw, 34px);
   border-bottom: 4px solid var(--product-accent);
   color: #fff;
-  background: linear-gradient(112deg, #171a1e, #30353a);
+  background:
+    radial-gradient(circle at 92% 18%, color-mix(in srgb, var(--product-accent) 24%, transparent), transparent 34%),
+    linear-gradient(112deg, #171a1e, #30353a);
 }
 
 .products .product-line-header .eyebrow {
