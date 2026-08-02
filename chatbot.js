@@ -226,13 +226,120 @@
       .slice(0, limit);
   }
 
-  function conciseAnswer(value, maximum = 1100) {
+  function trimAnswer(value, maximum) {
     const text = String(value || "").replace(/\s+/g, " ").trim();
     if (text.length <= maximum) return text;
     const candidate = text.slice(0, maximum + 1);
     const sentenceEnd = Math.max(candidate.lastIndexOf(". "), candidate.lastIndexOf("? "), candidate.lastIndexOf("! "));
     const cut = sentenceEnd > maximum * 0.55 ? sentenceEnd + 1 : candidate.lastIndexOf(" ");
     return `${candidate.slice(0, Math.max(cut, maximum * 0.6)).trim()}...`;
+  }
+
+  function conciseAnswer(value, maximum = 440) {
+    const text = String(value || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .replace(/^\d+(?:\.\d+)+\s+/, "");
+    const bulletParts = text.split(/\s*•\s*/).filter(Boolean);
+    const numbered = findNumberedItems(text);
+
+    if (bulletParts.length > 1) {
+      const intro = trimAnswer(bulletParts.shift(), 120);
+      const items = bulletParts.slice(0, 3).map((item) => trimAnswer(item, 115));
+      return `${intro} • ${items.join(" • ")}`;
+    }
+
+    if (numbered) {
+      const intro = numbered.intro ? `${trimAnswer(numbered.intro, 120)} ` : "";
+      const items = numbered.items
+        .slice(0, 3)
+        .map((item, index) => `${index + 1}. ${trimAnswer(item, 120)}`);
+      return `${intro}${items.join(" ")}`.trim();
+    }
+
+    const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
+    return trimAnswer(sentences.slice(0, 2).join(" ").trim(), maximum);
+  }
+
+  function additionalAnswer(value, maximum = 440) {
+    const text = String(value || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .replace(/^\d+(?:\.\d+)+\s+/, "");
+    const bulletParts = text.split(/\s*•\s*/).filter(Boolean);
+    const numbered = findNumberedItems(text);
+
+    if (bulletParts.length > 4) {
+      return bulletParts.slice(4, 7).map((item) => trimAnswer(item, 115)).join(" • ");
+    }
+    if (numbered?.items.length > 3) {
+      return numbered.items
+        .slice(3, 6)
+        .map((item, index) => `${index + 1}. ${trimAnswer(item, 120)}`)
+        .join(" ");
+    }
+
+    const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+    if (sentences.length > 2) {
+      return trimAnswer(sentences.slice(2, 4).join(" ").trim(), maximum);
+    }
+    return "";
+  }
+
+  function shortHeading(value) {
+    const heading = String(value || "")
+      .replace(/^Question\s+\d+:\s*/i, "")
+      .replace(/\?$/, "")
+      .trim();
+    return trimAnswer(heading, 76).replace(/\.\.\.$/, "");
+  }
+
+  function conversationalAnswer(query, answer) {
+    const normalizedQuery = normalize(query);
+    if (isFollowUpQuery(query)) return `One useful detail: ${answer}`;
+    if (normalizedQuery.startsWith("why ")) return `The key reason is simple: ${answer}`;
+    if (normalizedQuery.startsWith("how ")) return `Simply put, ${answer}`;
+    if (normalizedQuery.startsWith("who ")) return `In brief, ${answer}`;
+    if (normalizedQuery.startsWith("what ")) return `In short, ${answer}`;
+    return `Here is the key point: ${answer}`;
+  }
+
+  function smallTalkResponse(query) {
+    const text = normalize(query);
+    if (/^(hi|hello|hey|good morning|good afternoon|good evening)\b/.test(text)) {
+      return {
+        heading: "Hi!",
+        text: "Great to meet you. What would you like to know about HyperVault?",
+        sources: []
+      };
+    }
+    if (/^(thanks|thank you|thankyou|that helps|helpful)\b/.test(text)) {
+      return {
+        heading: "You are welcome!",
+        text: "Glad that helped. Ask me anything else about HyperVault.",
+        sources: []
+      };
+    }
+    if (/^(bye|goodbye|see you)\b/.test(text)) {
+      return {
+        heading: "See you soon!",
+        text: "Thanks for exploring HyperVault.",
+        sources: []
+      };
+    }
+    return null;
+  }
+
+  function isFollowUpQuery(query) {
+    return /^(tell me more(?: about (?:that|it))?|more details(?: please)?|how so|why|what does (?:that|it) mean|how does (?:that|it) work|and what about .+)$/.test(normalize(query));
+  }
+
+  function queryWithContext(query) {
+    if (!isFollowUpQuery(query)) return query;
+
+    const userMessages = conversation.filter((message) => message.role === "user");
+    const previous = userMessages.length > 1 ? userMessages[userMessages.length - 2] : null;
+    return previous ? `${previous.text} ${query}` : query;
   }
 
   function appendInlineFormatting(target, value) {
@@ -424,23 +531,82 @@
   }
 
   function answerQuestion(query) {
-    const matches = findMatches(query, 3);
+    const smallTalk = smallTalkResponse(query);
+    if (smallTalk) return smallTalk;
+
+    const followUp = isFollowUpQuery(query);
+    const previousAssistant = followUp
+      ? [...conversation].reverse().find((message) => message.role === "assistant" && message.sources?.length)
+      : null;
+    const previousEntry = previousAssistant?.sources?.length
+      ? knowledge.find((entry) => entry.title === previousAssistant.sources[0].title)
+      : null;
+
+    if (previousEntry) {
+      const detail = additionalAnswer(previousEntry.answer);
+      if (detail) {
+        return {
+          heading: shortHeading(previousEntry.title),
+          text: `One useful detail: ${detail}`,
+          sources: [previousEntry]
+        };
+      }
+
+      if (previousEntry.id === "overview-what-is-hypervault") {
+        const pillars = knowledge.find((entry) => entry.id === "overview-five-pillars");
+        if (pillars) {
+          return {
+            heading: shortHeading(pillars.title),
+            text: `One useful detail: ${conciseAnswer(pillars.answer)}`,
+            sources: [pillars]
+          };
+        }
+      }
+    }
+
+    let matches = findMatches(queryWithContext(query), followUp ? 12 : 3);
     if (!matches.length) {
       return {
-        heading: "No grounded answer found",
-        text: "I could not find a reliable answer to that in the published HyperVault material. Try asking about the product pillars, Android app, wearables, emergency intelligence, business model, roadmap, or intellectual property.",
+        heading: "I do not have that detail yet",
+        text: "I could not find it in the published HyperVault material. Try asking about the app, wearables, security, business model, roadmap, or intellectual property.",
         sources: []
       };
+    }
+
+    if (followUp && matches.length > 1) {
+      const previousTitles = new Set(
+        (previousAssistant?.sources || []).map((source) => source.title)
+      );
+      const previousDocuments = new Set(
+        (previousAssistant?.sources || []).map((source) => String(source.url || "").split("#", 1)[0])
+      );
+      const alternativeIndex = matches.findIndex(
+        (match, index) => {
+          const document = String(match.entry.url || "").split("#", 1)[0];
+          const expectedType = document.endsWith(".pdf") ? "pdf-faq" : "website-page";
+          return index > 0
+            && !previousTitles.has(match.entry.title)
+            && previousDocuments.has(document)
+            && match.entry.type === expectedType
+            && match.score >= matches[0].score * 0.35;
+        }
+      );
+      if (alternativeIndex > 0) {
+        matches = [matches[alternativeIndex], ...matches.filter((_, index) => index !== alternativeIndex)];
+      }
     }
 
     const top = matches[0];
     const sources = matches
       .filter((match, index) => index === 0 || match.score >= top.score * 0.62)
+      .slice(0, followUp ? 1 : 2)
       .map((match) => match.entry);
 
+    const answer = conciseAnswer(top.entry.answer);
+
     return {
-      heading: top.entry.title,
-      text: conciseAnswer(top.entry.answer),
+      heading: shortHeading(top.entry.title),
+      text: conversationalAnswer(query, answer),
       sources
     };
   }
@@ -515,7 +681,7 @@
     if (!conversation.length) {
       addMessage(
         "assistant",
-        "Hello. I can answer questions about HyperVault products, technology, security, wearables, business strategy, and the detailed FAQ handbooks.",
+        "Hi! Ask me about HyperVault products, security, wearables, business, or technology.",
         [],
         false,
         "How can I help?"
